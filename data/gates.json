@@ -1,7 +1,7 @@
 {
  "witness": "v0.6",
- "total": 1042,
- "killed": 1040,
+ "total": 1041,
+ "killed": 1039,
  "clean": true,
  "files": {
   "src/strength.mjs": {
@@ -41,8 +41,8 @@
    "clean": true
   },
   "src/logicfuzz.mjs": {
-   "total": 105,
-   "killed": 105,
+   "total": 104,
+   "killed": 104,
    "ignored": 0,
    "clean": true
   },

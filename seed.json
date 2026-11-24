@@ -2,7 +2,7 @@
   "genome": "1",
   "name": "the-verifier-set",
   "kind": "repo",
-  "purpose": "Answers questions about a document in a browser tab with a small AI model, and labels how true each answer is: every figure the model cites is checked against the document's own words, every step it works out is checked by exact arithmetic, and an answer that stands on a cited figure is labelled grounded, never proven. Where the document does not state a figure, or states it two ways, it gives no answer and says why.",
+  "purpose": "Answers questions about documents in a browser tab with a small AI model, and labels how true each answer is. A cited figure must be in the document word for word, a rule written as a formula must pass its tests, a claim is decided by an exact solver, and each step is checked by exact arithmetic. Where a figure is missing or stated two ways, it gives no answer and says why.",
   "lane": {
     "id": "the-verifier-set-citation",
     "accepts": "a document, something it states once with one figure (the unit price), and a quote offered as stating it",

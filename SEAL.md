@@ -80,7 +80,25 @@ claim): 7 in 10 each; dev 10 of 10 each, the builder's bench 10 of 12 and 9 of 1
 the dev result, because ten is few and the bench was lower. Every other bar is a promise of the checks themselves, not a
 measurement of the model, and is set at none.
 
+## The first seal, and why it was made again
+
+The first seal (`SEAL.json` with SHA-256 `377307f151da…`, commit `52b6385`) was made after the dev run, and the sealed
+run was begun under it. The first CI run then failed: the page built on GitHub's runner (Node 22) differed from the
+one built here (Node 25) in one number, the claims put to the solver in its attack (853 against 850). The solver's
+harness drew a new order for a claim's quantities with a sort whose comparator answered at random. How often an engine
+calls a comparator, and what it makes of answers that contradict each other, is the engine's own, so every draw after
+it, and every count of that attack, could differ between Node versions and between browsers. The harness now turns the
+list round by one draw instead (`rotate` in `src/logicfuzz.mjs`); a test pins what it makes, and a test sweeps every
+kernel for a sort of that kind. It was the only one.
+
+Nothing the model is shown, and nothing that judges its replies, changed: the problems, the four checks and the growth
+law are byte for byte as first sealed. The harness was gated again, the build was sealed again, and the sealed run was
+started again from nothing. The 34 of 288 replies made under the first seal are kept as they were saved
+(`data/runs/sealed-seal1-partial.json`). The run was stopped after 394 seconds; nothing in it was looked at except how
+many replies it held.
+
 ## The seal
 
-Made after the dev run and before the model was shown a sealed problem. The sealed run is the 144 problems the sealed
+Made after the dev run and before the model was shown a sealed problem, then made again as told above, before the
+sealed run was started again. The sealed run is the 144 problems the sealed
 seed (20261212) makes; none of them is a dev problem, and no sealed document is a dev document (`test/seal.test.mjs`).

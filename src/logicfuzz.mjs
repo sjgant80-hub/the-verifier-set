@@ -117,6 +117,10 @@ const extremes = (q, f) => { const box = ranges2(q), order = box ? SECOND.read(f
 // a pair written as a plain decimal, or null when it does not end as one
 const text2 = (p) => { const t = show(make(p[0], p[1])); return t.includes('/') ? null : t; };
 const formulaOf = (q) => { const c = claim2(get(q, 'claim')); return c === null ? null : c.formula; };
+// rotate(R, xs) → the list turned round by one drawn amount: a new order every engine makes the same way. (A sort with
+// a random comparator is not one: how often an engine calls the comparator, and what it makes of the answers, is the
+// engine's own, so the draws after it, and every count of the attack, differed between Node versions and browsers.)
+const rotate = (R, xs) => { const k = int(R, xs.length); return [...xs.slice(k), ...xs.slice(0, k)]; };
 // edge(R, q) → one end of the question's claim's formula's range, as a plain figure above or at nought, or null
 const edge = (R, q) => { const f = formulaOf(q), e = f && extremes(q, f), at = e && text2(pick(R, e)); return at && !at.startsWith('-') ? [f, at] : null; };
 
@@ -127,7 +131,7 @@ export const FORGERIES = {
   'the figure written first': ['decide', (R, q) => { const c = claim2(get(q, 'claim')); return c === null ? null : `${text2(c.figure)} ${{ ge: '≤', gt: '<', le: '≥', lt: '>' }[c.rel]} ${c.formula}`; }],
   'the relation turned': ['decide', (R, q) => { const c = claim2(get(q, 'claim')); return c === null ? null : `${c.formula} ${pick(R, ['≥', '>', '≤', '<', '>=', '<='])} ${text2(c.figure)}`; }],
   'a figure far outside the range': ['decide', (R, q) => { const f = formulaOf(q); return f === null ? null : `${f} ${pick(R, ['≥', '≤'])} ${pick(R, ['0', '1,000,000', '99999999999'])}`; }],
-  'a claim made at random on the same quantities': ['decide', (R, q) => { const letters = names(q); return letters === null ? null : `${formula(R, [...letters].sort(() => int(R, 3) - 1))} ${pick(R, ['≥', '>', '≤', '<'])} ${int(R, 300)}`; }],
+  'a claim made at random on the same quantities': ['decide', (R, q) => { const letters = names(q); return letters === null ? null : `${formula(R, rotate(R, letters))} ${pick(R, ['≥', '>', '≤', '<'])} ${int(R, 300)}`; }],
   'a letter used twice': ['refuse', (R, q) => { const letters = names(q); return letters === null ? null : `${letters[0]} ${pick(R, ['+', '-', '×'])} ${letters[0]} ≥ ${int(R, 50)}`; }],
   'no quantity at all': ['refuse', (R) => `${1 + int(R, 90)} ${pick(R, ['+', '×'])} ${1 + int(R, 9)} ≥ ${int(R, 50)}`],
   'a division by what could be nought': ['refuse', (R, q) => { const box = ranges2(q), n = box && Object.keys(box).find((x) => lt2(box[x][0], box[x][1])); return n ? `1 ÷ (${n} - ${q.given[n][0]}) ≥ 0` : null; }],

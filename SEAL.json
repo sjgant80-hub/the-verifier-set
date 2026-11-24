@@ -10,7 +10,7 @@
   "src/formula.mjs": "ddd12419993233e3c7d1304bec280d6a40cebbd7053f21c99b116c8447ff64ce",
   "src/formulafuzz.mjs": "d002bd4a57e1c3c3d5592466a7cda069a610d19dcc81f5d35641cf19035fea8f",
   "src/logic.mjs": "268484fb2ad8d68ce89c0f98edf8c4d0c84bb1ee9e1433ab5e58cdcba62c9837",
-  "src/logicfuzz.mjs": "063aa170bec01a4a9d0cb587702d3e46ea891f10e774f62da667b04386e8fc01",
+  "src/logicfuzz.mjs": "75e3f7e2131e9a42a588a21a90ae7b25a3373945d9c3f903a7165739bc7de0a3",
   "src/onetry.mjs": "b74c2dc6be29580e90d4f4723c33a797126a8b1ec81023809d9caa4580f86d48",
   "src/set.mjs": "1e3ffdeae3f9c364995254457aa220c011cda5d441ef4e095efac3c11bf04809",
   "src/strength.mjs": "922ffdf18a4bbf7fb9d2134db3f2ed3124531f84abbc46491ac3568215cc5d97",

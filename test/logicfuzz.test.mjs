@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import LF from '../src/logicfuzz.mjs';
 import L from '../src/logic.mjs';
 import { sha256 } from '../vendor/crystal/vendor/climb/src/sha256.mjs';
+import { readdirSync, readFileSync } from 'node:fs';
 
 const HOSTILE = [null, undefined, 7, 7n, true, 'x', {}, [], () => 1, { names: 5 }, { get names() { throw new Error('no'); } }, new Proxy({}, { get() { throw new Error('no'); } })];
 const Q = (given, claim) => ({ names: Object.fromEntries(Object.keys(given).map((n) => [n, n])), given, claim });
@@ -52,8 +53,16 @@ test('each way of making a claim is what its name says', () => {
   const made = (k, q = q1) => Object.fromEntries(Object.entries(LF.FORGERIES).map(([name, [, make]]) => [name, make(fixed(k), q)]));
   assert.deepEqual(made(0), {
     'the figure on the edge of the range': 'p × c + d ≥ 305', 'the figure just inside or outside the edge': 'p × c + d ≥ 306', 'the figure written first': '305 ≤ p × c + d', 'the relation turned': 'p × c + d ≥ 305', 'a figure far outside the range': 'p × c + d ≥ 0',
-    'a claim made at random on the same quantities': '((d + 1) + ((c + 1) + (p + 1))) ≥ 0', 'a letter used twice': 'p + p ≥ 0', 'no quantity at all': '1 + 1 ≥ 0', 'a division by what could be nought': '1 ÷ (c - 10) ≥ 0', 'two comparisons, or none': 'p × c + d ≥ 1 ≥ 0', 'a letter the question does not give': 'p × c + d + w ≥ 1', 'words, or too long': 'Yes: p × c + d ≥ 1',
+    'a claim made at random on the same quantities': '((p + 1) + ((c + 1) + (d + 1))) ≥ 0', 'a letter used twice': 'p + p ≥ 0', 'no quantity at all': '1 + 1 ≥ 0', 'a division by what could be nought': '1 ÷ (c - 10) ≥ 0', 'two comparisons, or none': 'p × c + d ≥ 1 ≥ 0', 'a letter the question does not give': 'p × c + d + w ≥ 1', 'words, or too long': 'Yes: p × c + d ≥ 1',
   });
+  // the quantities of a claim made at random are put in an order turned round by one draw, the same in every engine (a
+  // sort with a random comparator is not: Node 22 and Node 25 made different attacks from the same seed)
+  const atRandom = LF.FORGERIES['a claim made at random on the same quantities'][1];
+  assert.deepEqual([0, 1, 2, 4, 5].map((k) => atRandom(fixed(k), q1)), ['((p + 1) + ((c + 1) + (d + 1))) ≥ 0', '((c - d) - p) > 1', '(d × (p × c)) ≤ 2', '(c + (d + p)) ≥ 4', '((d × p) × c) > 5']);
+  const seq = (seed) => { let s = seed >>> 0; return () => (s = (Math.imul(s, 1103515245) + 12345) >>> 0) >>> 8; }, R9 = seq(9);
+  assert.equal(sha256(JSON.stringify(Array.from({ length: 200 }, () => atRandom(R9, q1)))), '862036cf37ca4a9b38182db3c76d692c0a1a83337a461a5b07ab91caa6371dd0');
+  // the class, swept: no kernel sorts with a comparator that ignores what it compares
+  for (const f of readdirSync(new URL('../src/', import.meta.url)).filter((n) => n.endsWith('.mjs'))) assert.ok(!/\.sort\(\s*\(\s*\)\s*=>/.test(readFileSync(new URL(`../src/${f}`, import.meta.url), 'utf8')), `src/${f}: a sort whose order is the engine's own`);
   const m1 = made(1); assert.deepEqual([m1['the figure on the edge of the range'], m1['the figure just inside or outside the edge'], m1['the relation turned'], m1['a figure far outside the range'], m1['two comparisons, or none'], m1['words, or too long']], ['p × c + d > 409', 'p × c + d > 408.5', 'p × c + d > 305', 'p × c + d ≤ 1,000,000', 'p × c + d', 'p × c + d ≥ 1 pounds']);
   assert.equal(LF.FORGERIES['a division by what could be nought'][1](fixed(0), Q({ p: '3' }, 'p ≥ 1')), null, 'nothing has a range'); assert.equal(LF.FORGERIES['the figure on the edge of the range'][1](fixed(0), Q({ p: ['-3', '-2'] }, 'p ≥ 0')), null, 'an edge below nought cannot be written as a figure');
   for (const [name, [label]] of Object.entries(LF.FORGERIES)) for (const k of [0, 1, 2, 3]) { const reply = LF.FORGERIES[name][1](fixed(k), q1); if (reply !== null && label === 'refuse') { assert.equal(L.judge(reply, q1).value, null, `${name}: ${reply}`); assert.equal(LF.plainly(reply, q1), null, name); } }

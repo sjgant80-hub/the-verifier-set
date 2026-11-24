@@ -14,7 +14,10 @@ const html = LF(read('index.html'));
 const visible = html.slice(html.indexOf('<body>'), html.indexOf('<script type="module">'));
 
 test('index.html is exactly the build of page/ and the kernels, baked from the published runs', async () => {
-  assert.equal(html, await page(ROOT));
+  const built = await page(ROOT);
+  // on a difference, say where it is: the whole page is too long for a readable diff
+  let i = 0; while (i < html.length && html[i] === built[i]) i++;
+  assert.equal(html.length === built.length && i === html.length, true, `index.html and the build first differ at character ${i} of ${html.length} (built ${built.length}):\nINDEX: ${JSON.stringify(html.slice(Math.max(0, i - 160), i + 240))}\nBUILT: ${JSON.stringify(built.slice(Math.max(0, i - 160), i + 240))}`);
 });
 
 test('every kernel is inlined byte for byte, its imports read from the scopes above it', () => {

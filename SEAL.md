@@ -100,5 +100,37 @@ many replies it held.
 ## The seal
 
 Made after the dev run and before the model was shown a sealed problem, then made again as told above, before the
-sealed run was started again. The sealed run is the 144 problems the sealed
+sealed run was started again.
+
+## The sealed run
+
+Made under the second seal (`7670651e141b…`), in a browser tab on the same Intel integrated GPU: the lattice on all 144
+sealed problems, then one unchecked reply to each. 584 model calls for the lattice and 144 for the unchecked replies,
+4,234 seconds in one sitting, no network requests
+while it worked. It is published whole (`data/runs/sealed.json`), and `scripts/publish.mjs` grew all 144 again
+identically from their recorded replies, with no model, before it was published. Its first 34 replies are identical,
+apart from their timings, to the 34 made under the first seal.
+
+| kind of problem | problems | reached an answer | came out as it should | one unchecked reply right |
+|---|---|---|---|---|
+| computed | 12 | 12 | 12 | 4 |
+| cited | 12 | 12 | 12 | 5 |
+| mixed | 36 | 33 | 33 | 3 |
+| absent | 12 | 0 | 12 | 2 |
+| conflict | 12 | 0 | 12 | 0 |
+| misstated | 12 | 11 | 11 | 0 |
+| coded | 12 | 12 | 12 | 5 |
+| coded-cited | 12 | 11 | 11 | 5 |
+| decided | 12 | 12 | 12 | 5 |
+| decided-cited | 12 | 12 | 12 | 5 |
+
+139 of 144 came out as they should, against 34 of 144 for one unchecked reply: 105 only with the checks, none only
+without them (exact McNemar test, p = 4.9e-32). On the 24 problems that have no answer, the unchecked reply gave a
+number 22 times; the lattice answered none of them, and stopped at the right figure for the right reason on all 24. No
+answer was wrong, and none was labelled stronger than what it stands on. All twelve claims in `CLAIMS.md` pass.
+
+The five that did not come out were given no answer, none a wrong one. Three held a division the model got wrong
+(102 ÷ 34 = 3.026, 93 ÷ 31 = 3.051, 51 ÷ 17 = 3.059), which The Crystal as sealed cannot split smaller. One held a sum
+already as small as steps go that the model got wrong (4270 + 8 = 4288), which dissolved. In one, the model copied the
+unit price from another line of the document, and the figure did not bond. The sealed run is the 144 problems the sealed
 seed (20261212) makes; none of them is a dev problem, and no sealed document is a dev document (`test/seal.test.mjs`).

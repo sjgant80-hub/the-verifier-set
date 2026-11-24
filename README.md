@@ -10,6 +10,11 @@ draws each strength in its own material: proven hard and bright, grounded soft a
 green. Where a document does not state a figure, or states it two ways, there is no answer, and the page says which
 figure and why. Nothing leaves the browser.
 
+**On the 144 sealed problems** (Llama 3.2 1B, 4-bit, in a browser tab): 139 came out as they should, against 34 for the
+same model in one unchecked reply (p = 4.9e-32). On the 24 with no answer, the unchecked reply gave a number 22 times;
+the checked one answered none. No answer was wrong, and none was labelled stronger than what it stands on. All twelve
+pre-registered claims pass. The five that missed got no answer, none a wrong one ([SEAL.md](SEAL.md)).
+
 The Verifier Set is the third build in a line. [The Climb](https://sjgant80-hub.github.io/the-climb/) showed that a
 small model gets further when code checks each step. [The Crystal](https://sjgant80-hub.github.io/the-crystal/) took
 that down to single steps and hardened the check. This build adds three more kinds of check and one rule that keeps

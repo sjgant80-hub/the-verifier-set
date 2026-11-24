@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>The Verifier Set: builder's bench</title>
+<style>html,body{margin:0;background:#02070c;color:#e4f6f8;font:13px ui-monospace,Consolas,monospace}pre{margin:12px;white-space:pre-wrap}</style></head>
+<body><pre id="out">starting</pre>
+<script type="module">
+// A builder's bench, not the page: it loads the model and the kernels as modules so that a prompt can be tried on the
+// DEV problems before the build is sealed. Nothing made here is published as a measurement.
+import W from '../src/weave.mjs';
+import T from '../src/tasks.mjs';
+import C from '../src/cite.mjs';
+import O from '../src/onetry.mjs';
+const out = (t) => { document.getElementById('out').textContent = t; };
+const lab = { W, T, C, O, engine: null, state: 'idle', log: [] };
+lab.load = async () => {
+  if (lab.engine) return true;
+  const webllm = await import('https://esm.run/@mlc-ai/web-llm@0.2.79');
+  lab.engine = await webllm.CreateMLCEngine('Llama-3.2-1B-Instruct-q4f16_1-MLC', { initProgressCallback: (p) => out(p.text) });
+  out('model loaded');
+  return true;
+};
+lab.ask = async (messages, maxTokens, more) => {
+  const t0 = performance.now(), r = await lab.engine.chat.completions.create({ messages, temperature: 0, max_tokens: maxTokens, ...(more || {}) });
+  return { text: r.choices[0].message.content || '', ms: performance.now() - t0, prompt: (r.usage || {}).prompt_tokens ?? null, reply: (r.usage || {}).completion_tokens ?? null, finish: r.choices[0].finish_reason };
+};
+// every figure a set of dev problems asks its document for: [{ cell, doc, there }]
+lab.places = (sheets) => T.set(20261201, sheets).filter((t) => t.doc).flatMap((t) => t.slots.map((s) => ({ cell: { text: s.text }, doc: t.doc, there: C.stated({ text: s.text }, t.doc).figure !== null })));
+// try one way of asking on a list of places: make(place) → messages; counts how many bond
+lab.tryAsk = async (name, places, make, maxTokens, more) => {
+  lab.state = `running ${name}`;
+  const rows = [];
+  for (const [i, p] of places.entries()) {
+    const r = await lab.ask(make(p), maxTokens, more), j = C.judge(r.text, p.cell, p.doc);
+    rows.push({ cell: p.cell.text, there: p.there, said: r.text, why: j.why, ms: Math.round(r.ms), finish: r.finish });
+    out(`${name}: ${i + 1} of ${places.length}`);
+  }
+  const there = rows.filter((r) => r.there), not = rows.filter((r) => !r.there);
+  const res = { name, bonded: there.filter((r) => r.why === 'bonded').length, there: there.length, saidNoneWhenAbsent: not.filter((r) => /^\s*none\.?\s*$/i.test(r.said)).length, absent: not.length, whys: rows.reduce((a, r) => { a[r.why] = (a[r.why] || 0) + 1; return a; }, {}), ms: Math.round(rows.reduce((a, r) => a + r.ms, 0) / rows.length), rows };
+  lab.log.push(res); lab.state = 'idle';
+  out(JSON.stringify({ ...res, rows: undefined }));
+  return res;
+};
+// the comparison the build's way of asking rests on, made as a record: the same figures asked for two ways, both
+// replies ended at the end of their first line, both ruled on by the build's own check (src/cite.mjs).
+//   offered    the model is told it may reply "none" when the document does not state the thing, and shown one
+//              example of doing so (the first way this build asked)
+//   copy only  the model is asked to copy the line, and is never offered a word for "it is not there" (weave.mjs)
+const EXAMPLE = W.SHOTS[0][0].split('\n\n')[0];
+const OFFERED = { system: 'You copy from a document. Reply with the exact words of the document that state what is asked, with the figure, copied letter for letter. Nothing else. If the document does not state it, reply: none', shots: [[`${EXAMPLE}\n\nCopy the words that state: the weekly rent`, 'The weekly rent is 85 pounds.'], ['Copy the words that state: the key deposit', 'The key deposit is 40 pounds.'], ['Copy the words that state: the parking fee', 'none']], ask: (p) => `${p.doc.text}\n\nCopy the words that state: ${p.cell.text}` };
+const talk = (way, p) => [{ role: 'system', content: way.system }, ...way.shots.flatMap(([u, a]) => [{ role: 'user', content: u }, { role: 'assistant', content: a }]), { role: 'user', content: way.ask(p) }];
+lab.compare = async (sheets) => {
+  await lab.load();
+  const places = T.set(20261201, sheets).filter((t) => t.doc).flatMap((t) => t.slots.map((s) => ({ id: t.id, cell: { text: s.text }, doc: t.doc, there: C.stated({ text: s.text }, t.doc).figure !== null })));
+  const ways = [{ name: 'offered', system: OFFERED.system, shots: OFFERED.shots, make: (p) => talk(OFFERED, p) }, { name: 'copy only', system: W.SYSTEM, shots: W.SHOTS, make: (p) => W.reading(p.doc, [], p.cell) }], out = [];
+  for (const way of ways) {
+    const rows = [];
+    for (const [i, p] of places.entries()) { const r = await lab.ask(way.make(p), W.SETTINGS.citeTokens, { stop: W.LINE_END }), j = C.judge(r.text, p.cell, p.doc); rows.push({ problem: p.id, cell: p.cell.text, there: p.there, said: r.text, why: j.why, ms: Math.round(r.ms) }); out_(`${way.name}: ${i + 1} of ${places.length}`); }
+    out.push({ name: way.name, system: way.system, shots: way.shots, rows });
+  }
+  const adapter = navigator.gpu ? await navigator.gpu.requestAdapter() : null, info = adapter ? adapter.info || {} : {};
+  // each document is kept in the record, so the record can be ruled on again whatever the problem maker becomes
+  const docs = Object.fromEntries(places.map((p) => [p.id, p.doc.text]));
+  lab.bench = { v: 'the-verifier-set-bench/2', what: 'the same figures of the dev problems asked for two ways; a builder\'s comparison, made before the seal, not a sealed measurement', at: new Date().toISOString(), model: 'Llama-3.2-1B-Instruct-q4f16_1-MLC', venue: 'tab (WebLLM 0.2.79, WebGPU)', gpu: [info.vendor, info.architecture].filter(Boolean).join(' ') || null, seed: 20261201, sheets, docs, ways: out };
+  out_('compared');
+  return lab.bench;
+};
+const out_ = out;
+// the unchecked reply the lattice is set against, asked two ways on every dev problem, with room to finish: told it
+// may reply "cannot tell", and not told. The build takes the way that gets MORE right here, so that the lattice is
+// compared with the stronger of the two.
+lab.baseline = async (sheets, maxTokens) => {
+  await lab.load();
+  const tasks = T.set(20261201, sheets), decline = ' If the document does not state what is needed, reply: cannot tell';
+  // the build's own system line, and the same line without the leave to decline
+  const ways = [{ name: 'may decline', system: O.SYSTEM }, { name: 'not told it may decline', system: O.SYSTEM.replace(decline, '') }], made = [];
+  for (const way of ways) {
+    const rows = [];
+    for (const [i, t] of tasks.entries()) { const r = await lab.ask([{ role: 'system', content: way.system }, O.asking(t)[1]], maxTokens), j = O.rule(r.text, t); rows.push({ problem: t.id, tier: t.tier, said: r.text, right: j.right, answered: j.answered, value: j.value, tokens: r.reply, finish: r.finish, ms: Math.round(r.ms) }); out_(`${way.name}: ${i + 1} of ${tasks.length}`); }
+    made.push({ name: way.name, system: way.system, maxTokens, rows });
+  }
+  // each problem is kept in the record as it was asked: what it said, what was right, whether it must be declined
+  const asked = Object.fromEntries(tasks.map((t) => [t.id, { tier: t.tier, user: O.asking(t)[1].content, want: t.check.value, decline: t.expect !== null, verdict: Boolean(t.decide) }]));
+  lab.base = { v: 'the-verifier-set-baseline/2', what: 'one unchecked reply to every dev problem, asked two ways; a builder\'s comparison made before the seal, to choose the stronger baseline', at: new Date().toISOString(), model: 'Llama-3.2-1B-Instruct-q4f16_1-MLC', venue: 'tab (WebLLM 0.2.79, WebGPU)', seed: 20261201, sheets, asked, ways: made };
+  out_('baseline compared');
+  return lab.base;
+};
+// rules in words, for the two checks not yet built: can the model write a rule as a formula, and a claim as a comparison?
+import('../src/formula.mjs').then((m) => { lab.FX = m.default; });
+const RULES = [
+  { words: 'the unit price times the order size', names: { p: 'the unit price', c: 'the order size' }, reference: 'p × c' },
+  { words: 'the unit price times the order size, plus the delivery charge', names: { p: 'the unit price', c: 'the order size', d: 'the delivery charge' }, reference: 'p × c + d' },
+  { words: 'the unit price times the order size, plus the delivery charge, less the deposit paid', names: { p: 'the unit price', c: 'the order size', d: 'the delivery charge', e: 'the deposit paid' }, reference: 'p × c + d - e' },
+  { words: 'the delivery charge shared out over the order size, added to the unit price', names: { p: 'the unit price', c: 'the order size', d: 'the delivery charge' }, reference: 'p + d ÷ c' },
+  { words: 'the monthly fee times the term length', names: { f: 'the monthly fee', t: 'the term length' }, reference: 'f × t' },
+  { words: 'the monthly fee times the term length, plus the setup charge', names: { f: 'the monthly fee', t: 'the term length', s: 'the setup charge' }, reference: 'f × t + s' },
+  { words: 'the monthly fee times the term length, plus the setup charge, less the loyalty credit', names: { f: 'the monthly fee', t: 'the term length', s: 'the setup charge', l: 'the loyalty credit' }, reference: 'f × t + s - l' },
+  { words: 'the setup charge shared out over the term length, added to the monthly fee', names: { f: 'the monthly fee', t: 'the term length', s: 'the setup charge' }, reference: 'f + s ÷ t' },
+  { words: 'the daily rate times the hire period', names: { r: 'the daily rate', n: 'the hire period' }, reference: 'r × n' },
+  { words: 'the daily rate times the hire period, plus the collection charge', names: { r: 'the daily rate', n: 'the hire period', k: 'the collection charge' }, reference: 'r × n + k' },
+  { words: 'the daily rate times the hire period, plus the collection charge, plus the damage bond', names: { r: 'the daily rate', n: 'the hire period', k: 'the collection charge', b: 'the damage bond' }, reference: 'r × n + k + b' },
+  { words: 'the collection charge shared out over the hire period, added to the daily rate', names: { r: 'the daily rate', n: 'the hire period', k: 'the collection charge' }, reference: 'r + k ÷ n' },
+];
+const legend = (names) => Object.entries(names).map(([n, w]) => `${n} = ${w}`).join(', ');
+lab.RULES = RULES;
+// ways of asking for a formula: [system, shots, ask(rule)]
+lab.FWAYS = {
+  one: ['You write a rule as a formula. Use only the letters given, numbers, + - × ÷ and brackets. Reply with the formula and nothing else.',
+    [['The rule: the weekly rent times the number of weeks, plus the key deposit. Letters: w = the weekly rent, n = the number of weeks, k = the key deposit.', 'w × n + k']],
+    (r) => `The rule: ${r.words}. Letters: ${legend(r.names)}.`],
+  two: ['You write a rule as a formula. Use only the letters given, numbers, + - × ÷ and brackets. Reply with the formula and nothing else.',
+    [['The rule: the weekly rent times the number of weeks, plus the key deposit. Letters: w = the weekly rent, n = the number of weeks, k = the key deposit.', 'w × n + k'], ['The rule: the cleaning fee shared out over the number of weeks, added to the weekly rent, less the discount. Letters: w = the weekly rent, n = the number of weeks, f = the cleaning fee, x = the discount.', 'w + f ÷ n - x']],
+    (r) => `The rule: ${r.words}. Letters: ${legend(r.names)}.`],
+};
+lab.formulas = async (way, seeds) => {
+  await lab.load();
+  const [system, shots, ask] = lab.FWAYS[way], rows = [];
+  for (const r of RULES) {
+    const msgs = [{ role: 'system', content: system }, ...shots.flatMap(([u, a]) => [{ role: 'user', content: u }, { role: 'assistant', content: a }]), { role: 'user', content: ask(r) }];
+    const a = await lab.ask(msgs, 40, { stop: ['\n'] }), j = lab.FX.judge(a.text, { ...r, seed: seeds || 7 });
+    rows.push({ reference: r.reference, said: a.text, why: j.why, ms: Math.round(a.ms) });
+    out_(`${way}: ${rows.length} of ${RULES.length}`);
+  }
+  const res = { way, bonded: rows.filter((x) => x.why === 'bonded').length, of: rows.length, rows };
+  lab.log.push(res); out_(JSON.stringify({ ...res, rows: undefined }));
+  return res;
+};
+// a claim written as a comparison: the relation and the figure the model writes, against the question's own
+const RELS = [['at least', '≥'], ['more than', '>'], ['at most', '≤'], ['less than', '<']];
+lab.claims = async (way) => {
+  await lab.load();
+  const system = 'You write a claim as a comparison. Use only the letters given, numbers, + - × ÷, brackets, and one of ≥ > ≤ <. Reply with the comparison and nothing else.';
+  const shots = way === 'four' ? [['The claim: the weekly rent times the number of weeks, plus the key deposit, comes to at least 300 pounds. Letters: w = the weekly rent, n = the number of weeks, k = the key deposit.', 'w × n + k ≥ 300'], ['The claim: the weekly rent times the number of weeks comes to less than 900 pounds. Letters: w = the weekly rent, n = the number of weeks.', 'w × n < 900'], ['The claim: the cleaning fee shared out over the number of weeks, added to the weekly rent, comes to more than 95 pounds. Letters: w = the weekly rent, n = the number of weeks, f = the cleaning fee.', 'w + f ÷ n > 95'], ['The claim: the weekly rent times the number of weeks, less the discount, comes to at most 640 pounds. Letters: w = the weekly rent, n = the number of weeks, x = the discount.', 'w × n - x ≤ 640']]
+    : [['The claim: the weekly rent times the number of weeks, plus the key deposit, comes to at least 300 pounds. Letters: w = the weekly rent, n = the number of weeks, k = the key deposit.', 'w × n + k ≥ 300']];
+  const rows = [];
+  for (const [i, r] of RULES.entries()) {
+    const [words, sign] = RELS[i % 4], figure = String(100 + 37 * i);
+    const msgs = [{ role: 'system', content: system }, ...shots.flatMap(([u, a]) => [{ role: 'user', content: u }, { role: 'assistant', content: a }]), { role: 'user', content: `The claim: ${r.words} comes to ${words} ${figure} pounds. Letters: ${legend(r.names)}.` }];
+    const a = await lab.ask(msgs, 48, { stop: ['\n'] }), m = a.text.trim().replace(/\.$/, '').match(/^(.*?)\s*(≥|>=|>|≤|<=|<)\s*([\d.,]+)$/);
+    const left = m ? lab.FX.judge(m[1], { ...r, seed: 7 }).why : 'not a comparison', rel = m ? { '>=': '≥', '<=': '≤' }[m[2]] || m[2] : null;
+    rows.push({ reference: `${r.reference} ${sign} ${figure}`, said: a.text, left, relation: rel === sign, figure: m ? m[3] === figure : false, ok: left === 'bonded' && rel === sign && m[3] === figure });
+    out_(`claims ${way}: ${rows.length} of ${RULES.length}`);
+  }
+  const res = { way: `claims ${way}`, ok: rows.filter((x) => x.ok).length, left: rows.filter((x) => x.left === 'bonded').length, relation: rows.filter((x) => x.relation).length, of: rows.length, rows };
+  lab.log.push(res); out_(JSON.stringify({ ...res, rows: undefined }));
+  return res;
+};
+window.__lab = lab;
+out('ready');
+</script></body></html>

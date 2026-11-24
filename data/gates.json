@@ -1,0 +1,104 @@
+{
+ "witness": "v0.6",
+ "total": 1042,
+ "killed": 1040,
+ "clean": true,
+ "files": {
+  "src/strength.mjs": {
+   "total": 11,
+   "killed": 11,
+   "ignored": 0,
+   "clean": true
+  },
+  "src/cite.mjs": {
+   "total": 71,
+   "killed": 71,
+   "ignored": 0,
+   "clean": true
+  },
+  "src/citefuzz.mjs": {
+   "total": 224,
+   "killed": 224,
+   "ignored": 0,
+   "clean": true
+  },
+  "src/formula.mjs": {
+   "total": 53,
+   "killed": 53,
+   "ignored": 0,
+   "clean": true
+  },
+  "src/formulafuzz.mjs": {
+   "total": 146,
+   "killed": 146,
+   "ignored": 0,
+   "clean": true
+  },
+  "src/logic.mjs": {
+   "total": 41,
+   "killed": 41,
+   "ignored": 0,
+   "clean": true
+  },
+  "src/logicfuzz.mjs": {
+   "total": 105,
+   "killed": 105,
+   "ignored": 0,
+   "clean": true
+  },
+  "src/tasks.mjs": {
+   "total": 69,
+   "killed": 68,
+   "ignored": 1,
+   "clean": true
+  },
+  "src/weave.mjs": {
+   "total": 81,
+   "killed": 81,
+   "ignored": 0,
+   "clean": true
+  },
+  "src/counts.mjs": {
+   "total": 61,
+   "killed": 61,
+   "ignored": 0,
+   "clean": true
+  },
+  "src/onetry.mjs": {
+   "total": 24,
+   "killed": 24,
+   "ignored": 0,
+   "clean": true
+  },
+  "src/claims.mjs": {
+   "total": 73,
+   "killed": 72,
+   "ignored": 1,
+   "clean": true
+  },
+  "src/facets.mjs": {
+   "total": 43,
+   "killed": 43,
+   "ignored": 0,
+   "clean": true
+  },
+  "src/set.mjs": {
+   "total": 24,
+   "killed": 24,
+   "ignored": 0,
+   "clean": true
+  },
+  "genome/cell.mjs": {
+   "total": 16,
+   "killed": 16,
+   "ignored": 0,
+   "clean": true
+  }
+ },
+ "nothingToMutate": {
+  "genome/io.mjs, judge.mjs, lane.mjs, health.mjs, tombstone.mjs": "the estate genome's hook template, byte for byte; gated in estate-genome (template/genome), exercised here by the birth check in CI",
+  "vendor/crystal/**": "The Crystal's kernels (and The Climb's inside them), byte for byte as each seal froze them; gated in the-crystal and the-climb (data/gates.json there) and compared with The Crystal's repository on every push (scripts/vendor.mjs --check)",
+  "vendor/docdec/src/gate.mjs": "DocDec's verifier gate at a fixed commit, byte for byte; gated in docdecdemo. It makes no bond here: it is one of the planted readers the citation harness must catch",
+  "page/gem.js": "the glass: it draws a record and decides nothing; its geometry and camera are tested (test/gem.test.mjs), its drawing is checked in a browser"
+ }
+}

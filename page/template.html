@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Verifier Set — every answer says what it stands on</title>
+<meta name="description" content="A small AI model reads a document and works out an answer in your browser. Every figure it cites is checked against the document; every step is checked by exact arithmetic; every answer says whether it is proven or only grounded. Re-run it yourself. Nothing leaves your browser.">
+<meta name="theme-color" content="#02070c">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2302070c'/%3E%3Cpath d='M16 4 27 16 16 28 5 16z' fill='none' stroke='%235ef2e4' stroke-width='2'/%3E%3C/svg%3E">
+<style>
+@font-face{font-family:'Fraunces';src:url('vendor/fonts/fraunces/files/fraunces-latin-full-italic.woff2') format('woff2');font-weight:100 900;font-style:italic;font-display:swap}
+@font-face{font-family:'Fraunces';src:url('vendor/fonts/fraunces/files/fraunces-latin-full-normal.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Hanken Grotesk';src:url('vendor/fonts/hanken-grotesk/files/hanken-grotesk-latin-wght-normal.woff2') format('woff2');font-weight:100 900;font-display:swap}
+@font-face{font-family:'JetBrains Mono';src:url('vendor/fonts/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2') format('woff2');font-weight:100 800;font-display:swap}
+:root{--abyss:#02070c;--water:#04101a;--lume:#5ef2e4;--blue:#49b4ff;--violet:#a797ff;--orchid:#d48cff;--leaf:#9be37a;--amber:#ffbf78;--red:#ff6470;--ink:#e4f6f8;--ink-2:#a3c3cb;--ink-3:#7f9fa7;--panel:rgba(4,16,25,.86);--edge:rgba(94,242,228,.2);--display:'Fraunces','Iowan Old Style','Palatino Linotype',Georgia,serif;--body:'Hanken Grotesk','Segoe UI',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,'Cascadia Mono',Consolas,monospace;--gut:clamp(16px,5vw,72px);color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--abyss);color:var(--ink);font:400 16px/1.6 var(--body);overflow-x:hidden}
+a{color:var(--lume);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--lume);outline-offset:3px}
+code{font:500 .86em var(--mono);color:var(--lume);overflow-wrap:anywhere}
+#gem{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0;touch-action:none;cursor:grab}
+.top{position:fixed;z-index:20;inset:0 0 auto 0;display:flex;align-items:center;gap:20px;padding:14px var(--gut);background:linear-gradient(180deg,rgba(2,7,12,.82),rgba(2,7,12,0));pointer-events:none}
+.top>*{pointer-events:auto}
+.mark{font:500 12px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--ink);text-decoration:none;white-space:nowrap}
+.top nav{margin-left:auto;display:flex;gap:18px;flex-wrap:wrap;justify-content:flex-end}
+.top nav a{font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;padding:8px 0}
+.top nav a:hover{color:var(--lume)}
+main{position:relative;z-index:5;pointer-events:none}
+main>*{pointer-events:auto}
+.hero{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:96px var(--gut) 28px;pointer-events:none}
+.hero>*{pointer-events:auto;max-width:560px}
+.kicker{font:500 11px/1.4 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);margin:0 0 10px}
+h1{font:400 clamp(44px,9vw,92px)/.98 var(--display);margin:0 0 14px;letter-spacing:-.01em;text-shadow:0 0 30px var(--abyss)}
+h1 em{font-style:italic;color:var(--lume)}
+.lead{margin:0 0 18px;color:var(--ink);text-shadow:0 0 14px var(--abyss),0 0 4px var(--abyss)}
+.row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+button{font:600 14px/1 var(--body);color:#012;background:var(--lume);border:0;padding:13px 20px;cursor:pointer;border-radius:2px}
+button:hover{filter:brightness(1.1)}
+button:disabled{opacity:.5;cursor:default}
+button.quiet{background:transparent;color:var(--ink);border:1px solid var(--edge)}
+.hint,.small{font:500 11.5px/1.5 var(--mono);color:var(--ink-2)}
+#status{font:500 12px/1.5 var(--mono);color:var(--ink-2);margin:12px 0 0;min-height:18px;text-shadow:0 0 10px var(--abyss)}
+.ledger{display:flex;flex-wrap:wrap;gap:8px 22px;margin:16px 0 8px;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;color:var(--ink-2);max-width:none}
+.ledger b{display:block;font:500 clamp(17px,2.6vw,24px)/1.1 var(--mono);color:var(--ink);letter-spacing:0}
+.ledger .bad b{color:var(--red)}
+.scrub{display:flex;align-items:center;gap:12px;font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);max-width:520px}
+.scrub input{flex:1;accent-color:var(--lume)}
+.tags{font:italic 400 15px/1.5 var(--display);color:var(--ink-2);margin:14px 0 0}
+#tip{position:fixed;z-index:30;left:0;top:0;transform:translate(-999px,-999px);font:500 12px/1.4 var(--mono);color:var(--ink);background:rgba(2,7,12,.92);border:1px solid var(--edge);padding:7px 10px;max-width:min(340px,80vw);pointer-events:none}
+section.panel{background:var(--panel);border-top:1px solid var(--edge);padding:44px var(--gut)}
+section.panel>*{max-width:760px}
+h2{font:400 clamp(26px,4.4vw,38px)/1.1 var(--display);margin:0 0 14px}
+h2 em{font-style:italic;color:var(--lume)}
+h3{font:600 15px/1.3 var(--body);margin:22px 0 6px}
+ol,ul{padding-left:20px}
+li{margin:0 0 8px}
+details{border-top:1px solid var(--edge);padding:10px 0}
+details>summary{cursor:pointer;font-weight:600}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:10px 0}
+th,td{text-align:left;padding:7px 8px 7px 0;border-bottom:1px solid var(--edge);vertical-align:top}
+th{font:500 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+td.num{font-family:var(--mono);white-space:nowrap}
+.pass{color:var(--lume)}.fail{color:var(--red);font-weight:600}.pend{color:var(--amber)}
+.wrap{overflow-x:auto}
+svg.law{width:100%;height:auto;max-width:760px}
+svg.law text{font:500 12px var(--mono);fill:var(--ink)}
+svg.law .m{fill:var(--ink-2)}
+footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var(--gut) 40px;font:500 12px/1.7 var(--mono);color:var(--ink-2)}
+@media (max-width:640px){.top nav a:not(.keep){display:none}.hero{padding-bottom:20px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.try{display:grid;gap:6px;margin:10px 0 4px;max-width:640px}
+.try label{font:500 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin-top:6px}
+.try textarea,.try input{font:500 13px/1.5 var(--mono);color:var(--ink);background:rgba(2,7,12,.7);border:1px solid var(--edge);padding:9px 10px;width:100%;border-radius:2px}
+.try button{justify-self:start;margin-top:6px}
+.soft{color:var(--amber)}.tested{color:var(--orchid)}.encoded{color:var(--leaf)}
+.key{display:flex;flex-wrap:wrap;gap:6px 18px;margin:8px 0 0;font:500 11.5px/1.4 var(--mono);color:var(--ink-2)}.key i{display:inline-block;width:10px;height:10px;margin-right:6px;transform:rotate(45deg)}
+</style>
+</head>
+<body>
+<canvas id="gem" role="img" aria-label="A crystal of octahedra. A hard, bright facet is a step proven by exact arithmetic. A soft, warm facet is grounded: it is, or stands on, a figure quoted from a document. An orchid facet is proven against its tests: it is, or stands on, a formula the model wrote that passed them. A leaf-green facet is proven within its encoding: a claim the solver decided as the model wrote it down. Dark facets were never reached."></canvas>
+<header class="top">
+  <a class="mark" href="#top">The Verifier Set</a>
+  <nav aria-label="On this page"><a href="#start">Start</a><a href="#how">How it works</a><a href="#set">The checks</a><a class="keep" href="#numbers">The numbers</a><a class="keep" href="#limits">What this does not prove</a><a href="#buyers">For buyers</a></nav>
+</header>
+<main>
+<section class="hero" id="top">
+  <p class="kicker">Grown from The Crystal, as sealed</p>
+  <h1>Know what it <em>stands on.</em></h1>
+  <p class="lead">A small AI model reads documents, writes rules as formulas and claims as comparisons, and works out answers. Four checks, one for each kind of work: a figure it cites must be in the document, a formula must pass its rule's tests, a claim is decided by a solver, a step is checked by exact arithmetic. Every facet is drawn in the material of what it stands on, and no answer is called truer than its weakest check.</p>
+  <div class="row"><button id="grow" type="button">Grow it here</button><button id="play" class="quiet" type="button">Play the record</button><span class="hint">or press Enter · the model is about 880 MB, once</span></div>
+  <p id="status" aria-live="polite">not measured yet</p>
+  <div class="ledger" aria-label="What is on the glass">
+    <span><b data-bind="n.cited">not measured yet</b>figures cited</span>
+    <span><b data-bind="n.proven">not measured yet</b>proven facets</span>
+    <span><b data-bind="n.grounded">not measured yet</b>grounded facets</span>
+    <span><b data-bind="n.tested">not measured yet</b>tested facets</span>
+    <span><b data-bind="n.encoded">not measured yet</b>decided facets</span>
+    <span class="bad"><b data-bind="n.refused">not measured yet</b>could not be cited</span>
+    <span><b data-bind="n.home">not measured yet</b>came out as they should</span>
+  </div>
+  <p class="key" aria-label="What each material means"><span><i style="background:var(--lume)"></i>proven: exact arithmetic</span><span><i style="background:var(--amber)"></i>grounded: a figure from a document</span><span><i style="background:var(--orchid)"></i>proven against its tests</span><span><i style="background:var(--leaf)"></i>proven within its encoding</span></p>
+  <label class="scrub"><span>Depth</span><input type="range" id="scrub" min="0" max="1000" value="1000" aria-label="Travel through the growth, from the seed to the last facet"></label>
+  <p class="tags">Don't trust us. Re-run it. · A small model that says "I can't tell." · Nothing leaves your browser.</p>
+</section>
+<div id="tip" role="status" aria-live="polite"></div>
+
+<section class="panel" id="start">
+  <h2>Start <em>here</em></h2>
+  <ol>
+    <li><b>Look.</b> Drag the crystal to turn it. Hard, bright facets are proven. Soft, warm facets are grounded. Orchid facets stand on a formula that passed its tests; leaf-green ones on a claim the solver decided. Point at any facet to read the step, how true it is, and what it stands on; for a cited figure, the words of the document it was quoted from.</li>
+    <li><b>Grow one yourself.</b> Press <b>Grow it here</b>, or Enter. The model runs in this tab on your own graphics chip and works through twelve problems, one of each kind, while you watch. <span id="device" class="small">Checking this device…</span></li>
+    <li><b>Try the citation check on your own document.</b> No model is needed for this: you play the model.
+      <div class="try">
+        <label for="tryDoc">A document, one statement to a line</label>
+        <textarea id="tryDoc" rows="6" spellcheck="false">Hire agreement between the Owner and the Hirer
+1. The daily rate is 126 pounds.
+2. The hire period is 14 days.
+3. The late fee is 5 pounds.
+4. By amendment, the late fee is 8 pounds.</textarea>
+        <label for="tryCell">What to cite</label><input id="tryCell" value="the daily rate" spellcheck="false">
+        <label for="tryQuote">Your quote of the document</label><input id="tryQuote" value="The daily rate is 26 pounds." spellcheck="false">
+        <button id="try" class="quiet" type="button">Check the quote</button>
+        <p id="tryOut" class="small" aria-live="polite">Press the button. The quote above is cut out of a longer figure, so it should be refused; put the 1 back and it bonds. Then ask for "the late fee", which the document states two ways. Then change 126 to -126 in the document: a figure with a sign on it is not read at all.</p>
+      </div></li>
+    <li><b>Check the record.</b> <button id="rejudge" class="quiet" type="button">Grow the published run again, with no model</button> <span id="rejudgeOut" class="small" aria-live="polite"></span></li>
+    <li><b>Attack both checks yourself.</b> <button id="attack" class="quiet" type="button">Make a new attack</button> <span id="attackOut" class="small" aria-live="polite"></span></li>
+    <li><b>Run the whole measurement.</b> <select id="runWhich" aria-label="Which set"><option value="sample">Sample: 12 problems</option><option value="dev">Dev: the 60 problems the build was tuned on</option><option value="sealed">Sealed: the 144 problems the claims are judged on</option></select> <button id="run" class="quiet" type="button">Run it</button> <button id="save" class="quiet" type="button" disabled>Save my run</button> <span id="runOut" class="small" aria-live="polite"></span></li>
+  </ol>
+</section>
+
+<section class="panel" id="how">
+  <h2>How it <em>works</em></h2>
+  <p>The reach of the whole engine is exactly the reach of its checks. So each kind of truth gets its own check, and every facet of the crystal carries the kind of check that made it and how much that check proves. There are four, and the model does the work for each; code only checks it.</p>
+  <svg class="law" viewBox="0 0 760 230" role="img" aria-labelledby="lawT"><title id="lawT">A cited figure is grounded. A step worked out from it is grounded too, and so is the answer. A step worked out from nothing but numbers is proven.</title>
+    <g fill="none" stroke="rgba(255,191,120,.6)"><rect x="10" y="20" width="200" height="52"/><rect x="280" y="20" width="200" height="52"/><rect x="550" y="20" width="200" height="52"/><path d="M210 46H280M480 46H550"/></g>
+    <g fill="none" stroke="rgba(94,242,228,.6)"><rect x="280" y="140" width="200" height="52"/><rect x="550" y="140" width="200" height="52"/><path d="M480 166H550"/></g>
+    <text x="110" y="42" text-anchor="middle">CITED</text><text x="110" y="60" text-anchor="middle" class="m">"The unit price is 26 pounds"</text>
+    <text x="380" y="42" text-anchor="middle">WORKED OUT ON IT</text><text x="380" y="60" text-anchor="middle" class="m">26 × 12 = 312</text>
+    <text x="650" y="42" text-anchor="middle">THE ANSWER</text><text x="650" y="60" text-anchor="middle" class="m">grounded, not proven</text>
+    <text x="10" y="98" class="m">The sum is exact. The 26 is only as true as the document. So everything above it is grounded.</text>
+    <text x="380" y="162" text-anchor="middle">WORKED OUT ALONE</text><text x="380" y="180" text-anchor="middle" class="m">28 × 39 = 1092</text>
+    <text x="650" y="162" text-anchor="middle">THE ANSWER</text><text x="650" y="180" text-anchor="middle" class="m">proven</text>
+    <text x="10" y="166" class="m">No document under it:</text><text x="10" y="184" class="m">exact arithmetic to the floor.</text>
+  </svg>
+  <ol>
+    <li><b>Cite.</b> When a question needs a figure from a document, the model is shown the document and asked to copy the one line that states it. Its copy bonds only if it is in the document letter for letter, begins and ends at the edge of a word or number, sits in a line that is about what was asked, and holds that line's figure, whole. The value is then read from the document by code. The model never supplies a number.</li>
+    <li><b>Refuse.</b> If the document does not state the figure, states it two ways, or does not write it plainly, nothing bonds and the reason is recorded. That is the engine saying it cannot find it in your documents. No answer is given. The model is never asked whether a figure is there: the check decides that, from the document. <span data-bind="h.none">not measured yet</span></li>
+    <li><b>Write a rule.</b> When a question gives a rule in words ("the unit price times the order size, plus the delivery charge"), the model writes it as a formula over a letter for each quantity: <code>p × c + d</code>. The formula is run on the rule's tests, chosen so that every near-miss of the rule (a sign changed, a side left out, a letter swapped) fails one. If it passes them all, the figures go into its letters and that is the calculation. It is <span class="tested">proven against its tests</span>: a formula built to pass exactly those tests and nothing else would pass too, and the attack below shows one doing it.</li>
+    <li><b>Write a claim.</b> When a question asks whether something is certain ("for 10 to 14 crates, is it certain the order comes to at least 300 pounds?"), the model writes the claim as a comparison: <code>p × c + d ≥ 300</code>. A small exact solver decides it from what is given: yes, no, or it depends. It is <span class="encoded">proven within its encoding</span>: the verdict is exact about the claim as the model wrote it down, and the model may have written it down wrongly. The page counts how often it did.</li>
+    <li><b>Work out.</b> With the figures cited and the calculation known, it is grown as The Crystal grows one: one small step at a time, each reply checked by exact arithmetic, a wrong step split smaller. <span data-bind="h.seed">not measured yet</span></li>
+    <li><b>Label.</b> Every facet carries how true it is. The law is one line: a facet is only as strong as the weakest bond it stands on. A sum worked out exactly from a cited figure is grounded. A sum worked out from a tested formula is proven against its tests. No two strengths are ever counted or drawn as the same thing.</li>
+  </ol>
+  <p><span data-bind="h.law">not measured yet</span></p>
+</section>
+
+<section class="panel" id="set">
+  <h2>The <em>checks</em></h2>
+  <p>Four kinds of check are in the design, and all four are built here. Each was added only together with the harness that attacks it, and each harness was turned on readers with a leak planted in them before anything was grown on its check.</p>
+  <div class="wrap" id="verifierTable">not measured yet</div>
+  <p class="small">Each check is attacked on this page every time it loads: forged replies made many ways, honest replies written every allowed way, and a second reader written apart from the check that must agree with it on every reply. The same harness is then turned on readers with a leak planted in each, to show it can find one. One of those is DocDec's own span check, exactly as it shipped: it lets a figure cut out of a longer one through, which is why it is not the check used here. The logical check is a small exact solver written for this build, not a general one such as Z3: it decides one kind of claim completely (a sum of products and quotients, each quantity once, each known exactly or between two figures) and refuses every other kind.</p>
+</section>
+
+<section class="panel" id="numbers">
+  <h2>The <em>numbers</em></h2>
+  <p class="small" data-bind="h.source">not measured yet</p>
+  <div class="wrap" id="claimsTable">not measured yet</div>
+  <details><summary>What the model read and wrote, and what it did when the figure was not there</summary><div id="reads">not measured yet</div></details>
+  <details><summary>The citation check, attacked</summary><div class="wrap" id="attackTable">not measured yet</div></details>
+  <details><summary>The formula check, attacked, and its limit shown</summary><div class="wrap" id="ruleAttack">not measured yet</div></details>
+  <details><summary>The solver, attacked</summary><div class="wrap" id="claimAttack">not measured yet</div></details>
+  <details><summary>What it cost, against one unchecked reply</summary><div id="cost">not measured yet</div></details>
+</section>
+
+<section class="panel" id="limits">
+  <h2>What this does <em>not</em> prove</h2>
+  <ul>
+    <li><b>Grounded is not true.</b> A cited figure is in the document, where the document says it is. If the document is wrong, the answer is wrong, and it is still grounded. <span data-bind="l.misstated">not measured yet</span> The label is the protection: it is never called proven.</li>
+    <li><b>"About what was asked" is a match of words.</b> The check looks for the key words of the question in the line that is quoted. A question put in other words than the document's is beyond it, and such a figure is refused, not guessed.</li>
+    <li><b>A figure must be written plainly.</b> Digits, with commas in the thousands and a decimal part, and nothing touching them that could change what they say. A figure with a sign in front, a leading point, a range, a unit run on to it, or a word like "million" after it is not read: the line cannot be cited from, and the question gets no answer. That is strict on purpose. Reading 5 where the document says 5 million would be worse.</li>
+    <li><b>The documents here are made by code.</b> Short agreements, one statement to a line. Nothing here measures the check on long, messy documents.</li>
+    <li><b>Passing the tests is not being right.</b> A formula is checked by running it on its rule's tests. The tests are chosen so that every near-miss of the rule fails one, but a formula built to pass exactly those tests and differ everywhere else passes too: the attack makes one for every rule and shows it bonding. That is why such a facet is labelled proven against its tests, never proven.</li>
+    <li><b>A claim is decided as it was written down.</b> The solver's verdict is exact about the comparison the model wrote. If the model wrote "at most" for "at least", the verdict is exact about the wrong claim. Nothing here can tell, and the page counts how often the model's claim gave a verdict other than the question's own. Such a verdict is labelled proven within its encoding, never proven.</li>
+    <li><b>A division the model gets wrong is not split smaller.</b> The arithmetic is grown as The Crystal grows it, as its seal froze it, and The Crystal has smaller steps for adding, taking away and multiplying, but none for dividing. When the model divides wrongly (it once wrote 26 ÷ 13 = 1.923), that step dissolves and the problem has no answer. It is never given a wrong one.</li>
+    <li><b>The solver is small.</b> It decides one kind of claim completely: a sum of products and quotients, each quantity used once, each known exactly or between two figures. A claim that uses a quantity twice, or divides by something that could be nought, is refused, not guessed. A general solver would decide far more.</li>
+    <li><b>The tests stand for a rule's owner.</b> Here they are made by code from the rule as the problem holds it. In your own work they would be the examples you keep for a rule, and the check is only as good as they are.</li>
+    <li><b>The attack is evidence, not a proof.</b> Many forged replies found no leak, and a second reader agreed every time. That does not show no forged reply exists.</li>
+    <li><b>The check holds the question.</b> It knows which figures a question needs and how they combine. The model does the reading and every step of the sum. For your own work, that bookkeeping is the part you would write.</li>
+    <li><b>The model did not get smarter, and nothing here retrains it.</b> It is the same small model at the last facet as at the first.</li>
+  </ul>
+</section>
+
+<section class="panel" id="blueprint">
+  <h2>How it is <em>built</em></h2>
+  <div class="wrap"><table><thead><tr><th>part</th><th>what it is</th><th>status</th></tr></thead><tbody>
+    <tr><td>What it stands on</td><td>The Crystal's kernels, byte for byte as its seal froze them, and inside them The Climb's (<code>vendor/crystal/</code>).</td><td data-bind="bp.seed">not measured yet</td></tr>
+    <tr><td>The strength law</td><td>The four kinds of bond, what each proves, and the weakest-root rule (<code>src/strength.mjs</code>).</td><td data-bind="bp.strength">not measured yet</td></tr>
+    <tr><td>The citation check</td><td>The one thing that can say a figure has been cited from a document (<code>src/cite.mjs</code>).</td><td data-bind="bp.cite">not measured yet</td></tr>
+    <tr><td>The attack on it</td><td><span data-bind="bp.ways">Many ways of forging a quote, honest quotes, noise, hard cases, places where nothing can be cited, a second reader, and leaky readers it must catch</span> (<code>src/citefuzz.mjs</code>).</td><td data-bind="bp.citefuzz">not measured yet</td></tr>
+    <tr><td>The formula check</td><td>Runs a formula the model wrote on its rule's tests, in a language of four signs and brackets that is its own sandbox, and chooses the tests so every near-miss fails one (<code>src/formula.mjs</code>).</td><td data-bind="bp.formula">not measured yet</td></tr>
+    <tr><td>The attack on it</td><td><span data-bind="bp.ruleways">Many ways of forging a formula, honest rewrites, a second runner, and leaky runners it must catch</span> (<code>src/formulafuzz.mjs</code>).</td><td data-bind="bp.formulafuzz">not measured yet</td></tr>
+    <tr><td>The solver</td><td>Decides a claim from what is given, exactly, by arithmetic on ranges; refuses what is outside its fragment (<code>src/logic.mjs</code>).</td><td data-bind="bp.logic">not measured yet</td></tr>
+    <tr><td>The attack on it</td><td><span data-bind="bp.claimways">Claims built to trip a solver or to be refused, hard questions, a second procedure, and leaky solvers it must catch</span> (<code>src/logicfuzz.mjs</code>).</td><td data-bind="bp.logicfuzz">not measured yet</td></tr>
+    <tr><td>The growth law</td><td>Cite, write the rule or the claim, then work out; refuse when a cell cannot be bonded (<code>src/weave.mjs</code>), on problems made by code, twelve kinds to a sheet (<code>src/tasks.mjs</code>).</td><td data-bind="bp.weave">not measured yet</td></tr>
+    <tr><td>The labelled lattice</td><td>Where each facet stands and what it is made of (<code>src/facets.mjs</code>), and the table of checks (<code>src/set.mjs</code>).</td><td data-bind="bp.facets">not measured yet</td></tr>
+    <tr><td>The numbers</td><td>Every count and every verdict, and the one unchecked reply they are set against (<code>src/counts.mjs</code>, <code>src/claims.mjs</code>, <code>src/onetry.mjs</code>).</td><td data-bind="bp.counts">not measured yet</td></tr>
+    <tr><td>The glass</td><td>WebGL2, written for this page. It draws a record and decides nothing; each of the four strengths is its own material (<code>page/gem.js</code>).</td><td>built</td></tr>
+    <tr><td>The model</td><td>Llama 3.2 1B Instruct at 4 bits, run by WebLLM 0.2.79 on WebGPU, always picking its likeliest word.</td><td>not part of this repository</td></tr>
+  </tbody></table></div>
+</section>
+
+<section class="panel" id="buyers">
+  <h2>For your <em>business</em></h2>
+  <p><b>What it is.</b> A way to get answers out of your own documents and rules from a small model you run yourself, where every figure is shown in the document it came from, every formula is run on its rule's tests, every claim is decided by a solver, every sum is exact, and every answer says how far it can be trusted. <span data-bind="b.what">not measured yet</span></p>
+  <details><summary>Where it fits, and where it does not</summary>
+    <p>It fits questions whose answer is figures from a document, a rule applied to them, and arithmetic: what an order comes to under a contract, what is owed after a deposit, what a term costs in total, and whether a range of orders is certain to clear a limit. It does not fit judgement, summaries, or anything a program cannot check. Where it cannot check, it gives no answer.</p></details>
+  <details><summary>For each role</summary><ul>
+    <li><b>Chief executive.</b> No answer leaves without saying what it stands on. A figure from a contract is shown in the contract. A document that contradicts itself gets no answer, and the page says which figure and why.</li>
+    <li><b>Finance.</b> The cost is small model calls on hardware you own. <span data-bind="b.cost">not measured yet</span> There is no charge per question.</li>
+    <li><b>Operations.</b> When it stops, it names the cell it could not bond and the reason (the figure it could not cite, the test the formula failed, the claim it could not decide), so a person picks up from there, not from the beginning.</li>
+    <li><b>Technology and security.</b> One page, no server, no account, no key. The document, the model and both checks stay in the browser. The model's files come from the public WebLLM library and are not pinned by hash here, which is a limit stated plainly.</li>
+    <li><b>Legal and compliance.</b> Every cited figure carries the document's hash and the character offsets of the quote, so anyone can open the document and see it. Nothing is paraphrased: a quote is the document's own words or it is refused.</li>
+  </ul></details>
+  <details><summary>Against what you use now</summary>
+    <p><span data-bind="b.versus">not measured yet</span> A general assistant will answer from a document whether or not the figure is there. This does not: where the document is silent or says two things, it gives no answer.</p></details>
+  <details><summary>Rolling it out</summary><ol>
+    <li>Pick one kind of question whose answer is figures from a document and a sum.</li><li>Write down, for that question, which figures it needs and how they combine.</li><li>Run your own documents and count: answered, refused, and why.</li><li>Read the refusals first. Each one names a clause to fix or a question to reword.</li><li>Keep the label on every answer you pass on: grounded means "as true as the document".</li>
+  </ol></details>
+  <details><summary>Security, data and ownership</summary>
+    <p>A document you paste is handled in the tab; the page makes no request while it works, and the count is measured by the browser. Your runs are kept in this browser's storage so a long run can resume, and clearing site data removes them. MIT licence: run it, change it, ship it. Supplied by <a href="https://www.ai-nativesolutions.com">AI Native Solutions</a>; support is agreed per deployment, in each deployment's agreement.</p></details>
+  <details><summary>Risks, answered straight</summary><ul>
+    <li><b>"What if the document is wrong?"</b> Then the answer is wrong, and labelled grounded. Nothing here can check a document against the world.</li>
+    <li><b>"It refuses too much."</b> It refuses when the figure is absent, stated twice, not written plainly, or asked for in other words. <span data-bind="b.refused">not measured yet</span></li>
+    <li><b>"It only does figures, rules, simple claims and sums."</b> Yes, here. All four checks are built, each for a narrow kind of work. Where none of them can check, nothing bonds.</li>
+    <li><b>"Can a small model write a rule, or a claim?"</b> It is measured. <span data-bind="b.rules">not measured yet</span></li>
+    <li><b>"A small model cannot read."</b> It is measured. <span data-bind="b.reads">not measured yet</span></li>
+  </ul></details>
+  <p><b>The case for the board.</b> The expensive failure of AI on documents is the confident answer that was never in the document. This cannot give one: a figure is in the document at a place you can open, or there is no answer. <span data-bind="b.board">not measured yet</span></p>
+  <div id="walk">not measured yet</div>
+</section>
+</main>
+<footer>
+  The Verifier Set · built by Kar · MIT licence (holder Simon Gant) · supplied by <a href="https://www.ai-nativesolutions.com">AI Native Solutions</a><br>
+  Powered by the Konomi architecture, created by Thomas Frumkin.<br>
+  AI you own. Proof you can re-run. · <a href="https://github.com/sjgant80-hub/the-verifier-set">source</a> · <a href="CLAIMS.md">claims</a> · <a href="https://sjgant80-hub.github.io/the-crystal/">The Crystal, which it grew from</a> · <a href="https://sjgant80-hub.github.io/the-climb/">The Climb</a>
+</footer>
+<script type="module">
+/*KERNELS*/
+/*APP*/
+</script>
+</body>
+</html>

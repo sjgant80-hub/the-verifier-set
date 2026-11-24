@@ -1,0 +1,58 @@
+{
+  "genome": "1",
+  "name": "the-verifier-set",
+  "kind": "repo",
+  "purpose": "Answers questions about a document in a browser tab with a small AI model, and labels how true each answer is: every figure the model cites is checked against the document's own words, every step it works out is checked by exact arithmetic, and an answer that stands on a cited figure is labelled grounded, never proven. Where the document does not state a figure, or states it two ways, it gives no answer and says why.",
+  "lane": {
+    "id": "the-verifier-set-citation",
+    "accepts": "a document, something it states once with one figure (the unit price), and a quote offered as stating it",
+    "refuses": "a figure the document does not state, states two ways, or that is asked for in words the document does not use"
+  },
+  "interface": {
+    "in": "{\"document\":\"The unit price is 126 pounds.\\nThe order size is 12 crates.\",\"cell\":\"the unit price\",\"reply\":\"The unit price is 126 pounds.\"}",
+    "out": "verified when the quote is in the document letter for letter, in the line that states the cell, with its one figure; unverified when it is not; refused when the document cannot give the figure"
+  },
+  "judge": {
+    "what": "a quote cites a figure only when it is the document's own words, begun and ended at the edge of a word or number, in the line that is about what was asked",
+    "run": "node genome/judge.mjs",
+    "cases": {
+      "good": {
+        "document": "The unit price is 126 pounds.\nThe order size is 12 crates.",
+        "cell": "the unit price",
+        "reply": "The unit price is 126 pounds."
+      },
+      "bad": {
+        "document": "The unit price is 126 pounds.\nThe order size is 12 crates.",
+        "cell": "the unit price",
+        "reply": "The unit price is 12"
+      }
+    }
+  },
+  "boundary": {
+    "run": "node genome/lane.mjs",
+    "inLane": {
+      "document": "The unit price is 126 pounds.\nThe order size is 12 crates.",
+      "cell": "the order size",
+      "reply": "The order size is 12 crates."
+    },
+    "outOfLane": {
+      "document": "The unit price is 126 pounds.\nThe order size is 12 crates.",
+      "cell": "the best pizza topping",
+      "reply": "cheese"
+    },
+    "escalate": "kar"
+  },
+  "health": {
+    "run": "node genome/health.mjs"
+  },
+  "tombstone": {
+    "apply": "node genome/tombstone.mjs apply",
+    "restore": "node genome/tombstone.mjs restore"
+  },
+  "provenance": {
+    "repo": "sjgant80-hub/the-verifier-set",
+    "by": "Kar, for Simon Gant",
+    "born": "2026-11-24",
+    "grownFrom": "sjgant80-hub/the-crystal, as sealed"
+  }
+}

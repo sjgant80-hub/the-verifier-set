@@ -1,0 +1,52 @@
+name: gate
+# The Verifier Set is gated like every cell: tests, a mutation witness that must be CLEAN on every gated file with the
+# counts committed in data/gates.json, The Crystal's sealed kernels and DocDec's gate compared byte for byte with their
+# repositories, every published run decided again from its recorded replies, and its own birth check through the
+# estate genome action. The mutation gate runs one job per gated file: run one after another they would take hours.
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      files: ${{ steps.list.outputs.files }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: tests (including the seal and the page build)
+        run: node --test test/*.test.mjs
+      - name: what it stands on is The Crystal and DocDec's gate, byte for byte
+        run: node scripts/vendor.mjs --check
+      - name: the seed is every step The Crystal's sealed run bonded, made again from that repository
+        run: node scripts/make-seed.mjs --check
+      - name: every published run is complete, under the seal where it must be, and decided again identically
+        run: node scripts/publish.mjs --check
+      - name: the committed gate record lists every gated file, each CLEAN
+        run: node scripts/gates.mjs --record
+      - name: the gated files, for the mutation gate below
+        id: list
+        run: echo "files=$(node scripts/gates.mjs --list)" >> "$GITHUB_OUTPUT"
+  mutation:
+    needs: gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        file: ${{ fromJSON(needs.gate.outputs.files) }}
+    name: mutation gate · ${{ matrix.file }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: CLEAN, with the counts as committed
+        run: |
+          git clone --depth 1 --branch v0.6 https://github.com/sjgant80-hub/witness.git .witness
+          node scripts/gates.mjs --witness .witness/witness.mjs --check --only "${{ matrix.file }}"
+  genome:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - uses: sjgant80-hub/estate-genome@v1

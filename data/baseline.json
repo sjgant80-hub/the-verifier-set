@@ -1,0 +1,1767 @@
+{
+ "v": "the-verifier-set-baseline/2",
+ "what": "one unchecked reply to every dev problem, asked two ways; a builder's comparison made before the seal, to choose the stronger baseline",
+ "at": "2026-11-24T20:31:39.856Z",
+ "model": "Llama-3.2-1B-Instruct-q4f16_1-MLC",
+ "venue": "tab (WebLLM 0.2.79, WebGPU)",
+ "seed": 20261201,
+ "sheets": 5,
+ "asked": {
+  "mixed:20261201-1": {
+   "tier": "mixed",
+   "user": "Service agreement between the Provider and the Client\n1. Insurance cover is 6,000 pounds.\n2. The loyalty credit is 34 pounds.\n3. This agreement is the whole of what was agreed.\n4. Nothing in this agreement changes the rights the law gives.\n5. The term length is 24 months.\n6. The monthly fee is 47 pounds.\n7. The setup charge is 73 pounds.\n\nWhat do the monthly fees come to over the term?",
+   "want": "1128",
+   "decline": false,
+   "verdict": false
+  },
+  "conflict:20261201-2": {
+   "tier": "conflict",
+   "user": "Supply agreement between the Supplier and the Buyer\n1. The unit price is 27 pounds per crate.\n2. The order size is 12 crates.\n3. The delivery charge is 93 pounds.\n4. Insurance cover is 4,000 pounds.\n5. Either party may end this agreement in writing.\n6. The deposit paid is 47 pounds.\n7. The warranty lasts 7 months.\n8. By amendment, the unit price is 35 pounds per crate.\n\nWhat does the order cost before delivery?",
+   "want": null,
+   "decline": true,
+   "verdict": false
+  },
+  "misstated:20261201-3": {
+   "tier": "misstated",
+   "user": "Service agreement between the Provider and the Client\n1. The term length is 12 months.\n2. The monthly fee is 80 pounds.\n3. Insurance cover is 4,000 pounds.\n4. Either party may end this agreement in writing.\n5. The setup charge is 21 pounds.\n6. Disputes go first to a meeting of both parties.\n7. The loyalty credit is 35 pounds.\n\nWhat does each month cost, with the setup charge shared out?",
+   "want": "81.75",
+   "decline": false,
+   "verdict": false
+  },
+  "coded:20261201-4": {
+   "tier": "coded",
+   "user": "The monthly fee is 58 pounds. The term length is 34 months. The setup charge is 44 pounds. What does the service cost over the term, with setup? It is the monthly fee times the term length, plus the setup charge.",
+   "want": "2016",
+   "decline": false,
+   "verdict": false
+  },
+  "decided:20261201-5": {
+   "tier": "decided",
+   "user": "The monthly fee is 77 pounds. The setup charge is 65 pounds. The loyalty credit is 14 pounds. The term length is from 18 to 21 months. Is it certain that the monthly fee times the term length, plus the setup charge, less the loyalty credit, comes to more than 1437 pounds?",
+   "want": "it depends",
+   "decline": false,
+   "verdict": true
+  },
+  "computed:20261201-6": {
+   "tier": "computed",
+   "user": "Work out 22 × 35 + 18.",
+   "want": "788",
+   "decline": false,
+   "verdict": false
+  },
+  "coded-cited:20261201-7": {
+   "tier": "coded-cited",
+   "user": "Service agreement between the Provider and the Client\n1. The term length is 34 months.\n2. Disputes go first to a meeting of both parties.\n3. The monthly fee is 78 pounds.\n4. The warranty lasts 15 months.\n5. The setup charge is 26 pounds.\n6. The loyalty credit is 56 pounds.\n7. This agreement is the whole of what was agreed.\n\nWhat do the monthly fees come to over the term? It is the monthly fee times the term length.",
+   "want": "2652",
+   "decline": false,
+   "verdict": false
+  },
+  "decided-cited:20261201-8": {
+   "tier": "decided-cited",
+   "user": "Supply agreement between the Supplier and the Buyer\n1. Disputes go first to a meeting of both parties.\n2. Either party may end this agreement in writing.\n3. The delivery charge is 54 pounds.\n4. Insurance cover is 6,000 pounds.\n5. The deposit paid is 87 pounds.\n6. The unit price is 35 pounds per crate.\n\nIf the order size is from 13 to 21 crates: is it certain that the unit price times the order size, plus the delivery charge, comes to more than 496 pounds?",
+   "want": "yes",
+   "decline": false,
+   "verdict": true
+  },
+  "mixed:20261201-9": {
+   "tier": "mixed",
+   "user": "Hire agreement between the Owner and the Hirer\n1. The collection charge is 24 pounds.\n2. The hire period is 23 days.\n3. The daily rate is 26 pounds.\n4. This agreement is the whole of what was agreed.\n5. Either party may end this agreement in writing.\n6. The late fee is 7 pounds a week.\n7. The damage bond is 34 pounds.\n\nWhat is owed for the period, with collection and the bond?",
+   "want": "656",
+   "decline": false,
+   "verdict": false
+  },
+  "absent:20261201-10": {
+   "tier": "absent",
+   "user": "Supply agreement between the Supplier and the Buyer\n1. Nothing in this agreement changes the rights the law gives.\n2. Payment falls due within 41 days.\n3. The order size is 13 crates.\n4. This agreement is the whole of what was agreed.\n5. The unit price is 78 pounds per crate.\n6. The delivery charge is 45 pounds.\n\nWhat is left to pay, with delivery, after the deposit?",
+   "want": null,
+   "decline": true,
+   "verdict": false
+  },
+  "mixed:20261201-11": {
+   "tier": "mixed",
+   "user": "Hire agreement between the Owner and the Hirer\n1. Insurance cover is 7,000 pounds.\n2. The damage bond is 52 pounds.\n3. Payment falls due within 58 days.\n4. The collection charge is 50 pounds.\n5. The warranty lasts 17 months.\n6. The daily rate is 63 pounds.\n7. The hire period is 32 days.\n\nWhat is owed for the period, with collection and the bond?",
+   "want": "2118",
+   "decline": false,
+   "verdict": false
+  },
+  "cited:20261201-12": {
+   "tier": "cited",
+   "user": "Service agreement between the Provider and the Client\n1. This agreement is the whole of what was agreed.\n2. The setup charge is 32 pounds.\n3. Insurance cover is 3,000 pounds.\n4. The term length is 13 months.\n5. The monthly fee is 51 pounds.\n6. The loyalty credit is 40 pounds.\n7. Either party may end this agreement in writing.\n\nWhat is the monthly fee?",
+   "want": "51",
+   "decline": false,
+   "verdict": false
+  },
+  "conflict:20261201-13": {
+   "tier": "conflict",
+   "user": "Supply agreement between the Supplier and the Buyer\n1. The order size is 38 crates.\n2. The delivery charge is 47 pounds.\n3. Insurance cover is 3,000 pounds.\n4. The unit price is 66 pounds per crate.\n5. Disputes go first to a meeting of both parties.\n6. Nothing in this agreement changes the rights the law gives.\n7. The deposit paid is 25 pounds.\n8. By amendment, the delivery charge is 52 pounds.\n\nWhat is left to pay, with delivery, after the deposit?",
+   "want": null,
+   "decline": true,
+   "verdict": false
+  },
+  "computed:20261201-14": {
+   "tier": "computed",
+   "user": "Work out 14 × 39.",
+   "want": "546",
+   "decline": false,
+   "verdict": false
+  },
+  "decided:20261201-15": {
+   "tier": "decided",
+   "user": "The monthly fee is 27 pounds. The setup charge is 24 pounds. The term length is from 24 to 30 months. Is it certain that the monthly fee, plus the setup charge divided by the term length, comes to at most 28 pounds?",
+   "want": "yes",
+   "decline": false,
+   "verdict": true
+  },
+  "mixed:20261201-16": {
+   "tier": "mixed",
+   "user": "Service agreement between the Provider and the Client\n1. The monthly fee is 86 pounds.\n2. Insurance cover is 7,000 pounds.\n3. Disputes go first to a meeting of both parties.\n4. The setup charge is 41 pounds.\n5. The term length is 29 months.\n6. Nothing in this agreement changes the rights the law gives.\n7. The loyalty credit is 15 pounds.\n\nWhat does the service cost over the term, with setup?",
+   "want": "2535",
+   "decline": false,
+   "verdict": false
+  },
+  "cited:20261201-17": {
+   "tier": "cited",
+   "user": "Service agreement between the Provider and the Client\n1. The term length is 35 months.\n2. Nothing in this agreement changes the rights the law gives.\n3. The setup charge is 59 pounds.\n4. Insurance cover is 3,000 pounds.\n5. The loyalty credit is 38 pounds.\n6. Disputes go first to a meeting of both parties.\n7. The monthly fee is 91 pounds.\n\nWhat is the loyalty credit?",
+   "want": "38",
+   "decline": false,
+   "verdict": false
+  },
+  "decided-cited:20261201-18": {
+   "tier": "decided-cited",
+   "user": "Hire agreement between the Owner and the Hirer\n1. This agreement is the whole of what was agreed.\n2. Payment falls due within 54 days.\n3. The daily rate is 72 pounds.\n4. The late fee is 4 pounds a week.\n5. The collection charge is 45 pounds.\n6. The damage bond is 53 pounds.\n\nIf the hire period is from 45 to 53 days: is it certain that the daily rate, plus the collection charge divided by the hire period, comes to at most 65 pounds?",
+   "want": "no",
+   "decline": false,
+   "verdict": true
+  },
+  "mixed:20261201-19": {
+   "tier": "mixed",
+   "user": "Hire agreement between the Owner and the Hirer\n1. The daily rate is 95 pounds.\n2. The hire period is 31 days.\n3. The damage bond is 85 pounds.\n4. The collection charge is 62 pounds.\n5. This agreement is the whole of what was agreed.\n6. Disputes go first to a meeting of both parties.\n7. The warranty lasts 23 months.\n\nWhat does each day cost, with the collection charge shared out?",
+   "want": "97",
+   "decline": false,
+   "verdict": false
+  },
+  "absent:20261201-20": {
+   "tier": "absent",
+   "user": "Supply agreement between the Supplier and the Buyer\n1. The order size is 28 crates.\n2. Disputes go first to a meeting of both parties.\n3. The deposit paid is 73 pounds.\n4. Payment falls due within 48 days.\n5. This agreement is the whole of what was agreed.\n6. The delivery charge is 84 pounds.\n\nWhat does each crate cost, with the delivery charge shared out?",
+   "want": null,
+   "decline": true,
+   "verdict": false
+  },
+  "mixed:20261201-21": {
+   "tier": "mixed",
+   "user": "Hire agreement between the Owner and the Hirer\n1. The late fee is 6 pounds a week.\n2. Either party may end this agreement in writing.\n3. The hire period is 43 days.\n4. The collection charge is 35 pounds.\n5. The daily rate is 81 pounds.\n6. The damage bond is 54 pounds.\n7. This agreement is the whole of what was agreed.\n\nWhat does the hire cost for the period?",
+   "want": "3483",
+   "decline": false,
+   "verdict": false
+  },
+  "coded:20261201-22": {
+   "tier": "coded",
+   "user": "The monthly fee is 57 pounds. The term length is 17 months. The setup charge is 46 pounds. The loyalty credit is 10 pounds. What does the service cost over the term, with setup, after the credit? It is the monthly fee times the term length, plus the setup charge, less the loyalty credit.",
+   "want": "1005",
+   "decline": false,
+   "verdict": false
+  },
+  "misstated:20261201-23": {
+   "tier": "misstated",
+   "user": "Service agreement between the Provider and the Client\n1. Disputes go first to a meeting of both parties.\n2. Payment falls due within 57 days.\n3. The warranty lasts 7 months.\n4. The monthly fee is 69 pounds.\n5. The term length is 22 months.\n6. The setup charge is 85 pounds.\n7. The loyalty credit is 24 pounds.\n\nWhat do the monthly fees come to over the term?",
+   "want": "1518",
+   "decline": false,
+   "verdict": false
+  },
+  "coded-cited:20261201-24": {
+   "tier": "coded-cited",
+   "user": "Supply agreement between the Supplier and the Buyer\n1. The delivery charge is 81 pounds.\n2. The order size is 39 crates.\n3. The warranty lasts 23 months.\n4. The deposit paid is 62 pounds.\n5. Either party may end this agreement in writing.\n6. Nothing in this agreement changes the rights the law gives.\n7. The unit price is 20 pounds per crate.\n\nWhat is left to pay, with delivery, after the deposit? It is the unit price times the order size, plus the delivery charge, less the deposit paid.",
+   "want": "799",
+   "decline": false,
+   "verdict": false
+  },
+  "mixed:20261201-25": {
+   "tier": "mixed",
+   "user": "Supply agreement between the Supplier and the Buyer\n1. The delivery charge is 42 pounds.\n2. The unit price is 39 pounds per crate.\n3. This agreement is the whole of what was agreed.\n4. Nothing in this agreement changes the rights the law gives.\n5. Disputes go first to a meeting of both parties.\n6. The deposit paid is 74 pounds.\n7. The order size is 27 crates.\n\nWhat is left to pay, with delivery, after the deposit?",
+   "want": "1021",
+   "decline": false,
+   "verdict": false
+  },
+  "decided-cited:20261201-26": {
+   "tier": "decided-cited",
+   "user": "Hire agreement between the Owner and the Hirer\n1. The damage bond is 87 pounds.\n2. The daily rate is 55 pounds.\n3. Payment falls due within 47 days.\n4. The collection charge is 35 pounds.\n5. This agreement is the whole of what was agreed.\n6. The warranty lasts 21 months.\n\nIf the hire period is from 22 to 28 days: is it certain that the daily rate times the hire period, plus the collection charge, comes to less than 1594 pounds?",
+   "want": "yes",
+   "decline": false,
+   "verdict": true
+  },
+  "decided:20261201-27": {
+   "tier": "decided",
+   "user": "The monthly fee is 42 pounds. The setup charge is 82 pounds. The term length is from 30 to 37 months. Is it certain that the monthly fee times the term length, plus the setup charge, comes to at most 1636 pounds?",
+   "want": "yes",
+   "decline": false,
+   "verdict": true
+  },
+  "absent:20261201-28": {
+   "tier": "absent",
+   "user": "Supply agreement between the Supplier and the Buyer\n1. The order size is 13 crates.\n2. The late fee is 8 pounds a week.\n3. The unit price is 51 pounds per crate.\n4. This agreement is the whole of what was agreed.\n5. Payment falls due within 17 days.\n6. The deposit paid is 40 pounds.\n\nWhat is left to pay, with delivery, after the deposit?",
+   "want": null,
+   "decline": true,
+   "verdict": false
+  },
+  "misstated:20261201-29": {
+   "tier": "misstated",
+   "user": "Service agreement between the Provider and the Client\n1. Either party may end this agreement in writing.\n2. The warranty lasts 22 months.\n3. The term length is 71 months.\n4. Nothing in this agreement changes the rights the law gives.\n5. The loyalty credit is 45 pounds.\n6. The setup charge is 33 pounds.\n7. The monthly fee is 93 pounds.\n\nWhat does the service cost over the term, with setup, after the credit?",
+   "want": "6591",
+   "decline": false,
+   "verdict": false
+  },
+  "conflict:20261201-30": {
+   "tier": "conflict",
+   "user": "Service agreement between the Provider and the Client\n1. The warranty lasts 7 months.\n2. This agreement is the whole of what was agreed.\n3. The setup charge is 75 pounds.\n4. The term length is 16 months.\n5. The loyalty credit is 14 pounds.\n6. Either party may end this agreement in writing.\n7. The monthly fee is 84 pounds.\n8. By amendment, the term length is 20 months.\n\nWhat do the monthly fees come to over the term?",
+   "want": null,
+   "decline": true,
+   "verdict": false
+  },
+  "coded-cited:20261201-31": {
+   "tier": "coded-cited",
+   "user": "Hire agreement between the Owner and the Hirer\n1. The daily rate is 53 pounds.\n2. Insurance cover is 3,000 pounds.\n3. This agreement is the whole of what was agreed.\n4. The hire period is 38 days.\n5. The damage bond is 74 pounds.\n6. The warranty lasts 10 months.\n7. The collection charge is 50 pounds.\n\nWhat does the hire cost for the period? It is the daily rate times the hire period.",
+   "want": "2014",
+   "decline": false,
+   "verdict": false
+  },
+  "computed:20261201-32": {
+   "tier": "computed",
+   "user": "Work out 90 × 30.",
+   "want": "2700",
+   "decline": false,
+   "verdict": false
+  },
+  "mixed:20261201-33": {
+   "tier": "mixed",
+   "user": "Service agreement between the Provider and the Client\n1. This agreement is the whole of what was agreed.\n2. The setup charge is 56 pounds.\n3. Either party may end this agreement in writing.\n4. The loyalty credit is 20 pounds.\n5. Payment falls due within 14 days.\n6. The monthly fee is 54 pounds.\n7. The term length is 36 months.\n\nWhat do the monthly fees come to over the term?",
+   "want": "1944",
+   "decline": false,
+   "verdict": false
+  },
+  "mixed:20261201-34": {
+   "tier": "mixed",
+   "user": "Supply agreement between the Supplier and the Buyer\n1. This agreement is the whole of what was agreed.\n2. The order size is 19 crates.\n3. The warranty lasts 9 months.\n4. The unit price is 17 pounds per crate.\n5. The deposit paid is 62 pounds.\n6. The delivery charge is 34 pounds.\n7. The late fee is 2 pounds a week.\n\nWhat is left to pay, with delivery, after the deposit?",
+   "want": "295",
+   "decline": false,
+   "verdict": false
+  },
+  "coded:20261201-35": {
+   "tier": "coded",
+   "user": "The monthly fee is 60 pounds. The setup charge is 26 pounds. The term length is 13 months. What does each month cost, with the setup charge shared out? It is the monthly fee, plus the setup charge divided by the term length.",
+   "want": "62",
+   "decline": false,
+   "verdict": false
+  },
+  "cited:20261201-36": {
+   "tier": "cited",
+   "user": "Hire agreement between the Owner and the Hirer\n1. Disputes go first to a meeting of both parties.\n2. Insurance cover is 5,000 pounds.\n3. The hire period is 17 days.\n4. The damage bond is 88 pounds.\n5. The collection charge is 57 pounds.\n6. The daily rate is 81 pounds.\n7. Payment falls due within 16 days.\n\nWhat is the hire period?",
+   "want": "17",
+   "decline": false,
+   "verdict": false
+  },
+  "absent:20261201-37": {
+   "tier": "absent",
+   "user": "Service agreement between the Provider and the Client\n1. This agreement is the whole of what was agreed.\n2. The loyalty credit is 34 pounds.\n3. The setup charge is 77 pounds.\n4. Either party may end this agreement in writing.\n5. The monthly fee is 52 pounds.\n6. The late fee is 3 pounds a week.\n\nWhat does the service cost over the term, with setup?",
+   "want": null,
+   "decline": true,
+   "verdict": false
+  },
+  "mixed:20261201-38": {
+   "tier": "mixed",
+   "user": "Supply agreement between the Supplier and the Buyer\n1. The delivery charge is 28 pounds.\n2. Disputes go first to a meeting of both parties.\n3. Payment falls due within 17 days.\n4. The deposit paid is 64 pounds.\n5. The order size is 44 crates.\n6. The late fee is 7 pounds a week.\n7. The unit price is 45 pounds per crate.\n\nWhat is left to pay, with delivery, after the deposit?",
+   "want": "1944",
+   "decline": false,
+   "verdict": false
+  },
+  "coded:20261201-39": {
+   "tier": "coded",
+   "user": "The daily rate is 94 pounds. The hire period is 14 days. The collection charge is 68 pounds. What does the hire cost for the period, with collection? It is the daily rate times the hire period, plus the collection charge.",
+   "want": "1384",
+   "decline": false,
+   "verdict": false
+  },
+  "conflict:20261201-40": {
+   "tier": "conflict",
+   "user": "Supply agreement between the Supplier and the Buyer\n1. The deposit paid is 42 pounds.\n2. The delivery charge is 83 pounds.\n3. The unit price is 70 pounds per crate.\n4. The order size is 43 crates.\n5. Disputes go first to a meeting of both parties.\n6. The warranty lasts 7 months.\n7. This agreement is the whole of what was agreed.\n8. By amendment, the order size is 50 crates.\n\nWhat is left to pay, with delivery, after the deposit?",
+   "want": null,
+   "decline": true,
+   "verdict": false
+  },
+  "decided-cited:20261201-41": {
+   "tier": "decided-cited",
+   "user": "Supply agreement between the Supplier and the Buyer\n1. The unit price is 43 pounds per crate.\n2. Payment falls due within 34 days.\n3. The delivery charge is 89 pounds.\n4. The deposit paid is 89 pounds.\n5. Either party may end this agreement in writing.\n6. Insurance cover is 2,000 pounds.\n\nIf the order size is from 42 to 50 crates: is it certain that the unit price times the order size, plus the delivery charge, comes to at least 2067 pounds?",
+   "want": "it depends",
+   "decline": false,
+   "verdict": true
+  },
+  "mixed:20261201-42": {
+   "tier": "mixed",
+   "user": "Supply agreement between the Supplier and the Buyer\n1. The order size is 31 crates.\n2. The deposit paid is 60 pounds.\n3. Nothing in this agreement changes the rights the law gives.\n4. The unit price is 93 pounds per crate.\n5. Either party may end this agreement in writing.\n6. This agreement is the whole of what was agreed.\n7. The delivery charge is 26 pounds.\n\nWhat is left to pay, with delivery, after the deposit?",
+   "want": "2849",
+   "decline": false,
+   "verdict": false
+  },
+  "coded-cited:20261201-43": {
+   "tier": "coded-cited",
+   "user": "Service agreement between the Provider and the Client\n1. The loyalty credit is 24 pounds.\n2. The setup charge is 74 pounds.\n3. The monthly fee is 14 pounds.\n4. The late fee is 2 pounds a week.\n5. Insurance cover is 9,000 pounds.\n6. The warranty lasts 16 months.\n7. The term length is 15 months.\n\nWhat do the monthly fees come to over the term? It is the monthly fee times the term length.",
+   "want": "210",
+   "decline": false,
+   "verdict": false
+  },
+  "misstated:20261201-44": {
+   "tier": "misstated",
+   "user": "Supply agreement between the Supplier and the Buyer\n1. The late fee is 8 pounds a week.\n2. The order size is 43 crates.\n3. The deposit paid is 42 pounds.\n4. Payment falls due within 39 days.\n5. The delivery charge is 129 pounds.\n6. Insurance cover is 3,000 pounds.\n7. The unit price is 18 pounds per crate.\n\nWhat does each crate cost, with the delivery charge shared out?",
+   "want": "21",
+   "decline": false,
+   "verdict": false
+  },
+  "cited:20261201-45": {
+   "tier": "cited",
+   "user": "Hire agreement between the Owner and the Hirer\n1. Payment falls due within 18 days.\n2. Nothing in this agreement changes the rights the law gives.\n3. This agreement is the whole of what was agreed.\n4. The damage bond is 47 pounds.\n5. The daily rate is 92 pounds.\n6. The hire period is 44 days.\n7. The collection charge is 84 pounds.\n\nWhat is the damage bond?",
+   "want": "47",
+   "decline": false,
+   "verdict": false
+  },
+  "mixed:20261201-46": {
+   "tier": "mixed",
+   "user": "Supply agreement between the Supplier and the Buyer\n1. The deposit paid is 88 pounds.\n2. The late fee is 2 pounds a week.\n3. Nothing in this agreement changes the rights the law gives.\n4. The unit price is 22 pounds per crate.\n5. The delivery charge is 117 pounds.\n6. The order size is 39 crates.\n7. This agreement is the whole of what was agreed.\n\nWhat does each crate cost, with the delivery charge shared out?",
+   "want": "25",
+   "decline": false,
+   "verdict": false
+  },
+  "computed:20261201-47": {
+   "tier": "computed",
+   "user": "Work out 74 × 22 - 67.",
+   "want": "1561",
+   "decline": false,
+   "verdict": false
+  },
+  "decided:20261201-48": {
+   "tier": "decided",
+   "user": "The unit price is 20 pounds per crate. The order size is from 28 to 36 crates. Is it certain that the unit price times the order size comes to more than 736 pounds?",
+   "want": "no",
+   "decline": false,
+   "verdict": true
+  },
+  "computed:20261201-49": {
+   "tier": "computed",
+   "user": "Work out 57 × 32.",
+   "want": "1824",
+   "decline": false,
+   "verdict": false
+  },
+  "mixed:20261201-50": {
+   "tier": "mixed",
+   "user": "Hire agreement between the Owner and the Hirer\n1. Disputes go first to a meeting of both parties.\n2. The hire period is 28 days.\n3. Insurance cover is 3,000 pounds.\n4. The daily rate is 13 pounds.\n5. The collection charge is 84 pounds.\n6. The damage bond is 53 pounds.\n7. Either party may end this agreement in writing.\n\nWhat does each day cost, with the collection charge shared out?",
+   "want": "16",
+   "decline": false,
+   "verdict": false
+  },
+  "coded:20261201-51": {
+   "tier": "coded",
+   "user": "The daily rate is 56 pounds. The hire period is 42 days. The collection charge is 85 pounds. The damage bond is 39 pounds. What is owed for the period, with collection and the bond? It is the daily rate times the hire period, plus the collection charge, plus the damage bond.",
+   "want": "2476",
+   "decline": false,
+   "verdict": false
+  },
+  "absent:20261201-52": {
+   "tier": "absent",
+   "user": "Service agreement between the Provider and the Client\n1. This agreement is the whole of what was agreed.\n2. The late fee is 5 pounds a week.\n3. The loyalty credit is 14 pounds.\n4. The warranty lasts 24 months.\n5. The term length is 22 months.\n6. The setup charge is 78 pounds.\n\nWhat does the service cost over the term, with setup, after the credit?",
+   "want": null,
+   "decline": true,
+   "verdict": false
+  },
+  "decided:20261201-53": {
+   "tier": "decided",
+   "user": "The unit price is 12 pounds per crate. The order size is from 20 to 24 crates. Is it certain that the unit price times the order size comes to at least 240 pounds?",
+   "want": "yes",
+   "decline": false,
+   "verdict": true
+  },
+  "decided-cited:20261201-54": {
+   "tier": "decided-cited",
+   "user": "Hire agreement between the Owner and the Hirer\n1. Either party may end this agreement in writing.\n2. The damage bond is 72 pounds.\n3. This agreement is the whole of what was agreed.\n4. The late fee is 7 pounds a week.\n5. The daily rate is 88 pounds.\n6. The collection charge is 70 pounds.\n\nIf the hire period is from 13 to 20 days: is it certain that the daily rate times the hire period, plus the collection charge, plus the damage bond, comes to more than 1264 pounds?",
+   "want": "yes",
+   "decline": false,
+   "verdict": true
+  },
+  "misstated:20261201-55": {
+   "tier": "misstated",
+   "user": "Hire agreement between the Owner and the Hirer\n1. The collection charge is 37 pounds.\n2. The damage bond is 70 pounds.\n3. This agreement is the whole of what was agreed.\n4. Insurance cover is 8,000 pounds.\n5. Payment falls due within 47 days.\n6. The hire period is 43 days.\n7. The daily rate is 62 pounds.\n\nWhat does the hire cost for the period?",
+   "want": "2666",
+   "decline": false,
+   "verdict": false
+  },
+  "conflict:20261201-56": {
+   "tier": "conflict",
+   "user": "Supply agreement between the Supplier and the Buyer\n1. The unit price is 47 pounds per crate.\n2. The deposit paid is 29 pounds.\n3. The warranty lasts 15 months.\n4. The order size is 12 crates.\n5. Either party may end this agreement in writing.\n6. The delivery charge is 94 pounds.\n7. Disputes go first to a meeting of both parties.\n8. By amendment, the order size is 19 crates.\n\nWhat does the order cost before delivery?",
+   "want": null,
+   "decline": true,
+   "verdict": false
+  },
+  "coded-cited:20261201-57": {
+   "tier": "coded-cited",
+   "user": "Supply agreement between the Supplier and the Buyer\n1. The delivery charge is 74 pounds.\n2. The order size is 37 crates.\n3. The deposit paid is 76 pounds.\n4. Payment falls due within 9 days.\n5. Nothing in this agreement changes the rights the law gives.\n6. The warranty lasts 21 months.\n7. The unit price is 63 pounds per crate.\n\nWhat does each crate cost, with the delivery charge shared out? It is the unit price, plus the delivery charge divided by the order size.",
+   "want": "65",
+   "decline": false,
+   "verdict": false
+  },
+  "cited:20261201-58": {
+   "tier": "cited",
+   "user": "Supply agreement between the Supplier and the Buyer\n1. The late fee is 7 pounds a week.\n2. Nothing in this agreement changes the rights the law gives.\n3. The order size is 14 crates.\n4. The delivery charge is 93 pounds.\n5. The deposit paid is 59 pounds.\n6. Payment falls due within 17 days.\n7. The unit price is 62 pounds per crate.\n\nWhat is the delivery charge?",
+   "want": "93",
+   "decline": false,
+   "verdict": false
+  },
+  "mixed:20261201-59": {
+   "tier": "mixed",
+   "user": "Service agreement between the Provider and the Client\n1. The loyalty credit is 36 pounds.\n2. Payment falls due within 31 days.\n3. The warranty lasts 16 months.\n4. The monthly fee is 50 pounds.\n5. The setup charge is 80 pounds.\n6. Either party may end this agreement in writing.\n7. The term length is 25 months.\n\nWhat do the monthly fees come to over the term?",
+   "want": "1250",
+   "decline": false,
+   "verdict": false
+  },
+  "mixed:20261201-60": {
+   "tier": "mixed",
+   "user": "Hire agreement between the Owner and the Hirer\n1. Insurance cover is 5,000 pounds.\n2. The hire period is 32 days.\n3. The damage bond is 85 pounds.\n4. The late fee is 8 pounds a week.\n5. The daily rate is 42 pounds.\n6. The collection charge is 77 pounds.\n7. Payment falls due within 16 days.\n\nWhat does the hire cost for the period, with collection?",
+   "want": "1421",
+   "decline": false,
+   "verdict": false
+  }
+ },
+ "ways": [
+  {
+   "name": "may decline",
+   "system": "You answer a question about a document, or work out a calculation. Give the answer as a number. If the question asks whether something is certain, answer yes, no, or it depends. If the document does not state what is needed, reply: cannot tell",
+   "maxTokens": 192,
+   "rows": [
+    {
+     "problem": "mixed:20261201-1",
+     "tier": "mixed",
+     "said": "It depends.\n\nThe monthly fees are 47 pounds, and the term length is 24 months. So, the total cost over the term is:\n\n47 pounds/month x 24 months = 1,158 pounds\n\nThe monthly fees come to 1,158 pounds over the term.",
+     "right": false,
+     "answered": true,
+     "value": "1,158",
+     "tokens": 58,
+     "finish": "stop",
+     "ms": 33400
+    },
+    {
+     "problem": "conflict:20261201-2",
+     "tier": "conflict",
+     "said": "The order cost before delivery is 47 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "47",
+     "tokens": 10,
+     "finish": "stop",
+     "ms": 4341
+    },
+    {
+     "problem": "misstated:20261201-3",
+     "tier": "misstated",
+     "said": "To find the monthly cost, we need to subtract the setup charge from the total cost.\n\nTotal cost = £80 (monthly fee) + £4,000 (insurance cover) = £4,080\nSetup charge = £21\nMonthly cost = £4,080 - £21 = £4,059\n\nSo, each month costs £4,059.",
+     "right": false,
+     "answered": true,
+     "value": "4,059",
+     "tokens": 74,
+     "finish": "stop",
+     "ms": 19014
+    },
+    {
+     "problem": "coded:20261201-4",
+     "tier": "coded",
+     "said": "To find the total cost, we need to multiply the monthly fee by the term length, and then add the setup charge.\n\nMonthly fee = 58 pounds\nTerm length = 34 months\nSetup charge = 44 pounds\n\nTotal cost = (Monthly fee x Term length) + Setup charge\n= (58 x 34) + 44\n= 1982 + 44\n= 2026\n\nThe service costs £2026 over the term.",
+     "right": false,
+     "answered": true,
+     "value": "2026",
+     "tokens": 94,
+     "finish": "stop",
+     "ms": 21868
+    },
+    {
+     "problem": "decided:20261201-5",
+     "tier": "decided",
+     "said": "It depends.\n\nThe calculation is:\n\n77 x 21 + 65 - 14 = 1617 + 65 - 14 = 1680\n\nSo, it is not certain that the result is more than 1437 pounds.",
+     "right": true,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 49,
+     "finish": "stop",
+     "ms": 16901
+    },
+    {
+     "problem": "computed:20261201-6",
+     "tier": "computed",
+     "said": "To calculate this, I'll follow the order of operations (PEMDAS):\n\n1. Multiply 22 and 35:\n   22 × 35 = 770\n2. Multiply 770 by 18:\n   770 × 18 = 13,880\n\nSo, the answer is: 13,880",
+     "right": false,
+     "answered": true,
+     "value": "13,880",
+     "tokens": 66,
+     "finish": "stop",
+     "ms": 22285
+    },
+    {
+     "problem": "coded-cited:20261201-7",
+     "tier": "coded-cited",
+     "said": "It depends. The monthly fee is 78 pounds, and the term length is 34 months. So, the monthly fee times the term length is:\n\n78 pounds/month x 34 months = 2668 pounds\n\nThis is the total amount of the monthly fees over the term.",
+     "right": false,
+     "answered": true,
+     "value": "2668",
+     "tokens": 57,
+     "finish": "stop",
+     "ms": 26959
+    },
+    {
+     "problem": "decided-cited:20261201-8",
+     "tier": "decided-cited",
+     "said": "It depends.\n\nThe calculation is: unit price x order size + delivery charge = 496 pounds.\n\nThe unit price is 35 pounds per crate, and the order size is from 13 to 21 crates. \n\nThe calculation is: (13 x 35) + (21 x 35) = (13 x 35) + (21 x 35) = 455 + 735 = 1190.\n\nThe total is 1190 pounds, which is less than 496 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 102,
+     "finish": "stop",
+     "ms": 23225
+    },
+    {
+     "problem": "mixed:20261201-9",
+     "tier": "mixed",
+     "said": "To calculate the total amount owed, we need to calculate the late fee and the damage bond separately, and then add the collection charge.\n\nLate fee: 7 pounds per week\nNumber of weeks: 23 days\nLate fee: 7 pounds/week x 23 weeks = 161 pounds\n\nDamage bond: 34 pounds\nNumber of weeks: 23 days\nDamage bond: 34 pounds\n\nTotal amount owed: 161 pounds + 34 pounds = 195 pounds\n\nSo, the total amount owed for the period is 195 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "195",
+     "tokens": 113,
+     "finish": "stop",
+     "ms": 23022
+    },
+    {
+     "problem": "absent:20261201-10",
+     "tier": "absent",
+     "said": "It depends.\n\nThe agreement states that payment falls due within 41 days, so we need to calculate the total amount due.\n\nThe order size is 13 crates, and the unit price is 78 pounds per crate, so the total amount due is:\n\n13 x 78 = 1014 pounds\n\nThe delivery charge is 45 pounds, so the total amount due is:\n\n1014 + 45 = 1059 pounds\n\nTherefore, the amount left to pay, with delivery, after the deposit is:\n\n1059 pounds",
+     "right": false,
+     "answered": true,
+     "value": "1059",
+     "tokens": 106,
+     "finish": "stop",
+     "ms": 31669
+    },
+    {
+     "problem": "mixed:20261201-11",
+     "tier": "mixed",
+     "said": "To calculate the amount owed, we need to consider the collection charge and the bond.\n\nThe bond is 52 pounds, and the collection charge is 50 pounds. So, the total amount owed for the bond is:\n\n52 pounds + 50 pounds = 102 pounds\n\nThis amount is owed from the start of the hire period, which is 32 days. So, the amount owed for the bond is 102 pounds, which is owed from the start of the hire period.\n\nThe insurance cover is 7,000 pounds. This amount is owed from the start of the hire period, which is 32 days. So, the total amount owed for the insurance cover is 7,000 pounds, which is owed from the start of the hire period.\n\nThe daily rate is 63 pounds. This amount is owed from the start of the hire period, which is 32 days. So, the total amount owed for the daily rate is 63",
+     "right": false,
+     "answered": true,
+     "value": "63",
+     "tokens": 191,
+     "finish": "length",
+     "ms": 54694
+    },
+    {
+     "problem": "cited:20261201-12",
+     "tier": "cited",
+     "said": "It depends.\nThe document does not state what is needed for the monthly fee.",
+     "right": false,
+     "answered": false,
+     "value": null,
+     "tokens": 16,
+     "finish": "stop",
+     "ms": 4818
+    },
+    {
+     "problem": "conflict:20261201-13",
+     "tier": "conflict",
+     "said": "The unit price is 66 pounds per crate, and the order size is 38 crates. So, the total amount to be paid is:\n\n38 x 66 = 2,496 pounds\n\nThe deposit paid is 25 pounds, so:\n\n2,496 - 25 = 2,471 pounds\n\nThe delivery charge is 52 pounds, and the unit price is 66 pounds per crate. So, the total amount to be paid for delivery is:\n\n52 x 38 = 2,016 pounds\n\nThe total amount to be paid is:\n\n2,471 + 2,016 = 4,497 pounds\n\nThe answer is 4,497 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "4,497",
+     "tokens": 137,
+     "finish": "stop",
+     "ms": 32606
+    },
+    {
+     "problem": "computed:20261201-14",
+     "tier": "computed",
+     "said": "14 × 39 = 546",
+     "right": true,
+     "answered": true,
+     "value": "546",
+     "tokens": 7,
+     "finish": "stop",
+     "ms": 4006
+    },
+    {
+     "problem": "decided:20261201-15",
+     "tier": "decided",
+     "said": "It depends.",
+     "right": false,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 3,
+     "finish": "stop",
+     "ms": 2769
+    },
+    {
+     "problem": "mixed:20261201-16",
+     "tier": "mixed",
+     "said": "To calculate the total cost, we need to calculate the monthly fee and the setup charge separately and then add them together.\n\nMonthly fee: 86 pounds\nSetup charge: 41 pounds\n\nTotal cost = Monthly fee + Setup charge\n= 86 + 41\n= 127 pounds\n\nSo, the total cost of the service over the term is 127 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "127",
+     "tokens": 75,
+     "finish": "stop",
+     "ms": 36530
+    },
+    {
+     "problem": "cited:20261201-17",
+     "tier": "cited",
+     "said": "It depends.\nThe loyalty credit is 38 pounds.",
+     "right": true,
+     "answered": true,
+     "value": "38",
+     "tokens": 11,
+     "finish": "stop",
+     "ms": 6134
+    },
+    {
+     "problem": "decided-cited:20261201-18",
+     "tier": "decided-cited",
+     "said": "It depends.\n\nThe calculation is: (daily rate + collection charge) / hire period = (72 + 45) / 53 = 117 / 53 = 2.19\n\nThis is not certain, as the actual value of the calculation is 2.19, which is between 2 and 3.",
+     "right": false,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 66,
+     "finish": "stop",
+     "ms": 16684
+    },
+    {
+     "problem": "mixed:20261201-19",
+     "tier": "mixed",
+     "said": "To find the daily rate, we need to add the daily rate and the collection charge.\n\nDaily rate = 95 pounds\nCollection charge = 62 pounds\nTotal = 95 + 62 = 157 pounds\n\nSince the dispute goes first to a meeting of both parties, we can assume that the agreement is not being disputed. Therefore, we can conclude that the daily rate is the same as the collection charge, which is 62 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "62",
+     "tokens": 90,
+     "finish": "stop",
+     "ms": 19428
+    },
+    {
+     "problem": "absent:20261201-20",
+     "tier": "absent",
+     "said": "Cannot tell\n\nThe document does not provide information on the cost of each crate.",
+     "right": true,
+     "answered": false,
+     "value": null,
+     "tokens": 16,
+     "finish": "stop",
+     "ms": 5326
+    },
+    {
+     "problem": "mixed:20261201-21",
+     "tier": "mixed",
+     "said": "To calculate the hire cost, we need to multiply the late fee by the number of weeks the hire period is, which is 43.\n\nHire cost = 6 pounds/week x 43 weeks\n= 6 x 43\n= 258 pounds\n\nThe hire cost is 258 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "258",
+     "tokens": 62,
+     "finish": "stop",
+     "ms": 17724
+    },
+    {
+     "problem": "coded:20261201-22",
+     "tier": "coded",
+     "said": "To calculate the total cost, we need to multiply the monthly fee by the term length, add the setup charge, and then subtract the loyalty credit.\n\nMonthly fee = 57 pounds\nTerm length = 17 months\nSetup charge = 46 pounds\nLoyalty credit = 10 pounds\n\nFirst, multiply the monthly fee by the term length:\n57 pounds/month * 17 months = 989 pounds\n\nNext, add the setup charge:\n989 pounds + 46 pounds = 1035 pounds\n\nFinally, subtract the loyalty credit:\n1035 pounds - 10 pounds = 1025 pounds\n\nSo, the total cost of the service is 1025 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "1025",
+     "tokens": 136,
+     "finish": "stop",
+     "ms": 64482
+    },
+    {
+     "problem": "misstated:20261201-23",
+     "tier": "misstated",
+     "said": "To calculate the total monthly fees, we need to multiply the monthly fee by the number of months the warranty is valid.\n\nMonthly fee = 69 pounds\nTerm length = 22 months\n\nTotal monthly fees = 69 pounds/month x 22 months = 1522 pounds\n\nSo, the total monthly fees come to £1522.",
+     "right": false,
+     "answered": true,
+     "value": "1522",
+     "tokens": 68,
+     "finish": "stop",
+     "ms": 14282
+    },
+    {
+     "problem": "coded-cited:20261201-24",
+     "tier": "coded-cited",
+     "said": "It is the unit price times the order size, plus the delivery charge, less the deposit paid.\n\nDelivery charge = 81 pounds\nOrder size = 39 crates\nUnit price = 20 pounds per crate\n\nLeft to pay = (unit price x order size) + delivery charge - deposit paid\n= (20 x 39) + 81 - 62\n= 780 + 81 - 62\n= 841\n\nSo, the Buyer is left to pay £841.",
+     "right": false,
+     "answered": true,
+     "value": "841",
+     "tokens": 100,
+     "finish": "stop",
+     "ms": 22099
+    },
+    {
+     "problem": "mixed:20261201-25",
+     "tier": "mixed",
+     "said": "cannot tell",
+     "right": false,
+     "answered": false,
+     "value": null,
+     "tokens": 2,
+     "finish": "stop",
+     "ms": 2651
+    },
+    {
+     "problem": "decided-cited:20261201-26",
+     "tier": "decided-cited",
+     "said": "It depends.\n\nThe calculation is: \nDaily rate x hire period = 55 x 22 = 1210\n+ Collection charge = 35\n= 1210 + 35 = 1245\n\nThis is less than 1594 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 52,
+     "finish": "stop",
+     "ms": 16551
+    },
+    {
+     "problem": "decided:20261201-27",
+     "tier": "decided",
+     "said": "Yes.",
+     "right": true,
+     "answered": true,
+     "value": "yes",
+     "tokens": 2,
+     "finish": "stop",
+     "ms": 2373
+    },
+    {
+     "problem": "absent:20261201-28",
+     "tier": "absent",
+     "said": "It depends.\n\nThe total order size is 13 crates, which is 13 x 51 = 663 pounds.\n\nThe late fee is 8 pounds a week, which is 8 x 4 = 32 pounds per week. There are 52 weeks in a year, so 32 x 52 = 1664 pounds.\n\nThe total amount due is 663 + 1664 = 2327 pounds.\n\nThe deposit paid is 40 pounds. So, the amount left to pay, with delivery, after the deposit is:\n\n2327 - 40 = 2287 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "2287",
+     "tokens": 121,
+     "finish": "stop",
+     "ms": 47880
+    },
+    {
+     "problem": "misstated:20261201-29",
+     "tier": "misstated",
+     "said": "To calculate the total cost of the service, we need to calculate the total cost of the service, including the setup charge and the loyalty credit, and then add the monthly fee.\n\nThe setup charge is 33 pounds, and the loyalty credit is 45 pounds, so the setup charge is 33 + 45 = 78 pounds.\n\nThe monthly fee is 93 pounds, and the loyalty credit is 45 pounds, so the monthly fee is 93 + 45 = 138 pounds.\n\nThe total cost of the service is 78 + 138 = 216 pounds.\n\nSo, the total cost of the service, including setup and loyalty credit, is 216 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "216",
+     "tokens": 137,
+     "finish": "stop",
+     "ms": 29935
+    },
+    {
+     "problem": "conflict:20261201-30",
+     "tier": "conflict",
+     "said": "To calculate the total cost of the monthly fees over the term, we need to multiply the monthly fee by the number of months in the term.\n\nTerm: 16 months\nMonthly fee: 84 pounds\n\nTotal cost = Monthly fee x Term length\n= 84 pounds x 16 months\n= 1344 pounds\n\nSo, the total cost of the monthly fees over the term is 1344 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "1344",
+     "tokens": 84,
+     "finish": "stop",
+     "ms": 18505
+    },
+    {
+     "problem": "coded-cited:20261201-31",
+     "tier": "coded-cited",
+     "said": "It depends. The hire cost is 53 pounds per day times 38 days, which is 2008 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "2008",
+     "tokens": 24,
+     "finish": "stop",
+     "ms": 8771
+    },
+    {
+     "problem": "computed:20261201-32",
+     "tier": "computed",
+     "said": "90 × 30 = 2700",
+     "right": true,
+     "answered": true,
+     "value": "2700",
+     "tokens": 8,
+     "finish": "stop",
+     "ms": 2929
+    },
+    {
+     "problem": "mixed:20261201-33",
+     "tier": "mixed",
+     "said": "It depends.\n\nThe monthly fee is 54 pounds, and the term length is 36 months. So, the total fee over the term is:\n\n54 pounds/month x 36 months = 1944 pounds\n\nThe monthly fees come to £1944.",
+     "right": true,
+     "answered": true,
+     "value": "1944",
+     "tokens": 52,
+     "finish": "stop",
+     "ms": 15635
+    },
+    {
+     "problem": "mixed:20261201-34",
+     "tier": "mixed",
+     "said": "cannot tell",
+     "right": false,
+     "answered": false,
+     "value": null,
+     "tokens": 2,
+     "finish": "stop",
+     "ms": 4046
+    },
+    {
+     "problem": "coded:20261201-35",
+     "tier": "coded",
+     "said": "The setup charge is 26 pounds, and the term length is 13 months. To find the monthly cost, we need to divide the setup charge by the term length.\n\nSetup charge = 26 pounds\nTerm length = 13 months\n\nMonthly cost = Setup charge / Term length\n= 26 pounds / 13 months\n= approximately 1.95 pounds per month\n\nSo, each month costs approximately 1.95 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "1.95",
+     "tokens": 89,
+     "finish": "stop",
+     "ms": 34055
+    },
+    {
+     "problem": "cited:20261201-36",
+     "tier": "cited",
+     "said": "It depends.\nThe hire period is 17 days.",
+     "right": true,
+     "answered": true,
+     "value": "17",
+     "tokens": 11,
+     "finish": "stop",
+     "ms": 4334
+    },
+    {
+     "problem": "absent:20261201-37",
+     "tier": "absent",
+     "said": "It depends\nThe late fee is 3 pounds a week, and there is a late fee of 3 pounds per week. The late fee is 3 pounds a week, so the late fee is 3 pounds a week. The late fee is 3 pounds a week, so the late fee is 3 pounds a week. The late fee is 3 pounds a week, so the late fee is 3 pounds a week. The late fee is 3 pounds a week, so the late fee is 3 pounds a week. The late fee is 3 pounds a week, so the late fee is 3 pounds a week. The late fee is 3 pounds a week, so the late fee is 3 pounds a week. The late fee is 3 pounds a week, so the late fee is 3 pounds a week. The late fee is 3 pounds a week, so the late fee is 3 pounds a",
+     "right": false,
+     "answered": true,
+     "value": "3",
+     "tokens": 191,
+     "finish": "length",
+     "ms": 40512
+    },
+    {
+     "problem": "mixed:20261201-38",
+     "tier": "mixed",
+     "said": "cannot tell\n\nThe document does not provide information on what is left to pay, with delivery, after the deposit.",
+     "right": false,
+     "answered": false,
+     "value": null,
+     "tokens": 23,
+     "finish": "stop",
+     "ms": 7368
+    },
+    {
+     "problem": "coded:20261201-39",
+     "tier": "coded",
+     "said": "To calculate the total hire cost, you need to multiply the daily rate by the hire period, and then add the collection charge.\n\nDaily rate: 94 pounds\nHire period: 14 days\nCollection charge: 68 pounds\n\nFirst, multiply the daily rate by the hire period:\n94 pounds/day × 14 days = 1316 pounds\n\nThen, add the collection charge:\n1316 pounds + 68 pounds = 1384 pounds\n\nThe total hire cost is 1384 pounds.",
+     "right": true,
+     "answered": true,
+     "value": "1384",
+     "tokens": 102,
+     "finish": "stop",
+     "ms": 70247
+    },
+    {
+     "problem": "conflict:20261201-40",
+     "tier": "conflict",
+     "said": "cannot tell",
+     "right": true,
+     "answered": false,
+     "value": null,
+     "tokens": 2,
+     "finish": "stop",
+     "ms": 2988
+    },
+    {
+     "problem": "decided-cited:20261201-41",
+     "tier": "decided-cited",
+     "said": "It depends.\n\nThe unit price is 43 pounds per crate, and the order size is from 42 to 50 crates. So, the minimum total cost is:\n\n(42 x 43) + (50 x 43) = 1804 + 2150 = 3954\n\nThe deposit paid is 89 pounds, so the total cost so far is:\n\n3954 + 89 = 4033\n\nThe payment falls due in 34 days, so the total cost so far is:\n\n4033 x 34/365 = 4033 x 0.929 = 3693.17\n\nThe unit price times the order size, plus the delivery charge, is:\n\n43 x (42 + 50) = 43 x 92 = 3916\n\nSo, the minimum total cost is:\n\n3693.17 + 3693.17 = 7396.34\n\nThe answer is: it depends.",
+     "right": true,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 191,
+     "finish": "length",
+     "ms": 41145
+    },
+    {
+     "problem": "mixed:20261201-42",
+     "tier": "mixed",
+     "said": "The delivery charge is 26 pounds.\n\nThe total amount to be paid is the deposit (60 pounds) plus the delivery charge (26 pounds), which is 86 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "86",
+     "tokens": 35,
+     "finish": "stop",
+     "ms": 10758
+    },
+    {
+     "problem": "coded-cited:20261201-43",
+     "tier": "coded-cited",
+     "said": "It depends.\n\nThe monthly fees are: 24 pounds, 14 pounds, and 9,000 pounds.\n\nThe total is: 24 + 14 + 9,000 = 9,034 pounds.\n\nThe monthly fees come to: 9,034 pounds over the term.",
+     "right": false,
+     "answered": true,
+     "value": "9,034",
+     "tokens": 59,
+     "finish": "stop",
+     "ms": 36464
+    },
+    {
+     "problem": "misstated:20261201-44",
+     "tier": "misstated",
+     "said": "To find the cost of each crate, we need to calculate the total cost of the shipment and then divide it by the number of crates.\n\nThe late fee is 8 pounds a week, and the order size is 43 crates, so the total late fee is:\n\n8 pounds/week x 43 weeks = 8 x 43 = 344 pounds\n\nThe deposit paid is 42 pounds, and the delivery charge is 129 pounds, so the total cost of the shipment is:\n\n42 pounds + 129 pounds = 171 pounds\n\nThe total cost of the shipment is 171 pounds, and the payment falls due within 39 days, so the total cost of the shipment is:\n\n171 pounds / 39 days = 4.4 pounds/day\n\nSince the delivery charge is shared out, we need to divide the total cost of the shipment by the number of crates:\n\nNumber of crates = 43\n\nCost per crate = 4.",
+     "right": false,
+     "answered": true,
+     "value": "4",
+     "tokens": 191,
+     "finish": "length",
+     "ms": 46067
+    },
+    {
+     "problem": "cited:20261201-45",
+     "tier": "cited",
+     "said": "Damage bond = 47 pounds",
+     "right": true,
+     "answered": true,
+     "value": "47",
+     "tokens": 6,
+     "finish": "stop",
+     "ms": 4966
+    },
+    {
+     "problem": "mixed:20261201-46",
+     "tier": "mixed",
+     "said": "This is a supply agreement between the Supplier and the Buyer.\n\nLet's break it down:\n\n* The deposit paid is 88 pounds, which is the unit price for a crate.\n* The late fee is 2 pounds a week, which is the delivery charge. Since there are 52 weeks in a year, the late fee is 2 pounds/week x 52 weeks/year = 104 pounds per year.\n* The late fee is not a fixed amount per crate, so we can't tell the cost of each crate.\n* The delivery charge is 117 pounds per crate.\n* The order size is 39 crates, so the total delivery charge is 39 x 117 pounds = 4647 pounds.\n\nSince the delivery charge is shared out, we can divide the total delivery charge by the number of crates to find the cost of each crate:\n\n4647 pounds / 39 crates = approximately 121 pounds per crate.",
+     "right": false,
+     "answered": true,
+     "value": "121",
+     "tokens": 188,
+     "finish": "stop",
+     "ms": 61363
+    },
+    {
+     "problem": "computed:20261201-47",
+     "tier": "computed",
+     "said": "To solve this, I'll follow the order of operations (PEMDAS):\n\n1. Multiply 74 and 22:\n74 × 22 = 1638\n2. Subtract 67 from the result:\n1638 - 67 = 1561\n\nSo, the answer is 1561.",
+     "right": true,
+     "answered": true,
+     "value": "1561",
+     "tokens": 62,
+     "finish": "stop",
+     "ms": 11660
+    },
+    {
+     "problem": "decided:20261201-48",
+     "tier": "decided",
+     "said": "It depends.\n\nThe unit price is 20 pounds per crate, and the order size is from 28 to 36 crates. To find the total cost, you multiply the unit price by the order size:\n\n20 pounds/crate × 28 crates = 560 pounds\n20 pounds/crate × 36 crates = 720 pounds\n\nThe total cost is 560 + 720 = 1270 pounds. This is less than 736 pounds, so it is not certain that the unit price times the order size comes to more than 736 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 112,
+     "finish": "stop",
+     "ms": 26175
+    },
+    {
+     "problem": "computed:20261201-49",
+     "tier": "computed",
+     "said": "To calculate 57 × 32, I get:\n\n57 × 30 = 1725\n57 × 2 = 114\nAdding the two results together, I get:\n\n1725 + 114 = 1849\n\nSo, the answer is 1849.",
+     "right": false,
+     "answered": true,
+     "value": "1849",
+     "tokens": 56,
+     "finish": "stop",
+     "ms": 14710
+    },
+    {
+     "problem": "mixed:20261201-50",
+     "tier": "mixed",
+     "said": "To find the daily cost, we need to subtract the collection charge from the daily rate.\n\nDaily rate = 13 pounds\nCollection charge = 84 pounds\nDaily cost = 13 - 84 = -71 pounds\n\nSince the collection charge is 84 pounds, the daily cost would be the difference between the daily rate and the collection charge.\n\nDaily cost = 13 - 84 = -71 pounds\n\nSo, the daily cost is -71 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "71",
+     "tokens": 93,
+     "finish": "stop",
+     "ms": 56492
+    },
+    {
+     "problem": "coded:20261201-51",
+     "tier": "coded",
+     "said": "To calculate the total amount owed, we need to multiply the daily rate by the hire period, add the collection charge, and add the damage bond.\n\nDaily rate = 56 pounds\nHire period = 42 days\nCollection charge = 85 pounds\nDamage bond = 39 pounds\n\nTotal amount owed = (56 x 42) + 85 + 39\n= 2388 + 85 + 39\n= 2452 pounds\n\nSo, the total amount owed for the period is 2452 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "2452",
+     "tokens": 108,
+     "finish": "stop",
+     "ms": 42857
+    },
+    {
+     "problem": "absent:20261201-52",
+     "tier": "absent",
+     "said": "To calculate the total cost of the service, we need to consider the setup charge, the late fee, the loyalty credit, and the warranty.\n\n1. Setup charge: £78\n2. Late fee: £5/week x 52 weeks = £260\n3. Loyalty credit: £14\n4. Warranty: £24\n5. Total cost: £78 + £260 + £14 + £24 = £396\n\nSo, the total cost of the service, including setup, is £396.",
+     "right": false,
+     "answered": true,
+     "value": "396",
+     "tokens": 106,
+     "finish": "stop",
+     "ms": 86468
+    },
+    {
+     "problem": "decided:20261201-53",
+     "tier": "decided",
+     "said": "It depends.",
+     "right": false,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 3,
+     "finish": "stop",
+     "ms": 2494
+    },
+    {
+     "problem": "decided-cited:20261201-54",
+     "tier": "decided-cited",
+     "said": "It depends.\n\nThe calculation is: Daily rate x Hire period + Collection charge + Damage bond = 88 x 13 + 70 + 72 = 88 x 13 = 1136 + 70 + 72 = 1408.\n\nThis is less than 1264, so it is not certain that the total comes to more than 1264 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 76,
+     "finish": "stop",
+     "ms": 59048
+    },
+    {
+     "problem": "misstated:20261201-55",
+     "tier": "misstated",
+     "said": "It depends.\n\nThe hire cost for the period is: 37 + 70 + 8,000 = 8,107 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "8,107",
+     "tokens": 28,
+     "finish": "stop",
+     "ms": 22399
+    },
+    {
+     "problem": "conflict:20261201-56",
+     "tier": "conflict",
+     "said": "cannot tell",
+     "right": true,
+     "answered": false,
+     "value": null,
+     "tokens": 2,
+     "finish": "stop",
+     "ms": 3002
+    },
+    {
+     "problem": "coded-cited:20261201-57",
+     "tier": "coded-cited",
+     "said": "Let's calculate the cost of each crate.\n\nThe delivery charge is 74 pounds, and the order size is 37 crates. To find the cost of each crate, we need to divide the delivery charge by the order size.\n\nCost per crate = Delivery charge / Order size\n= 74 pounds / 37\n= approximately 2.04 pounds per crate\n\nSince the delivery charge is shared out, we need to divide the delivery charge by the number of crates. There are 37 crates, so we divide 74 by 37.\n\nCost per crate = Delivery charge / Order size\n= 74 pounds / 37\n= approximately 2.04 pounds per crate\n\nSo, each crate costs approximately 2.04 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "2.04",
+     "tokens": 150,
+     "finish": "stop",
+     "ms": 71652
+    },
+    {
+     "problem": "cited:20261201-58",
+     "tier": "cited",
+     "said": "Delivery charge = 93 pounds.",
+     "right": true,
+     "answered": true,
+     "value": "93",
+     "tokens": 7,
+     "finish": "stop",
+     "ms": 7706
+    },
+    {
+     "problem": "mixed:20261201-59",
+     "tier": "mixed",
+     "said": "To calculate the total cost of the monthly fees over the term, we need to multiply the monthly fee by the number of months.\n\nMonthly fee: 50 pounds\nTerm length: 25 months\n\nTotal cost = Monthly fee x Term length\n= 50 pounds x 25 months\n= 1250 pounds\n\nSo, the total cost of the monthly fees over the term is 1250 pounds.",
+     "right": true,
+     "answered": true,
+     "value": "1250",
+     "tokens": 82,
+     "finish": "stop",
+     "ms": 22861
+    },
+    {
+     "problem": "mixed:20261201-60",
+     "tier": "mixed",
+     "said": "To calculate the hire cost, we need to consider the following:\n\n* Insurance cover: 5,000 pounds\n* Damage bond: 85 pounds\n* Late fee: 8 pounds per week\n* Daily rate: 42 pounds\n* Collection charge: 77 pounds\n\nThe hire cost is the sum of the insurance cover, damage bond, late fee, and collection charge. Since the hire period is 32 days, we need to multiply the daily rate by 32 to get the total hire cost.\n\nTotal hire cost = Insurance cover + Damage bond + Late fee + Collection charge\n= 5,000 + 85 + 8 + 77\n= 5,100 pounds\n\nThe hire cost for the period, with collection, is 5,100 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "5,100",
+     "tokens": 159,
+     "finish": "stop",
+     "ms": 56825
+    }
+   ]
+  },
+  {
+   "name": "not told it may decline",
+   "system": "You answer a question about a document, or work out a calculation. Give the answer as a number. If the question asks whether something is certain, answer yes, no, or it depends.",
+   "maxTokens": 192,
+   "rows": [
+    {
+     "problem": "mixed:20261201-1",
+     "tier": "mixed",
+     "said": "To calculate the total annual cost, we need to multiply the monthly fee by the number of months.\n\nMonthly fee = 47 pounds\nTerm length = 24 months\n\nTotal annual cost = 47 pounds/month x 24 months = 1128 pounds\n\nSo, the monthly fees come to £1128 over the term.",
+     "right": true,
+     "answered": true,
+     "value": "1128",
+     "tokens": 66,
+     "finish": "stop",
+     "ms": 17332
+    },
+    {
+     "problem": "conflict:20261201-2",
+     "tier": "conflict",
+     "said": "The order cost before delivery is 47 pounds.\n\nThe answer is 47 pounds because the deposit paid is 47 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "47",
+     "tokens": 25,
+     "finish": "stop",
+     "ms": 8879
+    },
+    {
+     "problem": "misstated:20261201-3",
+     "tier": "misstated",
+     "said": "To find the monthly cost, we need to subtract the setup charge from the total cost.\n\nTotal cost = £80 (monthly fee) + £4,000 (insurance cover) = £4,080\nSetup charge = £21\nMonthly cost = £4,080 - £21 = £4,059\n\nSo, each month costs £4,059.",
+     "right": false,
+     "answered": true,
+     "value": "4,059",
+     "tokens": 74,
+     "finish": "stop",
+     "ms": 27316
+    },
+    {
+     "problem": "coded:20261201-4",
+     "tier": "coded",
+     "said": "To find the total cost, we need to multiply the monthly fee by the term length, and then add the setup charge.\n\nMonthly fee = 58 pounds\nTerm length = 34 months\nSetup charge = 44 pounds\n\nTotal cost = (Monthly fee x Term length) + Setup charge\n= (58 x 34) + 44\n= 1982 + 44\n= 2026\n\nSo, the total cost of the service is £2026.",
+     "right": false,
+     "answered": true,
+     "value": "2026",
+     "tokens": 97,
+     "finish": "stop",
+     "ms": 41142
+    },
+    {
+     "problem": "decided:20261201-5",
+     "tier": "decided",
+     "said": "It depends.\n\nThe expression is: 77 x 18 + 65 - 14 = ?\n\nFirst, multiply: 77 x 18 = 1386\nThen, add: 1386 + 65 = 1451\nFinally, subtract: 1451 - 14 = 1437\n\nSo, it is certain that the expression comes to more than 1437 pounds.",
+     "right": true,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 81,
+     "finish": "stop",
+     "ms": 18386
+    },
+    {
+     "problem": "computed:20261201-6",
+     "tier": "computed",
+     "said": "To calculate this expression, I'll follow the order of operations (PEMDAS):\n\n1. Multiply 22 and 35:\n22 × 35 = 770\n2. Multiply 770 by 18:\n770 × 18 = 13880\n\nSo, the final answer is: 13880",
+     "right": false,
+     "answered": true,
+     "value": "13880",
+     "tokens": 62,
+     "finish": "stop",
+     "ms": 13704
+    },
+    {
+     "problem": "coded-cited:20261201-7",
+     "tier": "coded-cited",
+     "said": "The monthly fees come to:\n\n$78 x 34 = $2,592.80\n\nSo, the total amount of the monthly fees over the term is $2,592.80.",
+     "right": false,
+     "answered": true,
+     "value": "2,592.80",
+     "tokens": 39,
+     "finish": "stop",
+     "ms": 10707
+    },
+    {
+     "problem": "decided-cited:20261201-8",
+     "tier": "decided-cited",
+     "said": "It depends.\n\nThe calculation is: unit price times order size + delivery charge = 35 x (13 + 21) + 54 = 35 x 34 + 54 = 1190 + 54 = 1254.\n\nSince 1254 is less than 496, it is not certain that the unit price times the order size, plus the delivery charge, comes to more than 496 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 85,
+     "finish": "stop",
+     "ms": 25812
+    },
+    {
+     "problem": "mixed:20261201-9",
+     "tier": "mixed",
+     "said": "To calculate the total amount owed, we need to calculate the total collection charge and the total damage bond.\n\n1. Collection charge: 24 pounds\n2. Damage bond: 34 pounds\n3. Late fee: 7 pounds per week x 23 weeks = 161 pounds\n4. Total amount owed: 24 pounds + 34 pounds + 161 pounds = 249 pounds\n\nSo, the total amount owed for the period is 249 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "249",
+     "tokens": 94,
+     "finish": "stop",
+     "ms": 39421
+    },
+    {
+     "problem": "absent:20261201-10",
+     "tier": "absent",
+     "said": "It depends.\n\nThe agreement is the whole of what was agreed, so the Buyer is not obligated to pay anything yet.",
+     "right": true,
+     "answered": false,
+     "value": null,
+     "tokens": 24,
+     "finish": "stop",
+     "ms": 7481
+    },
+    {
+     "problem": "mixed:20261201-11",
+     "tier": "mixed",
+     "said": "To calculate the amount owed, we need to calculate the total amount owed for the period, including the collection charge and the bond.\n\n1. Insurance cover is 7,000 pounds.\n2. The damage bond is 52 pounds.\n3. Payment falls due within 58 days.\n4. The collection charge is 50 pounds.\n5. The warranty lasts 17 months, which is approximately 1.42 years (17 x 365/365).\n6. The daily rate is 63 pounds.\n7. The hire period is 32 days.\n\nLet's calculate the total amount owed:\n\n* Insurance cover: 7,000 pounds\n* Damage bond: 52 pounds\n* Collection charge: 50 pounds\n* Warranty: 1.42 years x 63 pounds/year = 90.66 pounds (approximate)\n* Total amount owed: 7,000 + 52 + 50 + 90.66 = 8",
+     "right": false,
+     "answered": true,
+     "value": "8",
+     "tokens": 191,
+     "finish": "length",
+     "ms": 47549
+    },
+    {
+     "problem": "cited:20261201-12",
+     "tier": "cited",
+     "said": "It depends.\nThe setup charge is 32 pounds, and the monthly fee is 51 pounds.",
+     "right": true,
+     "answered": true,
+     "value": "51",
+     "tokens": 20,
+     "finish": "stop",
+     "ms": 9610
+    },
+    {
+     "problem": "conflict:20261201-13",
+     "tier": "conflict",
+     "said": "Let's calculate the total amount left to pay:\n\n1. Order size: 38 crates\n2. Delivery charge: 47 pounds\n3. Insurance cover: 3,000 pounds\n4. Unit price: 66 pounds per crate\n5. Deposit: 25 pounds\n\nTotal amount = 38 x 66 + 47 + 3,000 = 2,012 + 47 + 3,000 = 2,059 pounds\n\nAfter the deposit of 25 pounds, the remaining amount to pay is:\n\n2,059 - 25 = 2,034 pounds\n\nSo, 2,034 pounds is left to pay, with delivery.",
+     "right": false,
+     "answered": true,
+     "value": "2,034",
+     "tokens": 137,
+     "finish": "stop",
+     "ms": 46388
+    },
+    {
+     "problem": "computed:20261201-14",
+     "tier": "computed",
+     "said": "Yes.",
+     "right": false,
+     "answered": false,
+     "value": null,
+     "tokens": 2,
+     "finish": "stop",
+     "ms": 1398
+    },
+    {
+     "problem": "decided:20261201-15",
+     "tier": "decided",
+     "said": "It depends. \n\nThe calculation is: (27 + 24) / 24 = 51 / 24 = 2.125.",
+     "right": false,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 29,
+     "finish": "stop",
+     "ms": 6484
+    },
+    {
+     "problem": "mixed:20261201-16",
+     "tier": "mixed",
+     "said": "To calculate the total cost of the service, we need to calculate the monthly fee and the setup charge separately, and then add them together.\n\nMonthly fee: 86 pounds\nSetup charge: 41 pounds\n\nTotal cost = Monthly fee + Setup charge\n= 86 + 41\n= 127 pounds\n\nSo, the total cost of the service, including setup, is 127 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "127",
+     "tokens": 80,
+     "finish": "stop",
+     "ms": 14507
+    },
+    {
+     "problem": "cited:20261201-17",
+     "tier": "cited",
+     "said": "It depends. The loyalty credit is 38 pounds.",
+     "right": true,
+     "answered": true,
+     "value": "38",
+     "tokens": 11,
+     "finish": "stop",
+     "ms": 3771
+    },
+    {
+     "problem": "decided-cited:20261201-18",
+     "tier": "decided-cited",
+     "said": "It depends.\n\nThe calculation is: (daily rate + collection charge) / hire period = (72 + 45) / 53 = 117 / 53 = 2.19\n\nSince the hire period is from 45 to 53 days, the calculation is based on the average hire period of 48 days. Therefore, the calculation is uncertain.",
+     "right": false,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 73,
+     "finish": "stop",
+     "ms": 16624
+    },
+    {
+     "problem": "mixed:20261201-19",
+     "tier": "mixed",
+     "said": "To find the daily rate, we need to add the daily rate and the collection charge.\n\nDaily rate = 95 pounds\nCollection charge = 62 pounds\nTotal = 95 + 62 = 157 pounds\n\nSince the dispute goes first to a meeting of both parties, we can assume that the agreement is not entirely resolved and the daily rate is not the final answer.",
+     "right": false,
+     "answered": true,
+     "value": "157",
+     "tokens": 76,
+     "finish": "stop",
+     "ms": 22666
+    },
+    {
+     "problem": "absent:20261201-20",
+     "tier": "absent",
+     "said": "Let's break down the information:\n\n* The order size is 28 crates.\n* Payment falls due within 48 days.\n* The delivery charge is 84 pounds.\n\nWe need to find the cost of each crate. Let's call the cost of each crate \"x\".\n\nSince the delivery charge is shared out, we can set up an equation based on the total payment and the delivery charge:\n\nTotal payment = Deposit + Payment\n= 73 pounds + (28 x x)\n= 73 + 28x\n\nSince the delivery charge is 84 pounds, we can set up another equation:\n\nDelivery charge = 84 pounds\n= 84 + (28 x y)\n\nwhere y is the delivery charge per crate.\n\nNow, we can equate the two equations:\n\n73 + 28x = 84 + 28y\n\nSubtracting 73 from both sides:\n\n28x = 11 + 28y\n\nDividing both sides by",
+     "right": false,
+     "answered": true,
+     "value": "28",
+     "tokens": 191,
+     "finish": "length",
+     "ms": 65618
+    },
+    {
+     "problem": "mixed:20261201-21",
+     "tier": "mixed",
+     "said": "To find the total hire cost, we need to multiply the daily rate by the number of days in the hire period.\n\nDaily rate = 81 pounds\nHire period = 43 days\n\nTotal hire cost = Daily rate x Hire period\n= 81 pounds x 43 days\n= 3,453 pounds\n\nSo, the total hire cost is £3,453.",
+     "right": false,
+     "answered": true,
+     "value": "3,453",
+     "tokens": 77,
+     "finish": "stop",
+     "ms": 14972
+    },
+    {
+     "problem": "coded:20261201-22",
+     "tier": "coded",
+     "said": "To find the total cost, we need to calculate the monthly fee times the term length, plus the setup charge, less the loyalty credit.\n\nMonthly fee = 57 pounds\nTerm length = 17 months\nSetup charge = 46 pounds\nLoyalty credit = 10 pounds\n\nFirst, calculate the monthly fee times the term length:\n57 x 17 = 989\n\nNext, add the setup charge to the result:\n989 + 46 = 1035\n\nFinally, subtract the loyalty credit from the result:\n1035 - 10 = 1025\n\nSo, the total cost is 1025 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "1025",
+     "tokens": 127,
+     "finish": "stop",
+     "ms": 26414
+    },
+    {
+     "problem": "misstated:20261201-23",
+     "tier": "misstated",
+     "said": "To calculate the total monthly fees, we need to multiply the monthly fee by the term length.\n\nMonthly fee = 69 pounds\nTerm length = 22 months\n\nTotal monthly fees = Monthly fee x Term length\n= 69 pounds x 22 months\n= 1522 pounds\n\nSo, the total monthly fees come to £1522.",
+     "right": false,
+     "answered": true,
+     "value": "1522",
+     "tokens": 70,
+     "finish": "stop",
+     "ms": 17980
+    },
+    {
+     "problem": "coded-cited:20261201-24",
+     "tier": "coded-cited",
+     "said": "It depends. \n\nThe calculation is:\n\n Unit price x order size = £20 x 39 = £780\n Delivery charge = £81\n Deposit paid = £62\n Total amount to be paid = £780 + £81 - £62 = £841\n\nSo, £841 is left to pay, with delivery.",
+     "right": false,
+     "answered": true,
+     "value": "841",
+     "tokens": 65,
+     "finish": "stop",
+     "ms": 19332
+    },
+    {
+     "problem": "mixed:20261201-25",
+     "tier": "mixed",
+     "said": "It depends.\n\nThe total delivery charge is 42 pounds, and the deposit paid is 74 pounds. So, the amount left to pay is:\n\n74 pounds - 42 pounds = 32 pounds\n\nTherefore, 32 pounds is left to pay, with delivery.",
+     "right": false,
+     "answered": true,
+     "value": "32",
+     "tokens": 54,
+     "finish": "stop",
+     "ms": 18773
+    },
+    {
+     "problem": "decided-cited:20261201-26",
+     "tier": "decided-cited",
+     "said": "It depends.\n\nThe calculation is:\n\nDaily rate x hire period = 55 x 22 = 1210\n+ Collection charge = 35\n= 1210 + 35 = 1245\n\nThis is less than 1594 pounds, so it is certain that the total comes to less than 1594 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 67,
+     "finish": "stop",
+     "ms": 20545
+    },
+    {
+     "problem": "decided:20261201-27",
+     "tier": "decided",
+     "said": "It depends. The calculation is: 42 x 37 + 82 = 1564 + 82 = 1646.",
+     "right": false,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 27,
+     "finish": "stop",
+     "ms": 7280
+    },
+    {
+     "problem": "absent:20261201-28",
+     "tier": "absent",
+     "said": "Let's calculate the total amount left to pay:\n\n1. Order size: 13 crates\n2. Late fee: 8 pounds per week\n3. Unit price: 51 pounds per crate\n4. Total cost: 13 x 51 = 663 pounds\n5. Payment due: 17 days\n6. Deposit paid: 40 pounds\n\nTotal cost: 663 pounds\nPayment due: 17 days\nDeposit paid: 40 pounds\n\nAmount left to pay: 663 - 40 = 623 pounds\n\nSo, there is 623 pounds left to pay, with delivery.",
+     "right": false,
+     "answered": true,
+     "value": "623",
+     "tokens": 124,
+     "finish": "stop",
+     "ms": 24168
+    },
+    {
+     "problem": "misstated:20261201-29",
+     "tier": "misstated",
+     "said": "To calculate the total cost of the service, we need to calculate the total cost of the setup charge, the loyalty credit, and the monthly fee, and then add the monthly fee to the total.\n\n1. Setup charge: 33 pounds\n2. Loyalty credit: 45 pounds\n3. Monthly fee: 93 pounds\n4. Total cost: 33 + 45 + 93 = 171 pounds\n\nSo, the total cost of the service is 171 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "171",
+     "tokens": 99,
+     "finish": "stop",
+     "ms": 43183
+    },
+    {
+     "problem": "conflict:20261201-30",
+     "tier": "conflict",
+     "said": "To calculate the total monthly fees, we need to multiply the monthly fee by the number of months in the term length.\n\nTerm length: 16 months\nMonthly fee: 84 pounds\n\nTotal monthly fees = 16 x 84 = 1344 pounds\n\nSo, the total monthly fees come to £1344.",
+     "right": false,
+     "answered": true,
+     "value": "1344",
+     "tokens": 65,
+     "finish": "stop",
+     "ms": 15440
+    },
+    {
+     "problem": "coded-cited:20261201-31",
+     "tier": "coded-cited",
+     "said": "The hire cost for the period is: 53 pounds/day x 38 days = 2,012 pounds\n\nThe answer is: 2,012 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "2,012",
+     "tokens": 33,
+     "finish": "stop",
+     "ms": 8276
+    },
+    {
+     "problem": "computed:20261201-32",
+     "tier": "computed",
+     "said": "90 × 30 = 2700.",
+     "right": true,
+     "answered": true,
+     "value": "2700",
+     "tokens": 9,
+     "finish": "stop",
+     "ms": 2680
+    },
+    {
+     "problem": "mixed:20261201-33",
+     "tier": "mixed",
+     "said": "It depends.\n\nThe monthly fee is 54 pounds, and the term length is 36 months. To calculate the total amount paid over the term, multiply the monthly fee by the term length:\n\n54 pounds/month x 36 months = 1944 pounds\n\nSo, the total amount paid over the term is 1944 pounds.",
+     "right": true,
+     "answered": true,
+     "value": "1944",
+     "tokens": 67,
+     "finish": "stop",
+     "ms": 16749
+    },
+    {
+     "problem": "mixed:20261201-34",
+     "tier": "mixed",
+     "said": "It depends.\n\nThe late fee is 2 pounds a week, and there are 52 weeks in a year. So, the late fee is 2 x 52 = 104 pounds.\n\nThe total amount left to pay is the deposit plus the late fee, which is 62 + 104 = 166 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "166",
+     "tokens": 65,
+     "finish": "stop",
+     "ms": 20372
+    },
+    {
+     "problem": "coded:20261201-35",
+     "tier": "coded",
+     "said": "Let's break it down:\n\nThe setup charge is 26 pounds, and it's shared out over 13 months. To find the monthly cost, we'll divide the setup charge by the term length:\n\n26 pounds / 13 months = approximately 1.96 pounds per month\n\nSo, each month, the setup charge is approximately £1.96.",
+     "right": false,
+     "answered": true,
+     "value": "1.96",
+     "tokens": 72,
+     "finish": "stop",
+     "ms": 22746
+    },
+    {
+     "problem": "cited:20261201-36",
+     "tier": "cited",
+     "said": "It depends.\n\nThe hire period is 17 days.",
+     "right": true,
+     "answered": true,
+     "value": "17",
+     "tokens": 11,
+     "finish": "stop",
+     "ms": 3814
+    },
+    {
+     "problem": "absent:20261201-37",
+     "tier": "absent",
+     "said": "It depends. The service cost over the term, with setup, is £34 + £77 = £111.",
+     "right": false,
+     "answered": true,
+     "value": "111",
+     "tokens": 23,
+     "finish": "stop",
+     "ms": 6628
+    },
+    {
+     "problem": "mixed:20261201-38",
+     "tier": "mixed",
+     "said": "It depends.\n\nThe late fee is 7 pounds a week, and there are 52 weeks in a year. So, the late fee is 7 x 52 = 364 pounds.\n\nThe total amount to be paid is 64 pounds (deposit) + 28 pounds (delivery charge) = 92 pounds.\n\nSo, 92 pounds - 364 pounds = -272 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "272",
+     "tokens": 79,
+     "finish": "stop",
+     "ms": 13993
+    },
+    {
+     "problem": "coded:20261201-39",
+     "tier": "coded",
+     "said": "To calculate the total hire cost, we need to multiply the daily rate by the hire period, and then add the collection charge.\n\nDaily rate: 94 pounds\nHire period: 14 days\nCollection charge: 68 pounds\n\nFirst, multiply the daily rate by the hire period:\n94 pounds/day × 14 days = 1316 pounds\n\nThen, add the collection charge:\n1316 pounds + 68 pounds = 1384 pounds\n\nSo, the total hire cost for the period, with collection, is 1384 pounds.",
+     "right": true,
+     "answered": true,
+     "value": "1384",
+     "tokens": 111,
+     "finish": "stop",
+     "ms": 20933
+    },
+    {
+     "problem": "conflict:20261201-40",
+     "tier": "conflict",
+     "said": "Let's calculate the total amount left to pay:\n\n1. Deposit: 42 pounds\n2. Delivery charge: 83 pounds\n3. Unit price: 70 pounds per crate\n4. Order size: 43 crates\n5. Total cost: 42 + 83 + (43 x 70) = 42 + 83 + 2990 = 3333 pounds\n\nSo, 3333 pounds is left to pay, with delivery.",
+     "right": false,
+     "answered": true,
+     "value": "3333",
+     "tokens": 94,
+     "finish": "stop",
+     "ms": 33813
+    },
+    {
+     "problem": "decided-cited:20261201-41",
+     "tier": "decided-cited",
+     "said": "It depends.\n\nThe unit price is 43 pounds per crate, and the order size is from 42 to 50 crates. So, the minimum total cost is:\n\n(42 x 43) + (50 x 43) = 1804 + 2150 = 3954 pounds\n\nThe deposit paid is 89 pounds, so the total cost so far is:\n\n3954 + 89 = 4033 pounds\n\nThe payment falls due in 34 days, so the total cost so far is:\n\n4033 x 34/365 = 4033 x 0.929 = 3693.17 pounds\n\nThe unit price times the order size, plus the delivery charge, is:\n\n43 x 42 + 89 = 1846 + 89 = 1935 pounds\n\nSo, it is not certain that the unit price times the order size, plus the delivery charge, comes to at least 2067 pounds",
+     "right": true,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 191,
+     "finish": "length",
+     "ms": 63295
+    },
+    {
+     "problem": "mixed:20261201-42",
+     "tier": "mixed",
+     "said": "To find out what is left to pay, we need to calculate the total cost of the delivery charge and the unit price of the crates.\n\nDelivery charge: 26 pounds\nUnit price per crate: 93 pounds\nNumber of crates: 31\n\nTotal cost of delivery: 26 + (31 x 93)\n= 26 + 2887\n= 2903\n\nSo, the Buyer is left to pay 2903 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "2903",
+     "tokens": 91,
+     "finish": "stop",
+     "ms": 18556
+    },
+    {
+     "problem": "coded-cited:20261201-43",
+     "tier": "coded-cited",
+     "said": "It depends.\n\nThe monthly fees are: £14, £24, and £9,000.\n\nThe total monthly fees are: £14 + £24 + £9,000 = £9,148.\n\nThe warranty lasts 16 months, so it will be 16/12 = 1.33 years.\n\nThe term length is 15 months, so it will be 15/12 = 1.25 years.\n\nThe total fees over the term are: £9,148 x 1.25 = £11,640.50.\n\nSo, the total fees over the term are £11,640.50.",
+     "right": false,
+     "answered": true,
+     "value": "11,640.50",
+     "tokens": 128,
+     "finish": "stop",
+     "ms": 31785
+    },
+    {
+     "problem": "misstated:20261201-44",
+     "tier": "misstated",
+     "said": "To find the cost of each crate, we need to calculate the total cost of the shipment and then divide it by the number of crates.\n\nThe late fee is 8 pounds a week, and the order size is 43 crates, so the total late fee is:\n\n8 pounds/week x 43 weeks = 344 pounds\n\nThe deposit paid is 42 pounds, and the delivery charge is 129 pounds, so the total cost of the shipment is:\n\n344 pounds + 42 pounds + 129 pounds = 555 pounds\n\nSince the delivery charge is shared out, we need to divide the total cost by the number of crates:\n\n555 pounds / 43 crates = 13.0 pounds per crate\n\nSo, each crate costs 13.0 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "13.0",
+     "tokens": 155,
+     "finish": "stop",
+     "ms": 47387
+    },
+    {
+     "problem": "cited:20261201-45",
+     "tier": "cited",
+     "said": "Damage bond = 47 pounds.",
+     "right": true,
+     "answered": true,
+     "value": "47",
+     "tokens": 7,
+     "finish": "stop",
+     "ms": 3449
+    },
+    {
+     "problem": "mixed:20261201-46",
+     "tier": "mixed",
+     "said": "To find the cost of each crate, we need to subtract the delivery charge from the unit price.\n\nUnit price = 22 pounds per crate\nDelivery charge = 117 pounds\n\nCost per crate = Unit price - Delivery charge\n= 22 pounds - 117 pounds\n= -95 pounds (this means the delivery charge is negative, which is not possible)\n\nSince the delivery charge is negative, it means that the Buyer has already paid for the delivery, and the Supplier has not yet delivered the goods. Therefore, the Supplier has not yet paid for the delivery, and the Buyer has not yet paid for the goods.\n\nSince the Supplier has not yet paid for the delivery, and the Buyer has not yet paid for the goods, the agreement is not a contract, and the Supplier and Buyer are not obligated to fulfill their obligations.\n\nTherefore, the answer is: it depends.",
+     "right": false,
+     "answered": true,
+     "value": "95",
+     "tokens": 176,
+     "finish": "stop",
+     "ms": 41512
+    },
+    {
+     "problem": "computed:20261201-47",
+     "tier": "computed",
+     "said": "To solve this, I'll follow the order of operations (PEMDAS):\n\n1. Multiply 74 and 22:\n74 × 22 = 1638\n2. Subtract 67 from the result:\n1638 - 67 = 1561\n\nSo, the answer is 1561.",
+     "right": true,
+     "answered": true,
+     "value": "1561",
+     "tokens": 62,
+     "finish": "stop",
+     "ms": 20325
+    },
+    {
+     "problem": "decided:20261201-48",
+     "tier": "decided",
+     "said": "It depends. \n\nThe unit price is 20 pounds per crate. The order size is from 28 to 36 crates. \n\nThe minimum order size is 28 crates. \nThe maximum order size is 36 crates. \n\nThe minimum order size is 28 * 20 = 560 pounds. \nThe maximum order size is 36 * 20 = 720 pounds. \n\nThe minimum order size is 560 pounds. \nThe maximum order size is 720 pounds. \n\nThe minimum order size is 560 pounds. \nThe maximum order size is 720 pounds. \n\nThe minimum order size is 560 pounds. \nThe maximum order size is 720 pounds. \n\nThe minimum order size is 560 pounds. \nThe maximum order size is 720 pounds. \n\nThe minimum order size is 560 pounds. \nThe maximum order size is 720 pounds. \n\nThe minimum order size is 560 pounds. \nThe maximum order",
+     "right": false,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 191,
+     "finish": "length",
+     "ms": 53579
+    },
+    {
+     "problem": "computed:20261201-49",
+     "tier": "computed",
+     "said": "57 × 32 = 1824",
+     "right": true,
+     "answered": true,
+     "value": "1824",
+     "tokens": 8,
+     "finish": "stop",
+     "ms": 2633
+    },
+    {
+     "problem": "mixed:20261201-50",
+     "tier": "mixed",
+     "said": "To find the daily cost, we need to subtract the collection charge from the daily rate.\n\nDaily rate = 13 pounds\nCollection charge = 84 pounds\n\nDaily cost = Daily rate - Collection charge\n= 13 pounds - 84 pounds\n= -71 pounds\n\nSince the collection charge is 84 pounds, the daily cost is -71 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "71",
+     "tokens": 72,
+     "finish": "stop",
+     "ms": 22089
+    },
+    {
+     "problem": "coded:20261201-51",
+     "tier": "coded",
+     "said": "To calculate the total amount owed, we need to multiply the daily rate by the hire period, add the collection charge, and add the damage bond.\n\nDaily rate: 56 pounds\nHire period: 42 days\nCollection charge: 85 pounds\nDamage bond: 39 pounds\n\nTotal amount owed = (56 x 42) + 85 + 39\n= 2388 + 85 + 39\n= 2452 pounds\n\nSo, the total amount owed for the period is 2452 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "2452",
+     "tokens": 108,
+     "finish": "stop",
+     "ms": 36281
+    },
+    {
+     "problem": "absent:20261201-52",
+     "tier": "absent",
+     "said": "It depends.\n\nThe service cost over the term, with setup, after the credit is: £78 + £14 + £5 = £97.",
+     "right": false,
+     "answered": true,
+     "value": "97",
+     "tokens": 30,
+     "finish": "stop",
+     "ms": 9005
+    },
+    {
+     "problem": "decided:20261201-53",
+     "tier": "decided",
+     "said": "It depends. \n\nThe unit price is 12 pounds per crate. The order size is from 20 to 24 crates. \n\nThe minimum order size is 20 crates. \nThe maximum order size is 24 crates. \n\nThe minimum order size is 20 crates. \nThe maximum order size is 24 crates. \n\nThe minimum order size is 20 crates. \nThe maximum order size is 24 crates. \n\nThe minimum order size is 20 crates. \nThe maximum order size is 24 crates. \n\nThe minimum order size is 20 crates. \nThe maximum order size is 24 crates. \n\nThe minimum order size is 20 crates. \nThe maximum order size is 24 crates. \n\nThe minimum order size is 20 crates. \nThe maximum order size is 24 crates. \n\nThe minimum order size is 20 crates. \nThe maximum order size is 24 crates. \n\nThe minimum order size is",
+     "right": false,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 191,
+     "finish": "length",
+     "ms": 41965
+    },
+    {
+     "problem": "decided-cited:20261201-54",
+     "tier": "decided-cited",
+     "said": "It depends.\n\nThe total comes to: 88 x 13 + 70 + 72 = 88 x 13 = 1136 + 70 + 72 = 1408\n\nIt is not certain that the total comes to more than 1264 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "it depends",
+     "tokens": 56,
+     "finish": "stop",
+     "ms": 16467
+    },
+    {
+     "problem": "misstated:20261201-55",
+     "tier": "misstated",
+     "said": "To find the hire cost, we need to calculate the total cost of the hire agreement.\n\nHere are the calculations:\n\n1. Collection charge: 37 pounds\n2. Damage bond: 70 pounds\n3. Total cost: 37 + 70 = 107 pounds\n4. Insurance cover: 8,000 pounds\n5. Payment falls due within 47 days, so we need to calculate the total cost before the payment falls due.\n   Payment falls due: 47 days\n   Total cost before payment falls due: 107 * 47 = 5,014 pounds\n6. Hire period: 43 days\n   Total cost before payment falls due: 5,014 * 43 = 217,502 pounds\n7. Daily rate: 62 pounds\n   Total cost before payment falls due: 217,502 * 62 = 13,446,824 pounds\n\nThe hire cost for the period is:",
+     "right": false,
+     "answered": true,
+     "value": "13,446,824",
+     "tokens": 191,
+     "finish": "length",
+     "ms": 63304
+    },
+    {
+     "problem": "conflict:20261201-56",
+     "tier": "conflict",
+     "said": "It depends.\n\nThe unit price is 47 pounds per crate, and the order size is 12 crates. Therefore, the total cost before delivery is:\n\n12 x 47 = 564 pounds\n\nSo, the order cost before delivery is 564 pounds.",
+     "right": false,
+     "answered": true,
+     "value": "564",
+     "tokens": 52,
+     "finish": "stop",
+     "ms": 11696
+    },
+    {
+     "problem": "coded-cited:20261201-57",
+     "tier": "coded-cited",
+     "said": "Let's calculate the cost of each crate.\n\nThe delivery charge is 74 pounds, and the order size is 37 crates. To find the cost of each crate, we need to divide the delivery charge by the order size.\n\nCost per crate = Delivery charge / Order size\n= 74 pounds / 37\n= 2.03 pounds per crate\n\nSo, each crate costs 2.03 pounds, with the delivery charge shared out.",
+     "right": false,
+     "answered": true,
+     "value": "2.03",
+     "tokens": 91,
+     "finish": "stop",
+     "ms": 19070
+    },
+    {
+     "problem": "cited:20261201-58",
+     "tier": "cited",
+     "said": "Delivery charge = 93 pounds.",
+     "right": true,
+     "answered": true,
+     "value": "93",
+     "tokens": 7,
+     "finish": "stop",
+     "ms": 3344
+    },
+    {
+     "problem": "mixed:20261201-59",
+     "tier": "mixed",
+     "said": "To calculate the total annual cost of the monthly fees, we need to multiply the monthly fee by the number of months in the term length.\n\nMonthly fee = 50 pounds\nTerm length = 25 months\n\nTotal annual cost = 50 pounds/month x 25 months = 1250 pounds\n\nSo, the total annual cost of the monthly fees is 1250 pounds.",
+     "right": true,
+     "answered": true,
+     "value": "1250",
+     "tokens": 76,
+     "finish": "stop",
+     "ms": 20788
+    },
+    {
+     "problem": "mixed:20261201-60",
+     "tier": "mixed",
+     "said": "To calculate the total hire cost, we need to add up the costs mentioned in points 1-6.\n\nInsurance cover: £5,000\nHire period: 32 days x £42/day = £1,344\nDamage bond: £85\nLate fee: 8 pounds/week x 16 weeks = £128\nDaily rate: 32 days x £42/day = £1,344\nCollection charge: 77 pounds\nTotal hire cost: £5,000 + £1,344 + £85 + £128 + £1,344 + £77 = £7,402\n\nSo, the hire cost for the period, with collection, is £7,402.",
+     "right": false,
+     "answered": true,
+     "value": "7,402",
+     "tokens": 143,
+     "finish": "stop",
+     "ms": 52960
+    }
+   ]
+  }
+ ]
+}

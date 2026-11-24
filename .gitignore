@@ -1,0 +1,6 @@
+.witness/
+node_modules/
+*.witnessbak
+data/runs/*-l[0-9]*.json
+.claude/
+data/runs/incoming-*.json

@@ -1,0 +1,53 @@
+// citetable.mjs — the evidential bond-check's rule, written out as cases. Both readers are held to it: cite.mjs must
+// give the ruling, and the second reader (plainly, citefuzz.mjs) must say yes exactly where the ruling is 'bonded'.
+export const DOC = { id: 'd1', text: ['Supply agreement between the Supplier and the Buyer', '1. The unit price is 126 pounds per crate.', '2. The order size is 12 crates.', '3. The delivery charge is 45 pounds.', '4. The notice period is 30 days from 14 March.', '5. The deposit paid is 1,250.50 pounds.', '6. The deposit paid is held by the Buyer.', '7. The late fee is 5 pounds.', '8. By amendment, the late fee is 8 pounds.', '(9) The cover level is 3rd party, form A4.', '- The warranty period is 24 months.', '10. The rebate rate is 12.5.'].join('\n') };
+export const HOSTILE = [null, undefined, 7, 7n, true, {}, [], () => 1, Symbol('x'), { text: 5 }, { text: null }, { get text() { throw new Error('no'); } }, new Proxy({}, { get() { throw new Error('no'); } })];
+
+// the rule, case by case: [reply, cell, ruling]
+export const TABLE = [
+  // a quote of the line, whole or in part, that holds the key words and the figure
+  ['The unit price is 126 pounds per crate.', 'the unit price', 'bonded'], ['The unit price is 126 pounds per crate', 'the unit price', 'bonded'], ['unit price is 126', 'the unit price', 'bonded'], ['The unit price is 126 pounds', 'unit price', 'bonded'],
+  ['"The unit price is 126 pounds"', 'the unit price', 'bonded'], ["'The unit price is 126'", 'the unit price', 'bonded'], ['“The unit price is 126 pounds per crate.”', 'the unit price', 'bonded'], ['‘unit price is 126’', 'the unit price', 'bonded'],
+  ['"The unit price is 126".', 'the unit price', 'bonded'], ['"The unit price is 126 pounds per crate.".', 'the unit price', 'bonded'], ['  The unit price is 126 pounds  \n', 'the unit price', 'bonded'], ['The order size is 12 crates.', 'the order size', 'bonded'],
+  ['The deposit paid is 1,250.50 pounds.', 'the deposit paid', 'bonded'], ['deposit paid is 1,250.50', 'what is the deposit paid', 'bonded'], ['The warranty period is 24 months.', 'the warranty period', 'bonded'], ['The rebate rate is 12.5.', 'the rebate rate', 'bonded'], ['The rebate rate is 12.5', 'the rebate rate', 'bonded'],
+  ['The delivery charge is 45 pounds.', 'how much is the delivery charge', 'bonded'], ['The delivery charge is 45 pounds.', 'DELIVERY Charge', 'bonded'], ['delivery charge is 45', 'charge delivery', 'bonded'],
+  // not a quote of the document: a letter or a digit out, a figure cut from a longer one, a word cut in two
+  ['The unit price is 26 pounds', 'the unit price', 'not a quote of the document'], ['The unit price is 12', 'the unit price', 'not a quote of the document'], ['The unit price is 1', 'the unit price', 'not a quote of the document'], ['he unit price is 126', 'the unit price', 'not a quote of the document'],
+  ['The unit price is 126 pound', 'the unit price', 'not a quote of the document'], ['the unit price is 126 pounds', 'the unit price', 'not a quote of the document'], ['The unit price is 127 pounds', 'the unit price', 'not a quote of the document'], ['The unit  price is 126', 'the unit price', 'not a quote of the document'],
+  ['The unit price is １２６', 'the unit price', 'not a quote of the document'], ['The deposit paid is 1,250', 'the deposit paid', 'not a quote of the document'], ['The deposit paid is 250.50', 'the deposit paid', 'not a quote of the document'], ['The deposit paid is 1,250.5', 'the deposit paid', 'not a quote of the document'],
+  ['The rebate rate is 12', 'the rebate rate', 'not a quote of the document'], ['The document says: The unit price is 126 pounds', 'the unit price', 'not a quote of the document'], ['The unit price is 126 pounds I think', 'the unit price', 'not a quote of the document'],
+  ['"The unit price is 126', 'the unit price', 'not a quote of the document'], ['The unit price is 126"', 'the unit price', 'not a quote of the document'], ['“The unit price is 126"', 'the unit price', 'not a quote of the document'], ['The unit price is 126..', 'the unit price', 'not a quote of the document'],
+  ['The unit price is 126 pounds per crate.\nThe order size is 12 crates.', 'the unit price', 'not a quote of the document'], ['The unit price is 126\u200b', 'the unit price', 'not a quote of the document'], ['The\u00a0unit price is 126', 'the unit price', 'not a quote of the document'],
+  // a quote, but not one that cites this figure
+  ['The order size is 12 crates.', 'the unit price', 'a quote of another line'], ['Supply agreement between the Supplier and the Buyer', 'the unit price', 'a quote of another line'], ['1.', 'the unit price', 'the quote does not name what was asked'],
+  ['The unit price is 126 pounds per crate.\n2. The order size is 12 crates.', 'the unit price', 'a quote of another line'], ['126 pounds', 'the unit price', 'the quote does not name what was asked'], ['126', 'the unit price', 'the quote does not name what was asked'], ['price is 126 pounds', 'the unit price', 'the quote does not name what was asked'],
+  ['The unit price is', 'the unit price', 'the quote does not hold the figure'], ['The unit price', 'the unit price', 'the quote does not hold the figure'], ['The deposit paid is held by the Buyer.', 'the deposit paid', 'the quote does not hold the figure'],
+  ['none', 'the unit price', 'the model says it is not there'], ['None.', 'the unit price', 'the model says it is not there'], ['"NONE"', 'the unit price', 'the model says it is not there'], ['', 'the unit price', 'the model says it is not there'], ['   ', 'the unit price', 'the model says it is not there'], ['.', 'the unit price', 'the model says it is not there'],
+  [`The unit price is 126${' '.repeat(300)}`, 'the unit price', 'bonded'], [`The unit price is 126 ${'x'.repeat(300)}`, 'the unit price', 'too long'],
+  // a line may be copied with its own label, and with no other; a label's number is never the figure
+  ['1. The unit price is 126 pounds per crate.', 'the unit price', 'bonded'], ['1. The unit price is 126', 'the unit price', 'bonded'], ['"1. The unit price is 126 pounds per crate."', 'the unit price', 'bonded'], ['- The warranty period is 24 months.', 'the warranty period', 'bonded'],
+  ['10. The rebate rate is 12.5.', 'the rebate rate', 'bonded'], ['. The unit price is 126 pounds', 'the unit price', 'bonded'], ['0. The rebate rate is 12.5.', 'the rebate rate', 'not a quote of the document'], ['2. The unit price is 126 pounds per crate.', 'the unit price', 'not a quote of the document'],
+  ['11. The unit price is 126 pounds per crate.', 'the unit price', 'not a quote of the document'], ['5. The deposit paid is', 'the deposit paid', 'the quote does not hold the figure'], ['7. The late', 'the unit price', 'a quote of another line'],
+  ['crate.\n2. The order size is 12 crates.', 'the order size', 'a quote of another line'], ['2. The order size is 12 crates.\n3.', 'the order size', 'a quote of another line'],
+  // what the document itself cannot give, whatever is replied
+  ['The discount is 5 pounds.', 'the discount', 'not in the document'], ['none', 'the discount', 'not in the document'], ['The late fee is 5 pounds.', 'the late fee', 'more than one figure there'], ['By amendment, the late fee is 8 pounds.', 'the late fee', 'more than one figure there'],
+  ['The notice period is 30 days from 14 March.', 'the notice period', 'more than one figure there'], ['The cover level is 3rd party, form A4.', 'the cover level', 'no figure there'], ['Supply agreement between the Supplier and the Buyer', 'the supplier', 'no figure there'],
+  ['x', 'the', 'not a question of the document'], ['x', '', 'not a question of the document'], ['x', 'what is the', 'not a question of the document'], ['x', '126', 'not a question of the document'],
+];
+
+// the same, on the harness's document of hard cases (citefuzz.mjs HARD): figures written every awkward way
+export const ODD = [
+  // not written plainly: the check cannot find a figure there, whatever is replied
+  ['The credit note is -40 pounds.', 'the credit note', 'no figure there'], ['The scrap rate is .5 per cent.', 'the scrap rate', 'no figure there'], ['The budget cap is 5 million pounds.', 'the budget cap', 'no figure there'], ['The notice window is 30-day based.', 'the notice window', 'no figure there'],
+  ['The bulk price is 1.250,50 euros.', 'the bulk price', 'no figure there'], ['The parcel weight is 5kg.', 'the parcel weight', 'no figure there'], ['The ceiling is 3 thousand units.', 'the ceiling', 'no figure there'], ['The span is 5-10 days.', 'the span', 'no figure there'], ['The floor is 0,500 units.', 'the floor', 'no figure there'],
+  ['The tariff is 12 pounds', 'the tariff', 'more than one figure there'],
+  // written plainly, with a mark beside it, a label of another kind, the same figure on two lines
+  ['The gate fee is 20 pounds.', 'the gate fee', 'bonded'], ['Note that the gate fee is 20.00 pounds.', 'the gate fee', 'bonded'], ['the gate fee is 20.00', 'the gate fee', 'bonded'], ['gate fee is 20', 'the gate fee', 'bonded'], ['the gate fee is 20', 'the gate fee', 'not a quote of the document'],
+  ['By rule v1.2 the levy is 5 pounds.', 'the levy', 'bonded'], ['13. By rule v1.2 the levy is 5', 'the levy', 'bonded'], ['2 the levy is 5 pounds', 'the levy', 'not a quote of the document'], ['The surcharge is £7.', 'the surcharge', 'bonded'], ['(14) The surcharge is £7', 'the surcharge', 'bonded'],
+  ['4) The surcharge is £7', 'the surcharge', 'not a quote of the document'], ['14) The surcharge is £7', 'the surcharge', 'bonded'], ['The rebate is 12.5%.', 'the rebate', 'bonded'], ['The rebate is 12.5', 'the rebate', 'bonded'], ['- The rebate is 12.5%', 'the rebate', 'bonded'], ['The rebate is 12', 'the rebate', 'not a quote of the document'],
+  ['The reserve is (1,250.50).', 'the reserve', 'bonded'], ['The reserve is (1,250.50', 'the reserve', 'bonded'], ['* The reserve is (1,250.50)', 'the reserve', 'bonded'], ['The reserve is (1,250', 'the reserve', 'not a quote of the document'], ['The reserve is (1', 'the reserve', 'not a quote of the document'],
+  ['The reserve is (', 'the reserve', 'the quote does not hold the figure'], ['15)  The margin is 0.75 of cost.', 'the margin', 'bonded'], ['  15)  The margin is 0.75', 'the margin', 'bonded'], ['5)  The margin is 0.75', 'the margin', 'not a quote of the document'], ['The margin is 0.75', 'the margin', 'bonded'], ['The margin is 0', 'the margin', 'not a quote of the document'],
+  ['The quota is 007 units.', 'the quota', 'bonded'], ['• The quota is 007', 'the quota', 'bonded'], ['The quota is 00', 'the quota', 'not a quote of the document'],
+];
+
+

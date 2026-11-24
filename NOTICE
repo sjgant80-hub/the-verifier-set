@@ -1,0 +1,15 @@
+The Verifier Set: code under the MIT licence (LICENSE), copyright Simon Gant.
+
+- vendor/crystal/ is The Crystal (sjgant80-hub/the-crystal), MIT, copyright Simon Gant: its kernels byte for byte at
+  the commit that sealed them, and inside them The Climb's (sjgant80-hub/the-climb), as The Crystal vendors them. Each
+  is recorded with its hash in vendor/PROVENANCE.json.
+- vendor/docdec/src/gate.mjs is DocDec's verifier gate (sjgant80-hub/docdecdemo), MIT, copyright Simon Gant, at the
+  commit recorded in vendor/PROVENANCE.json. It makes no bond here: it is a reader the citation harness must catch.
+- data/seed.json is derived from The Crystal's published sealed run (scripts/make-seed.mjs).
+- The problems and their documents are made by code (src/tasks.mjs). No dataset is used. The parties to every
+  document are named only by their roles, and nothing in them describes a real person or company.
+- vendor/fonts/ holds Fraunces, Hanken Grotesk and JetBrains Mono (variable, latin), each under the SIL Open Font
+  Licence 1.1; each folder carries its licence. They are served from this page so that no font host is called.
+- The model is not part of this repository. The page fetches Llama 3.2 1B Instruct (Meta, Llama 3.2 Community Licence)
+  from the MLC project's published build when the viewer presses the button, and runs it with WebLLM 0.2.79
+  (Apache 2.0).

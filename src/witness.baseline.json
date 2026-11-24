@@ -1,0 +1,12 @@
+[
+ {
+  "mutation": "< → <=",
+  "snippet": "for (let tries = 0; tries < 50; tries++) { const p = problem(R, tier, id, s); if (sound(p)",
+  "reason": "a limit that no set in use reaches: a problem is drawn again only until its document says what the problem means it to, which the dev and the sealed sets (pinned by hash in test/weave.test.mjs) do within a few draws. The limit is there so that the loop has an end of its own; 50 or 51 draws make the same problems from every seed a test pins"
+ },
+ {
+  "mutation": "< → <=",
+  "snippet": "out.push(one.compared === 0 ? pending('S7', 'needs the sealed run and one unchecked reply ",
+  "reason": "the two differ only when p is exactly 0.05. An exact McNemar p is a whole number over a power of two, and one twentieth is not such a number, so p is never exactly 0.05"
+ }
+]

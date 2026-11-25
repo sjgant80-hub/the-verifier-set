@@ -13,3 +13,5 @@ The Verifier Set: code under the MIT licence (LICENSE), copyright Simon Gant.
 - The model is not part of this repository. The page fetches Llama 3.2 1B Instruct (Meta, Llama 3.2 Community Licence)
   from the MLC project's published build when the viewer presses the button, and runs it with WebLLM 0.2.79
   (Apache 2.0).
+- vendor/house/ is the house kit (sjgant80-hub/house-standard), MIT, copyright Simon Gant, byte for byte: the crystal
+  hero, the token sheet, the motion, the receipts reader and the ship gate the page test holds this page to.

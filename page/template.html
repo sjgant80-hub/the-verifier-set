@@ -46,7 +46,8 @@ button.quiet{background:transparent;color:var(--ink);border:1px solid var(--edge
 .ledger b{display:block;font:500 clamp(17px,2.6vw,24px)/1.1 var(--mono);color:var(--ink);letter-spacing:0}
 .ledger .bad b{color:var(--red)}
 .scrub{display:flex;align-items:center;gap:12px;font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);max-width:520px}
-.scrub input{flex:1;accent-color:var(--lume)}
+.scrub input{flex:1;accent-color:var(--lume);min-height:32px}
+select{font:500 13px/1.2 var(--body);min-height:36px;padding:6px 8px;color:var(--ink);background:rgba(2,7,12,.9);border:1px solid var(--edge);border-radius:2px}
 .tags{font:italic 400 15px/1.5 var(--display);color:var(--ink-2);margin:14px 0 0}
 #tip{position:fixed;z-index:30;left:0;top:0;transform:translate(-999px,-999px);font:500 12px/1.4 var(--mono);color:var(--ink);background:rgba(2,7,12,.92);border:1px solid var(--edge);padding:7px 10px;max-width:min(340px,80vw);pointer-events:none}
 section.panel{background:var(--panel);border-top:1px solid var(--edge);padding:44px var(--gut)}
@@ -86,7 +87,7 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
 </header>
 <main>
 <section class="hero" id="top">
-  <p class="kicker">Grown from The Crystal, as sealed</p>
+  <p class="kicker">The third build, on The Crystal's sealed checks</p>
   <h1>Know what it <em>stands on.</em></h1>
   <p class="lead">A small AI model reads documents, writes rules as formulas and claims as comparisons, and works out answers. Four checks, one for each kind of work: a figure it cites must be in the document, a formula must pass its rule's tests, a claim is decided by a solver, a step is checked by exact arithmetic. Every facet is drawn in the material of what it stands on, and no answer is called truer than its weakest check.</p>
   <div class="row"><button id="grow" type="button">Grow it here</button><button id="play" class="quiet" type="button">Play the record</button><span class="hint">or press Enter · the model is about 880 MB, once</span></div>
@@ -108,6 +109,7 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
 
 <section class="panel" id="start">
   <h2>Start <em>here</em></h2>
+  <p><b>The words this page uses.</b> A <b>facet</b> is one piece of an answer on the glass: a figure, a rule, a claim, or one step of a sum. A facet <b>bonds</b> when its check passes; one that cannot is refused, and the reason is kept. <b>Proven</b>: worked out by code in exact fractions, with no rounding: nothing to take on trust. <b>Grounded</b>: a figure copied from a document, as true as the document. <b>Proven against its tests</b>: a formula that passed every test of its rule. <b>Proven within its encoding</b>: a claim decided exactly, as the model wrote it down. A claim's <b>bar</b> is the result it had to reach, written down before the sealed run. The <b>sealed run</b> is the measurement: problems the build was never tuned on, every file that could change a result frozen first. The <b>lattice</b> is the whole checked process (copy, write, decide, work out), set against <b>one unchecked reply</b>: the same model asked once, with nothing checking it. A <b>harness</b> is code that attacks a check with forged replies; a <b>second reader</b> is a separate piece of code, written apart from the check, that must rule the same way on every reply; a <b>planted leak</b> is a flaw put into a copy of a check on purpose, to show the harness finds it.</p>
   <ol>
     <li><b>Look.</b> Drag the crystal to turn it. Hard, bright facets are proven. Soft, warm facets are grounded. Orchid facets stand on a formula that passed its tests; leaf-green ones on a claim the solver decided. Point at any facet to read the step, how true it is, and what it stands on; for a cited figure, the words of the document it was quoted from.</li>
     <li><b>Grow one yourself.</b> Press <b>Grow it here</b>, or Enter. The model runs in this tab on your own graphics chip and works through twelve problems, one of each kind, while you watch. <span id="device" class="small">Checking this device…</span></li>
@@ -122,10 +124,10 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
         <label for="tryCell">What to cite</label><input id="tryCell" value="the daily rate" spellcheck="false">
         <label for="tryQuote">Your quote of the document</label><input id="tryQuote" value="The daily rate is 26 pounds." spellcheck="false">
         <button id="try" class="quiet" type="button">Check the quote</button>
-        <p id="tryOut" class="small" aria-live="polite">Press the button. The quote above is cut out of a longer figure, so it should be refused; put the 1 back and it bonds. Then ask for "the late fee", which the document states two ways. Then change 126 to -126 in the document: a figure with a sign on it is not read at all.</p>
+        <p id="tryOut" class="small" aria-live="polite">Press the button. The quote above says 26 where the document says 126, so it is not the document's words and is refused; put the 1 back and it bonds. Then ask for "the late fee", which the document states two ways. Then change 126 to -126 in the document: a figure with a sign on it is not read at all.</p>
       </div></li>
     <li><b>Check the record.</b> <button id="rejudge" class="quiet" type="button">Grow the published run again, with no model</button> <span id="rejudgeOut" class="small" aria-live="polite"></span></li>
-    <li><b>Attack both checks yourself.</b> <button id="attack" class="quiet" type="button">Make a new attack</button> <span id="attackOut" class="small" aria-live="polite"></span></li>
+    <li><b>Attack all four checks yourself.</b> <button id="attack" class="quiet" type="button">Make a new attack</button> <span id="attackOut" class="small" aria-live="polite"></span></li>
     <li><b>Run the whole measurement.</b> <select id="runWhich" aria-label="Which set"><option value="sample">Sample: 12 problems</option><option value="dev">Dev: the 60 problems the build was tuned on</option><option value="sealed">Sealed: the 144 problems the claims are judged on</option></select> <button id="run" class="quiet" type="button">Run it</button> <button id="save" class="quiet" type="button" disabled>Save my run</button> <span id="runOut" class="small" aria-live="polite"></span></li>
   </ol>
 </section>
@@ -149,7 +151,7 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
     <li><b>Refuse.</b> If the document does not state the figure, states it two ways, or does not write it plainly, nothing bonds and the reason is recorded. That is the engine saying it cannot find it in your documents. No answer is given. The model is never asked whether a figure is there: the check decides that, from the document. <span data-bind="h.none">not measured yet</span></li>
     <li><b>Write a rule.</b> When a question gives a rule in words ("the unit price times the order size, plus the delivery charge"), the model writes it as a formula over a letter for each quantity: <code>p × c + d</code>. The formula is run on the rule's tests, chosen so that every near-miss of the rule (a sign changed, a side left out, a letter swapped) fails one. If it passes them all, the figures go into its letters and that is the calculation. It is <span class="tested">proven against its tests</span>: a formula built to pass exactly those tests and nothing else would pass too, and the attack below shows one doing it.</li>
     <li><b>Write a claim.</b> When a question asks whether something is certain ("for 10 to 14 crates, is it certain the order comes to at least 300 pounds?"), the model writes the claim as a comparison: <code>p × c + d ≥ 300</code>. A small exact solver decides it from what is given: yes, no, or it depends. It is <span class="encoded">proven within its encoding</span>: the verdict is exact about the claim as the model wrote it down, and the model may have written it down wrongly. The page counts how often it did.</li>
-    <li><b>Work out.</b> With the figures cited and the calculation known, it is grown as The Crystal grows one: one small step at a time, each reply checked by exact arithmetic, a wrong step split smaller. <span data-bind="h.seed">not measured yet</span></li>
+    <li><b>Work out.</b> With the figures cited and the calculation known, it is grown as The Crystal grows one: one small step at a time, each reply checked by exact arithmetic. A step the model gets wrong is split into smaller steps it is asked again; a step that is already as small as steps go, and still wrong, is dropped (it dissolves), and the problem gets no answer rather than a wrong one. <span data-bind="h.seed">not measured yet</span></li>
     <li><b>Label.</b> Every facet carries how true it is. The law is one line: a facet is only as strong as the weakest bond it stands on. A sum worked out exactly from a cited figure is grounded. A sum worked out from a tested formula is proven against its tests. No two strengths are ever counted or drawn as the same thing.</li>
   </ol>
   <p><span data-bind="h.law">not measured yet</span></p>
@@ -170,7 +172,7 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
   <details><summary>The citation check, attacked</summary><div class="wrap" id="attackTable">not measured yet</div></details>
   <details><summary>The formula check, attacked, and its limit shown</summary><div class="wrap" id="ruleAttack">not measured yet</div></details>
   <details><summary>The solver, attacked</summary><div class="wrap" id="claimAttack">not measured yet</div></details>
-  <details><summary>What it cost, against one unchecked reply</summary><div id="cost">not measured yet</div></details>
+  <details><summary>What the checked answers cost, against one unchecked reply</summary><div id="cost">not measured yet</div></details>
 </section>
 
 <section class="panel" id="limits">
@@ -194,6 +196,7 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
 
 <section class="panel" id="blueprint">
   <h2>How it is <em>built</em></h2>
+  <p class="small">"Gated 41/41" means a mutation test changed that part's code 41 ways, one small change at a time (a &lt; for a &lt;=, a + for a -), and its tests caught every one. "Equivalent" is a change that makes no difference to what the code does, so no test can catch it; each has its reason written down in <code>src/witness.baseline.json</code>.</p>
   <div class="wrap"><table><thead><tr><th>part</th><th>what it is</th><th>status</th></tr></thead><tbody>
     <tr><td>What it stands on</td><td>The Crystal's kernels, byte for byte as its seal froze them, and inside them The Climb's (<code>vendor/crystal/</code>).</td><td data-bind="bp.seed">not measured yet</td></tr>
     <tr><td>The strength law</td><td>The four kinds of bond, what each proves, and the weakest-root rule (<code>src/strength.mjs</code>).</td><td data-bind="bp.strength">not measured yet</td></tr>
@@ -220,7 +223,7 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
     <li><b>Chief executive.</b> No answer leaves without saying what it stands on. A figure from a contract is shown in the contract. A document that contradicts itself gets no answer, and the page says which figure and why.</li>
     <li><b>Finance.</b> The cost is small model calls on hardware you own. <span data-bind="b.cost">not measured yet</span> There is no charge per question.</li>
     <li><b>Operations.</b> When it stops, it names the cell it could not bond and the reason (the figure it could not cite, the test the formula failed, the claim it could not decide), so a person picks up from there, not from the beginning.</li>
-    <li><b>Technology and security.</b> One page, no server, no account, no key. The document, the model and both checks stay in the browser. The model's files come from the public WebLLM library and are not pinned by hash here, which is a limit stated plainly.</li>
+    <li><b>Technology and security.</b> One page, no server, no account, no key. The document, the model and all four checks stay in the browser. The model's files come from the public WebLLM library, and this page does not check them against a fixed fingerprint (a hash), so a changed file upstream would not be caught here: a limit stated plainly.</li>
     <li><b>Legal and compliance.</b> Every cited figure carries the document's hash and the character offsets of the quote, so anyone can open the document and see it. Nothing is paraphrased: a quote is the document's own words or it is refused.</li>
   </ul></details>
   <details><summary>Against what you use now</summary>

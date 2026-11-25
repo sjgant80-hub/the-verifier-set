@@ -3,7 +3,7 @@
  "sealed": "data/runs/sealed.json",
  "dev": "data/runs/dev.json",
  "seed": "data/seed.json",
- "walk": null,
+ "walk": "data/walk.json",
  "bench": "data/bench.json",
  "baseline": "data/baseline.json"
 }

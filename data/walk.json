@@ -1,0 +1,51 @@
+{
+ "v": "buyer-walk/1",
+ "at": "2026-11-25",
+ "model": "qwen2.5:7b on this machine's CPU, through Ollama",
+ "note": "A simulated buyer walk: a local 7B model played four buyers and read this page's text cold, part by part, one buyer at a time (36 readings, about 2.5 hours). It is a model's first-pass audit, not a customer's opinion. Kar checked every gap it raised against the page, and pressed every button on the page by hand (the quote check with each of its suggested changes, growing the published run again, a new attack, and growing twelve problems live). The real gaps are below, each with what was changed. Not changed: lines that only quoted the page back (the footer, the case for the board), and one that was right as it stood (a forgery tried only 10 times applies only to lines that carry a clause number). A first try that asked for all four buyers in one reply was not kept: the model answered \"none\" to nearly every part, which is no evidence the page is clear.",
+ "personas": [
+  {
+   "who": "The CFO of a 400-person firm",
+   "verdict": "could follow the result, but tripped on words used before they were defined and on two numbers with no unit",
+   "gaps": [
+    { "gap": "\"bonded\", \"harness\", \"planted leak\" and \"lattice\" are used before the page says what they are", "fix": "a list of the words this page uses now opens Start here: facet, bond, proven, grounded, proven against its tests, proven within its encoding, bar, sealed run, lattice, one unchecked reply, harness, second reader, planted leak" },
+    { "gap": "\"4.1 small calls per problem\": what is a call?", "fix": "the line now says each is a short request to the small model on this device: copy one line, write one rule or claim, or work out one step" },
+    { "gap": "\"asked the stronger of two ways\": which two, and how much stronger?", "fix": "it now names the two instructions and gives each one's score: 16 of 60 against 15 of 60 dev problems" },
+    { "gap": "\"gated 11/11\" is never explained", "fix": "the blueprint now opens with what a mutation gate is, and what an equivalent change is" },
+    { "gap": "\"not pinned by hash\": what does that mean for me?", "fix": "it now says the page does not check the downloaded model files against a fixed fingerprint, so a changed file upstream would not be caught here" }
+   ]
+  },
+  {
+   "who": "The CTO who also owns security",
+   "verdict": "wanted the mechanics spelled out where the page gave only a count",
+   "gaps": [
+    { "gap": "\"1550 claims were put to the solver, on 63 questions\": how do 63 questions make 1550 claims?", "fix": "the solver's attack now says each question gets about 25 claims: its own, and others made to trip a solver or to be refused" },
+    { "gap": "\"worked out every corner of every range\"", "fix": "now: worked the formula out at every mix of each quantity's lowest and highest value" },
+    { "gap": "\"a wrong step split smaller\", \"dissolves\"", "fix": "How it works now says what happens: a wrong step is split into smaller steps asked again; one already as small as steps go, and still wrong, is dropped, and the problem gets no answer rather than a wrong one" },
+    { "gap": "\"exact arithmetic\" is not defined", "fix": "proven now reads: worked out by code in exact fractions, with no rounding" },
+    { "gap": "a commit id beside a count of steps reads as another number", "fix": "the line now says \"at commit\"" }
+   ]
+  },
+  {
+   "who": "The COO who runs the teams that would use it",
+   "verdict": "read two tables as contradicting themselves, and wanted every \"it\" named",
+   "gaps": [
+    { "gap": "\"every rule and claim asked for bonded | 0\" in a table of reasons for failing", "fix": "an empty table of reasons now says \"none\", with a dash, not a nought" },
+    { "gap": "\"What it cost\": what is \"it\"?", "fix": "now \"What the checked answers cost, against one unchecked reply\"" },
+    { "gap": "the 24 figures refused as \"not in the document\" or \"more than one figure there\" look like failures", "fix": "a line under the table now says, checked figure by figure from the record, that each is the figure its problem was built without, where refusing is right" },
+    { "gap": "\"No answer was given\" for the five that missed is vague", "fix": "each now says where it stopped, and that it was left with no answer rather than given a wrong one" },
+    { "gap": "growing live, the closing line counted only grounded and proven answers (found by pressing the button)", "fix": "it now counts all four strengths" }
+   ]
+  },
+  {
+   "who": "The owner-manager of a 12-person business, no technical staff",
+   "verdict": "was lost at the first line, then could use the citation check once its messages said why in plain words",
+   "gaps": [
+    { "gap": "\"Grown from The Crystal, as sealed\" means nothing to a stranger", "fix": "the line now reads \"The third build, on The Crystal's sealed checks\", and the words are defined below it" },
+    { "gap": "\"Attack both checks yourself\": there are four", "fix": "fixed there and in two other places that still said both" },
+    { "gap": "the citation check's message repeated its reason word for word (\"more than one figure there ... more than one figure there\")", "fix": "it now says why in plain words, for example that the document gives more than one figure for this, so it cannot give one" },
+    { "gap": "the run selector and the depth slider were too small to tap on a phone (18 px and 16 px tall)", "fix": "both are now at least 32 px tall; nothing on the page scrolls sideways at 375 px" }
+   ]
+  }
+ ]
+}

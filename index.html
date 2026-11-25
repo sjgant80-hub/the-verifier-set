@@ -9,88 +9,240 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2302070c'/%3E%3Cpath d='M16 4 27 16 16 28 5 16z' fill='none' stroke='%235ef2e4' stroke-width='2'/%3E%3C/svg%3E">
 <style>
+/* house.css — the AI Native house standard: one token sheet, one kit. Every page is built from these and nothing else.
+   HERO · RECEIPTS · THE STACK · THE GLASS · HONEST EXPANDER. The law of the page: the loudest true number leads, every
+   caveat waits behind a click, and no section is prose. Fonts are the house's three faces, served from the page. */
 @font-face{font-family:'Fraunces';src:url('vendor/fonts/fraunces/files/fraunces-latin-full-italic.woff2') format('woff2');font-weight:100 900;font-style:italic;font-display:swap}
 @font-face{font-family:'Fraunces';src:url('vendor/fonts/fraunces/files/fraunces-latin-full-normal.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
 @font-face{font-family:'Hanken Grotesk';src:url('vendor/fonts/hanken-grotesk/files/hanken-grotesk-latin-wght-normal.woff2') format('woff2');font-weight:100 900;font-display:swap}
 @font-face{font-family:'JetBrains Mono';src:url('vendor/fonts/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2') format('woff2');font-weight:100 800;font-display:swap}
-:root{--abyss:#02070c;--water:#04101a;--lume:#5ef2e4;--blue:#49b4ff;--violet:#a797ff;--orchid:#d48cff;--leaf:#9be37a;--amber:#ffbf78;--red:#ff6470;--ink:#e4f6f8;--ink-2:#a3c3cb;--ink-3:#7f9fa7;--panel:rgba(4,16,25,.86);--edge:rgba(94,242,228,.2);--display:'Fraunces','Iowan Old Style','Palatino Linotype',Georgia,serif;--body:'Hanken Grotesk','Segoe UI',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,'Cascadia Mono',Consolas,monospace;--gut:clamp(16px,5vw,72px);color-scheme:dark}
+:root{color-scheme:dark;--bg:#02070c;--bg2:#060e18;--panel:#081320;--ink:#e9f2f6;--soft:#aebecb;--muted:#6f8698;--cyan:#49e8c8;--cyan-dim:#1f6a60;--gold:#ffcf6a;--red:#ff6b6b;--line:rgba(255,255,255,.09);--line2:rgba(255,255,255,.055);--display:'Fraunces',Georgia,serif;--sans:'Hanken Grotesk',system-ui,-apple-system,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;--gut:max(20px,env(safe-area-inset-left,0px));--gutr:max(20px,env(safe-area-inset-right,0px))}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--abyss);color:var(--ink);font:400 16px/1.6 var(--body);overflow-x:hidden}
-a{color:var(--lume);text-underline-offset:3px}
-:focus-visible{outline:2px solid var(--lume);outline-offset:3px}
-code{font:500 .86em var(--mono);color:var(--lume);overflow-wrap:anywhere}
-#gem{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0;touch-action:none;cursor:grab}
-.top{position:fixed;z-index:20;inset:0 0 auto 0;display:flex;align-items:center;gap:20px;padding:14px var(--gut);background:linear-gradient(180deg,rgba(2,7,12,.82),rgba(2,7,12,0));pointer-events:none}
-.top>*{pointer-events:auto}
-.mark{font:500 12px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--ink);text-decoration:none;white-space:nowrap}
-.top nav{margin-left:auto;display:flex;gap:18px;flex-wrap:wrap;justify-content:flex-end}
-.top nav a{font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;padding:8px 0}
-.top nav a:hover{color:var(--lume)}
-main{position:relative;z-index:5;pointer-events:none}
-main>*{pointer-events:auto}
-.hero{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:96px var(--gut) 28px;pointer-events:none}
-.hero>*{pointer-events:auto;max-width:560px}
-.kicker{font:500 11px/1.4 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);margin:0 0 10px}
-h1{font:400 clamp(44px,9vw,92px)/.98 var(--display);margin:0 0 14px;letter-spacing:-.01em;text-shadow:0 0 30px var(--abyss)}
-h1 em{font-style:italic;color:var(--lume)}
-.lead{margin:0 0 18px;color:var(--ink);text-shadow:0 0 14px var(--abyss),0 0 4px var(--abyss)}
-.row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
-button{font:600 14px/1 var(--body);color:#012;background:var(--lume);border:0;padding:13px 20px;cursor:pointer;border-radius:2px}
-button:hover{filter:brightness(1.1)}
-button:disabled{opacity:.5;cursor:default}
-button.quiet{background:transparent;color:var(--ink);border:1px solid var(--edge)}
-.hint,.small{font:500 11.5px/1.5 var(--mono);color:var(--ink-2)}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{line-height:1.5;font-size:16px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gutr)}
+.mono{font-family:var(--mono)}
+em{font-style:italic;font-family:var(--display);font-weight:600}
+code{font:500 .88em var(--mono);color:var(--cyan);overflow-wrap:anywhere}
+.pass{color:var(--cyan)}.fail{color:var(--red)}.pend{color:var(--gold)}.dim{color:var(--muted)}
+
+/* HERO: the crystal behind the headline */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;background:radial-gradient(120% 90% at 70% 18%,#0a1826 0%,var(--bg) 58%)}
+#crystal{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
+.hero-shade{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(2,7,12,.78) 0%,rgba(2,7,12,.34) 46%,rgba(2,7,12,0) 70%),radial-gradient(130% 110% at 50% 42%,transparent 50%,rgba(2,6,12,.7) 100%)}
+.hero .wrap{position:relative;z-index:2;width:100%;padding-block:12vh;pointer-events:none}
+.hero .wrap>*{pointer-events:auto}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);margin:0}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(44px,9vw,104px);line-height:.98;letter-spacing:-.02em;margin:18px 0 0;text-wrap:balance;max-width:14ch}
+h1 em{color:var(--cyan)}
+.sub{font-size:clamp(16px,2.3vw,21px);color:var(--soft);max-width:46ch;margin:26px 0 0;line-height:1.55}
+.cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:13.5px;letter-spacing:.02em;padding:13px 20px;min-height:46px;border-radius:999px;text-decoration:none;transition:.18s ease;white-space:nowrap;cursor:pointer;border:1px solid transparent;background:none;color:var(--ink)}
+.btn.primary{background:var(--cyan);color:#021310;font-weight:700}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px -12px var(--cyan)}
+.btn.ghost{border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+.btn:disabled{opacity:.5;cursor:default;transform:none}
+.facet{position:absolute;z-index:3;left:var(--gut);bottom:22px;font:500 12px/1.5 var(--mono);color:var(--soft);max-width:min(560px,calc(100vw - 40px));min-height:18px;pointer-events:none}
+.facet b{color:var(--ink);font-weight:500}
+
+/* SECTIONS */
+section{position:relative;z-index:2}
+.pad{padding-block:clamp(72px,11vh,140px)}
+.alt{background:linear-gradient(180deg,var(--bg),#040b14);border-top:1px solid var(--line2)}
+.deep{background:var(--bg2);border-top:1px solid var(--line2);border-bottom:1px solid var(--line2)}
+.kline{font-family:var(--mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--cyan);margin:0 0 20px}
+.claim{font-family:var(--display);font-weight:400;font-size:clamp(30px,5.2vw,58px);line-height:1.05;letter-spacing:-.015em;text-wrap:balance;max-width:20ch;margin:0}
+.claim b{font-weight:600}
+.claim em{color:var(--cyan)}
+.lede{color:var(--soft);font-size:clamp(15px,1.9vw,18px);line-height:1.6;max-width:52ch;margin:26px 0 0}
+.lede b{color:var(--ink);font-weight:600}
+
+/* RECEIPTS: the number is the hero */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:64px;border-top:1px solid var(--line);padding-top:48px}
+.stat .n{font-family:var(--mono);font-weight:700;font-size:clamp(38px,6.6vw,76px);line-height:1;letter-spacing:-.02em;white-space:nowrap}
+.stat .n .was{color:var(--muted)}.stat .n .arrow{color:var(--cyan-dim);padding:0 .12em}.stat .n .now{color:var(--cyan)}.stat .n .bad{color:var(--red)}.stat .n .wait{color:var(--gold)}
+.stat .lab{color:var(--soft);font-size:14px;margin-top:16px;line-height:1.5;max-width:28ch}
+.stat .lab b{color:var(--ink);font-weight:600}
+.src{display:inline-block;font:500 11px/1 var(--mono);letter-spacing:.06em;color:var(--muted);text-decoration:none;margin-top:10px;border-bottom:1px dotted var(--muted);padding-bottom:2px}
+.src:hover{color:var(--cyan);border-color:var(--cyan)}
+.wins{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:42px}
+.win{border:1px solid var(--line2);border-radius:16px;padding:26px 22px;background:var(--panel)}
+.win .wn{font-family:var(--mono);font-weight:700;font-size:clamp(26px,3.6vw,42px);color:var(--cyan);letter-spacing:-.02em;line-height:1;white-space:nowrap}
+.win .wn .of{color:var(--muted)}
+.win .wl{color:var(--soft);font-size:13px;margin-top:12px;line-height:1.5}
+
+/* CARDS */
+.acts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.acts.two{grid-template-columns:repeat(2,1fr)}
+.act{position:relative;display:flex;flex-direction:column;background:linear-gradient(180deg,var(--panel),#050c15);border:1px solid var(--line2);border-radius:18px;padding:28px 24px 24px;text-decoration:none;transition:.2s ease;overflow:hidden}
+a.act:hover,.act.lift:hover{border-color:var(--cyan);transform:translateY(-4px);box-shadow:0 24px 60px -34px #000}
+.act::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .25s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(73,232,200,.10),transparent 60%)}
+.act:hover::before{opacity:1}
+.act .num{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--muted)}
+.act h3{font-family:var(--display);font-weight:500;font-size:26px;letter-spacing:-.01em;margin:14px 0 0}
+.act p{color:var(--soft);font-size:14.5px;line-height:1.55;margin:10px 0 0;flex:1}
+.act .go{font-family:var(--mono);font-size:12.5px;color:var(--cyan);margin-top:18px;display:inline-flex;gap:7px;align-items:center}
+
+/* THE STACK: one line per layer */
+.stack{margin-top:44px;border:1px solid var(--line2);border-radius:18px;overflow:hidden;background:#040b13}
+.srow{display:grid;grid-template-columns:64px minmax(0,1fr);align-items:center;border-top:1px solid var(--line2);padding:16px 22px;transition:.16s}
+.srow:first-child{border-top:none}
+.srow:hover{background:#08141f}
+.srow .d{font-family:var(--mono);font-size:12px;color:var(--cyan);letter-spacing:.12em}
+.srow .nm{display:flex;gap:6px 14px;align-items:baseline;flex-wrap:wrap;min-width:0}
+.srow .nm b{font-family:var(--display);font-weight:500;font-size:19px}
+.srow .nm span{color:var(--soft);font-size:14px;min-width:0;overflow-wrap:anywhere}
+.srow.red .d{color:var(--red)}.srow.gold .d{color:var(--gold)}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.tag.off{color:var(--muted);border:1px solid var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.spark{display:block;width:100%;max-width:520px;height:64px;margin:12px 0 0}
+.tag.cy{color:var(--cyan);border:1px solid rgba(73,232,200,.32)}
+.tag.gd{color:var(--gold);border:1px solid rgba(255,207,106,.34);animation:breathe 2.4s ease-in-out infinite}
+.tag.rd{color:var(--red);border:1px solid rgba(255,107,107,.4)}
+@keyframes breathe{50%{opacity:.55}}
+
+/* THE GLASS: it runs here, on the visitor's own device */
+.glass{margin-top:44px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,#07121d,#040b13);padding:26px 24px;box-shadow:0 30px 80px -50px #000,inset 0 1px 0 rgba(255,255,255,.04)}
+.glass h3{font-family:var(--display);font-weight:500;font-size:24px;margin:0 0 6px}
+.glass .hint{color:var(--soft);font-size:14px;margin:0 0 16px;max-width:60ch}
+.glass .out{font:500 13px/1.6 var(--mono);color:var(--soft);margin:14px 0 0;min-height:22px}
+.glass textarea,.glass input,.glass select{font:500 13px/1.5 var(--mono);color:var(--ink);background:rgba(2,7,12,.75);border:1px solid var(--line);border-radius:10px;padding:10px 12px;max-width:100%;min-height:42px}
+.glass textarea{width:100%;min-height:128px}
+.glass label{font:500 11px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:inline-flex;flex-direction:column;gap:5px}
+.row{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.box{border:1px solid var(--line2);border-radius:14px;padding:14px 16px;background:rgba(2,7,12,.5);min-width:0}
+.box h4{font:500 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+pre{font:500 12.5px/1.55 var(--mono);color:var(--ink);margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.wall svg{width:100%;height:auto;display:block}
+.wall rect{cursor:pointer;transition:opacity .15s}
+.wall rect:hover{opacity:.7}
+.key{display:flex;flex-wrap:wrap;gap:6px 18px;margin:12px 0 0;font:500 11.5px/1.4 var(--mono);color:var(--muted)}
+.key i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+
+/* PROOF + THE HONEST EXPANDER */
+.proof{text-align:center}
+.proof .hl{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(38px,8vw,88px);line-height:1;letter-spacing:-.02em;margin:0}
+.proof .hl .a{color:var(--muted)}.proof .hl .b{color:var(--cyan)}
+.proof .sub2{color:var(--soft);margin:24px auto 0;max-width:42ch;font-size:16px}
+.links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+.plink{font-family:var(--mono);font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);padding:11px 18px;border-radius:999px;transition:.18s;min-height:44px;display:inline-flex;align-items:center}
+.plink:hover{border-color:var(--cyan);color:var(--cyan)}
+details.honest{max-width:680px;margin:22px auto 0;border:1px solid var(--line2);border-radius:14px;background:#040b13;text-align:left}
+details.honest:first-of-type{margin-top:52px}
+details.honest summary{font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--muted);padding:16px 20px;cursor:pointer;list-style:none;min-height:48px}
+details.honest summary::-webkit-details-marker{display:none}
+details.honest summary::before{content:"+ ";color:var(--cyan)}
+details.honest[open] summary::before{content:"– "}
+details.honest .in{padding:0 20px 20px;color:var(--soft);font-size:14px;line-height:1.6}
+details.honest .in p{margin:0 0 10px}
+details.honest .in b{color:var(--ink)}
+details.honest .in a{color:var(--cyan)}
+
+footer{border-top:1px solid var(--line2);padding-block:46px;position:relative;z-index:2}
+.frow{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-size:22px}
+.taglist{font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.9;letter-spacing:.02em}
+.taglist span{color:var(--cyan)}
+.fnote{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:14px;letter-spacing:.02em;line-height:1.8}
+.fnote a{color:var(--soft)}
+
+/* MOTION */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media(max-width:860px){.acts{grid-template-columns:repeat(2,1fr)}.wins{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.stats{grid-template-columns:1fr;gap:40px}.two{grid-template-columns:1fr}.hero-shade{background:linear-gradient(180deg,rgba(2,7,12,.2) 0%,rgba(2,7,12,.82) 62%)}.hero{align-items:flex-end}.hero .wrap{padding-block:9vh}}
+@media(max-width:680px){.acts,.acts.two{grid-template-columns:1fr}.srow{grid-template-columns:48px minmax(0,1fr);padding:14px 16px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .reveal{opacity:1;transform:none;transition:none}.tag.gd{animation:none}.btn,.act{transition:none}}
+/* this build's own styles, for its own content, which now sits behind a click or inside the glass */
+#gem{position:relative;display:block;width:100%;height:min(68vh,560px);touch-action:none;cursor:grab;border-radius:14px;background:#02070c;margin:0 0 16px}
+.legacy{font-size:15px;line-height:1.6}
+.legacy{--abyss:#02070c;--water:#04101a;--lume:#5ef2e4;--blue:#49b4ff;--violet:#a797ff;--orchid:#d48cff;--leaf:#9be37a;--amber:#ffbf78;--red:#ff6470;--ink:#e4f6f8;--ink-2:#a3c3cb;--ink-3:#7f9fa7;--panel:rgba(4,16,25,.86);--edge:rgba(94,242,228,.2);--display:'Fraunces','Iowan Old Style','Palatino Linotype',Georgia,serif;--body:'Hanken Grotesk','Segoe UI',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,'Cascadia Mono',Consolas,monospace;--gut:clamp(16px,5vw,72px);}
+.legacy a{color:var(--lume);text-underline-offset:3px}
+.legacy :focus-visible{outline:2px solid var(--lume);outline-offset:3px}
+.legacy code{font:500 .86em var(--mono);color:var(--lume);overflow-wrap:anywhere}
+.legacy .kicker{font:500 11px/1.4 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);margin:0 0 10px}
+.legacy .lead{margin:0 0 18px;color:var(--ink);text-shadow:0 0 14px var(--abyss),0 0 4px var(--abyss)}
+.legacy .row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.legacy button{font:600 14px/1 var(--body);color:#012;background:var(--lume);border:0;padding:13px 20px;cursor:pointer;border-radius:2px}
+.legacy button:hover{filter:brightness(1.1)}
+.legacy button:disabled{opacity:.5;cursor:default}
+.legacy button.quiet{background:transparent;color:var(--ink);border:1px solid var(--edge)}
+.legacy .hint,.legacy .small{font:500 11.5px/1.5 var(--mono);color:var(--ink-2)}
 #status{font:500 12px/1.5 var(--mono);color:var(--ink-2);margin:12px 0 0;min-height:18px;text-shadow:0 0 10px var(--abyss)}
-.ledger{display:flex;flex-wrap:wrap;gap:8px 22px;margin:16px 0 8px;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;color:var(--ink-2);max-width:none}
-.ledger b{display:block;font:500 clamp(17px,2.6vw,24px)/1.1 var(--mono);color:var(--ink);letter-spacing:0}
-.ledger .bad b{color:var(--red)}
-.scrub{display:flex;align-items:center;gap:12px;font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);max-width:520px}
-.scrub input{flex:1;accent-color:var(--lume);min-height:32px}
-select{font:500 13px/1.2 var(--body);min-height:36px;padding:6px 8px;color:var(--ink);background:rgba(2,7,12,.9);border:1px solid var(--edge);border-radius:2px}
-.tags{font:italic 400 15px/1.5 var(--display);color:var(--ink-2);margin:14px 0 0}
+.legacy .ledger{display:flex;flex-wrap:wrap;gap:8px 22px;margin:16px 0 8px;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;color:var(--ink-2);max-width:none}
+.legacy .ledger b{display:block;font:500 clamp(17px,2.6vw,24px)/1.1 var(--mono);color:var(--ink);letter-spacing:0}
+.legacy .ledger .bad b{color:var(--red)}
+.legacy .scrub{display:flex;align-items:center;gap:12px;font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);max-width:520px}
+.legacy .scrub input{flex:1;accent-color:var(--lume);min-height:32px}
+.legacy select{font:500 13px/1.2 var(--body);min-height:36px;padding:6px 8px;color:var(--ink);background:rgba(2,7,12,.9);border:1px solid var(--edge);border-radius:2px}
+.legacy .tags{font:italic 400 15px/1.5 var(--display);color:var(--ink-2);margin:14px 0 0}
 #tip{position:fixed;z-index:30;left:0;top:0;transform:translate(-999px,-999px);font:500 12px/1.4 var(--mono);color:var(--ink);background:rgba(2,7,12,.92);border:1px solid var(--edge);padding:7px 10px;max-width:min(340px,80vw);pointer-events:none}
-section.panel{background:var(--panel);border-top:1px solid var(--edge);padding:44px var(--gut)}
-section.panel>*{max-width:760px}
-h2{font:400 clamp(26px,4.4vw,38px)/1.1 var(--display);margin:0 0 14px}
-h2 em{font-style:italic;color:var(--lume)}
-h3{font:600 15px/1.3 var(--body);margin:22px 0 6px}
-ol,ul{padding-left:20px}
-li{margin:0 0 8px}
-details{border-top:1px solid var(--edge);padding:10px 0}
-details>summary{cursor:pointer;font-weight:600}
-table{border-collapse:collapse;width:100%;font-size:14px;margin:10px 0}
-th,td{text-align:left;padding:7px 8px 7px 0;border-bottom:1px solid var(--edge);vertical-align:top}
-th{font:500 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
-td.num{font-family:var(--mono);white-space:nowrap}
-.pass{color:var(--lume)}.fail{color:var(--red);font-weight:600}.pend{color:var(--amber)}
-.wrap{overflow-x:auto}
-svg.law{width:100%;height:auto;max-width:760px}
-svg.law text{font:500 12px var(--mono);fill:var(--ink)}
-svg.law .m{fill:var(--ink-2)}
-footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var(--gut) 40px;font:500 12px/1.7 var(--mono);color:var(--ink-2)}
-@media (max-width:640px){.top nav a:not(.keep){display:none}.hero{padding-bottom:20px}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-.try{display:grid;gap:6px;margin:10px 0 4px;max-width:640px}
-.try label{font:500 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin-top:6px}
-.try textarea,.try input{font:500 13px/1.5 var(--mono);color:var(--ink);background:rgba(2,7,12,.7);border:1px solid var(--edge);padding:9px 10px;width:100%;border-radius:2px}
-.try button{justify-self:start;margin-top:6px}
-.soft{color:var(--amber)}.tested{color:var(--orchid)}.encoded{color:var(--leaf)}
-.key{display:flex;flex-wrap:wrap;gap:6px 18px;margin:8px 0 0;font:500 11.5px/1.4 var(--mono);color:var(--ink-2)}.key i{display:inline-block;width:10px;height:10px;margin-right:6px;transform:rotate(45deg)}
+.legacy h2{font:400 clamp(26px,4.4vw,38px)/1.1 var(--display);margin:0 0 14px}
+.legacy h2 em{font-style:italic;color:var(--lume)}
+.legacy h3{font:600 15px/1.3 var(--body);margin:22px 0 6px}
+.legacy ol,.legacy ul{padding-left:20px}
+.legacy li{margin:0 0 8px}
+.legacy details{border-top:1px solid var(--edge);padding:10px 0}
+.legacy details>summary{cursor:pointer;font-weight:600}
+.legacy table{border-collapse:collapse;width:100%;font-size:14px;margin:10px 0}
+.legacy th,.legacy td{text-align:left;padding:7px 8px 7px 0;border-bottom:1px solid var(--edge);vertical-align:top}
+.legacy th{font:500 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.legacy td.num{font-family:var(--mono);white-space:nowrap}
+.legacy .pass{color:var(--lume)}.fail{color:var(--red);font-weight:600}.pend{color:var(--amber)}
+.legacy .wrap{overflow-x:auto}
+.legacy svg.law{width:100%;height:auto;max-width:760px}
+.legacy svg.law text{font:500 12px var(--mono);fill:var(--ink)}
+.legacy svg.law .m{fill:var(--ink-2)}
+.legacy .try{display:grid;gap:6px;margin:10px 0 4px;max-width:640px}
+.legacy .try label{font:500 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin-top:6px}
+.legacy .try textarea,.legacy .try input{font:500 13px/1.5 var(--mono);color:var(--ink);background:rgba(2,7,12,.7);border:1px solid var(--edge);padding:9px 10px;width:100%;border-radius:2px}
+.legacy .try button{justify-self:start;margin-top:6px}
+.legacy .soft{color:var(--amber)}.tested{color:var(--orchid)}.encoded{color:var(--leaf)}
+.legacy .key{display:flex;flex-wrap:wrap;gap:6px 18px;margin:8px 0 0;font:500 11.5px/1.4 var(--mono);color:var(--ink-2)}.key i{display:inline-block;width:10px;height:10px;margin-right:6px;transform:rotate(45deg)}
 </style>
 </head>
 <body>
-<canvas id="gem" role="img" aria-label="A crystal of octahedra. A hard, bright facet is a step proven by exact arithmetic. A soft, warm facet is grounded: it is, or stands on, a figure quoted from a document. An orchid facet is proven against its tests: it is, or stands on, a formula the model wrote that passed them. A leaf-green facet is proven within its encoding: a claim the solver decided as the model wrote it down. Dark facets were never reached."></canvas>
-<header class="top">
-  <a class="mark" href="#top">The Verifier Set</a>
-  <nav aria-label="On this page"><a href="#start">Start</a><a href="#how">How it works</a><a href="#set">The checks</a><a class="keep" href="#numbers">The numbers</a><a class="keep" href="#limits">What this does not prove</a><a href="#buyers">For buyers</a><a href="#paper">White paper</a></nav>
+<header class="hero" id="top">
+  <canvas id="crystal" role="img" aria-label="A crystal of 32 faces. Each lit face is one of this build's pre-registered claims: cyan when it passed, red when it failed and is kept."></canvas>
+  <div class="hero-shade"></div>
+  <div class="wrap">
+    <p class="eyebrow">AI Native Solutions · The Verifier Set</p>
+    <h1>It refuses to <em>lie.</em></h1>
+    <p class="sub">Every answer is checked against the arithmetic or the cited source. If it cannot be checked, it is not released.</p>
+    <div class="cta"><a class="btn primary" href="#result">See the result →</a><a class="btn ghost" href="#glass">Run it yourself</a></div>
+  </div>
+  <p class="facet" id="hsFacet" aria-live="polite">12 of 12 claims passed · point at a face</p>
 </header>
-<main>
-<section class="hero" id="top">
-  <p class="kicker">The third build, on The Crystal's sealed checks</p>
-  <h1>Know what it <em>stands on.</em></h1>
-  <p class="lead">A small AI model reads documents, writes rules as formulas and claims as comparisons, and works out answers. Four checks, one for each kind of work: a figure it cites must be in the document, a formula must pass its rule's tests, a claim is decided by a solver, a step is checked by exact arithmetic. Every facet is drawn in the material of what it stands on, and no answer is called truer than its weakest check.</p>
-  <div class="row"><button id="grow" type="button">Grow it here</button><button id="play" class="quiet" type="button">Play the record</button><span class="hint">or press Enter · the model is about 880 MB, once</span></div>
+
+<section class="pad" id="result">
+  <div class="wrap">
+    <p class="kline reveal">The result</p>
+    <h2 class="claim reveal">The same 1B model. Once with the checks, once without. <b>The checks do the work.</b></h2>
+    <div class="stats" id="hsReceipts"><div class="stat reveal"><div class="n"><span class="was">34</span><span class="arrow">→</span><span class="now">139</span></div><div class="lab"><b>Of 144 sealed problems.</b> Sealed problems that came out as they should: unchecked, then checked.</div><a class="src" href="data/runs/sealed.json">receipt: the sealed run ↗</a></div><div class="stat reveal"><div class="n"><span class="was">22</span><span class="arrow">→</span><span class="now">0</span></div><div class="lab"><b>Confident numbers given to questions that have no answer: unchecked, then checked.</b> Of 24.</div><a class="src" href="data/runs/sealed.json">receipt: the sealed run ↗</a></div><div class="stat reveal"><div class="n"><span class="now">12</span><span class="was" style="font-size:.42em"> /12</span></div><div class="lab"><b>Pre-registered claims passed.</b> A claim that fails stays on the page, in red.</div><a class="src" href="data/runs/sealed.json">receipt: the sealed run ↗</a></div></div>
+  </div>
+</section>
+
+<section class="pad alt" id="claims">
+  <div class="wrap">
+    <p class="kline reveal">The claims, written down first</p>
+    <h2 class="claim reveal">The pass marks were fixed <b>before the sealed run.</b></h2>
+    <div class="stack reveal" id="hsClaims"><div class="srow "><div class="d">S1</div><div class="nm"><b>Every answer is labelled with what it stands on</b><span>115 problems reached an answer: 79 grounded, 12 proven against its tests, 12 proven within its encoding, 12 proven, 0 none of these. 0 were labelled stronger than what they stand on; 12 problems with no document, rule or claim were answered</span><span class="tag cy">pass</span></div></div><div class="srow "><div class="d">S2</div><div class="nm"><b>An answer is what its document gives</b><span>0 answers that stand only on cited figures and exact steps were not what the problem&#39;s own document gives</span><span class="tag cy">pass</span></div></div><div class="srow "><div class="d">S3</div><div class="nm"><b>Nothing is cited that is not there</b><span>0 of 24 problems that must not be answered reached an answer; 24 stopped at the right figure with the right reason (100.0%)</span><span class="tag cy">pass</span></div></div><div class="srow "><div class="d">S4</div><div class="nm"><b>The citation check holds</b><span>0 of 13479 forged quotes bonded (0 that would have cited a figure wrongly, 0 outside the allowed form); 0 of 3180 honest quotes were refused; 0 of 1360 replies bonded where nothing can be cited; the two readers ruled differently on 0 of 27559 replies; 0 threw. 265 places that can be cited and 34 that cannot, seed 20261212</span><span class="tag cy">pass</span></div></div><div class="srow "><div class="d">S5</div><div class="nm"><b>The harnesses can find a leak</b><span>the citation check: 12 of 12 planted leaks found; the formula check: 12 of 12 planted leaks found; the solver: 12 of 12 planted leaks found</span><span class="tag cy">pass</span></div></div><div class="srow "><div class="d">S6</div><div class="nm"><b>The small model can read</b><span>255 of 256 figures that were in their documents were quoted so that they bonded (99.6%)</span><span class="tag cy">pass</span></div></div><div class="srow "><div class="d">S7</div><div class="nm"><b>Checked beats unchecked</b><span>one unchecked reply 23.6%, the lattice 96.5% of 144 problems; 105 only the lattice, 0 only the one reply, p = 4.93e-32</span><span class="tag cy">pass</span></div></div><div class="srow "><div class="d">S8</div><div class="nm"><b>A wrong source gives a wrong answer, and it is labelled</b><span>11 of 12 such problems reached an answer: 11 gave the document&#39;s answer, 11 differ from the true one, 11 are labelled grounded</span><span class="tag cy">pass</span></div></div><div class="srow "><div class="d">S9</div><div class="nm"><b>The formula check holds</b><span>0 of 1424 formulas that are a different rule bonded (0 different rules, 0 outside the allowed form); 0 of 432 honest formulas were refused; 0 near-misses passed a rule&#39;s tests; the two runners ruled differently on 0 of 2756 replies; 0 threw. 36 rules, seed 20261212. The limit, counted apart: 36 of 36 formulas built from the tests themselves bonded, as passing the tests allows</span><span class="tag cy">pass</span></div></div><div class="srow "><div class="d">S10</div><div class="nm"><b>The solver holds</b><span>1550 of 1550 claims had one verdict from both, or were refused by both (290 yes, 279 no, 235 it depends, 746 refused); they differed on 0; 0 threw. 63 questions, seed 20261212</span><span class="tag cy">pass</span></div></div><div class="srow "><div class="d">S11</div><div class="nm"><b>The small model can write a rule</b><span>24 of 24 formulas the model wrote passed their rule&#39;s tests (100.0%)</span><span class="tag cy">pass</span></div></div><div class="srow "><div class="d">S12</div><div class="nm"><b>The small model can write a claim</b><span>24 of 24 claims the model wrote were decided with the question&#39;s own verdict (100.0%); 0 were decided with another verdict, and are labelled as such</span><span class="tag cy">pass</span></div></div></div>
+  </div>
+</section>
+
+<section class="pad proof" id="glass">
+  <div class="wrap">
+    <h2 class="hl reveal"><span class="a">Don't trust us.</span><br><span class="b">Re-run it.</span></h2>
+    <p class="sub2 reveal">Grow it on your own graphics chip, or play the sealed record. Nothing leaves your browser.</p>
+    <div class="glass legacy reveal" style="text-align:left">
+      <canvas id="gem" role="img" aria-label="A crystal of octahedra. A hard, bright facet is a step proven by exact arithmetic. A soft, warm facet is grounded: it is, or stands on, a figure quoted from a document. An orchid facet is proven against its tests: it is, or stands on, a formula the model wrote that passed them. A leaf-green facet is proven within its encoding: a claim the solver decided as the model wrote it down. Dark facets were never reached."></canvas>
+      <div class="row"><button id="grow" type="button">Grow it here</button><button id="play" class="quiet" type="button">Play the record</button><span class="hint">or press Enter · the model is about 880 MB, once</span></div>
   <p id="status" aria-live="polite">Showing the published sealed run: Llama 3.2 1B, 4-bit, in a browser tab (WebLLM 0.2.79), intel gen-12lp, 2026-11-24.</p>
   <div class="ledger" aria-label="What is on the glass">
     <span><b data-bind="n.cited">255</b>figures cited</span>
@@ -103,13 +255,18 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
   </div>
   <p class="key" aria-label="What each material means"><span><i style="background:var(--lume)"></i>proven: exact arithmetic</span><span><i style="background:var(--amber)"></i>grounded: a figure from a document</span><span><i style="background:var(--orchid)"></i>proven against its tests</span><span><i style="background:var(--leaf)"></i>proven within its encoding</span></p>
   <label class="scrub"><span>Depth</span><input type="range" id="scrub" min="0" max="1000" value="1000" aria-label="Travel through the growth, from the seed to the last facet"></label>
-  <p class="tags">Don't trust us. Re-run it. · A small model that says "I can't tell." · Nothing leaves your browser.</p>
+    </div>
+    <div id="tip" role="status" aria-live="polite"></div>
+    <details class="honest reveal"><summary>What this does — and doesn't — claim</summary><div class="in"><p><b>Grounded is not true.</b> A cited figure is as true as its document. It is labelled grounded, never proven.</p><p><b>Narrow on purpose.</b> Figures, rules, simple claims and sums. Where no check can say yes, there is no answer.</p><p><b>One sealed run.</b> One model, problems made by code. It says nothing about messy documents.</p><p>The full list is below, under "What this does not prove".</p></div></details>
+  </div>
 </section>
-<div id="tip" role="status" aria-live="polite"></div>
 
-<section class="panel" id="start">
-  <h2>Start <em>here</em></h2>
-  <p><b>The words this page uses.</b> A <b>facet</b> is one piece of an answer on the glass: a figure, a rule, a claim, or one step of a sum. A facet <b>bonds</b> when its check passes; one that cannot is refused, and the reason is kept. <b>Proven</b>: worked out by code in exact fractions, with no rounding: nothing to take on trust. <b>Grounded</b>: a figure copied from a document, as true as the document. <b>Proven against its tests</b>: a formula that passed every test of its rule. <b>Proven within its encoding</b>: a claim decided exactly, as the model wrote it down. A claim's <b>bar</b> is the result it had to reach, written down before the sealed run. The <b>sealed run</b> is the measurement: problems the build was never tuned on, every file that could change a result frozen first. The <b>lattice</b> is the whole checked process (copy, write, decide, work out), set against <b>one unchecked reply</b>: the same model asked once, with nothing checking it. A <b>harness</b> is code that attacks a check with forged replies; a <b>second reader</b> is a separate piece of code, written apart from the check, that must rule the same way on every reply; a <b>planted leak</b> is a flaw put into a copy of a check on purpose, to show the harness finds it.</p>
+<section class="pad alt" id="full">
+  <div class="wrap">
+    <p class="kline reveal">Everything, in full</p>
+    <h2 class="claim reveal">Every detail is still here. <b>One click away.</b></h2>
+    <details class="honest reveal" style="max-width:none"><summary>What it is, in one paragraph</summary><div class="in legacy"><p class="lead">A small AI model reads documents, writes rules as formulas and claims as comparisons, and works out answers. Four checks, one for each kind of work: a figure it cites must be in the document, a formula must pass its rule's tests, a claim is decided by a solver, a step is checked by exact arithmetic. Every facet is drawn in the material of what it stands on, and no answer is called truer than its weakest check.</p></div></details>
+    <details class="honest reveal" id="start" style="max-width:none"><summary>Start here</summary><div class="in legacy"><p><b>The words this page uses.</b> A <b>facet</b> is one piece of an answer on the glass: a figure, a rule, a claim, or one step of a sum. A facet <b>bonds</b> when its check passes; one that cannot is refused, and the reason is kept. <b>Proven</b>: worked out by code in exact fractions, with no rounding: nothing to take on trust. <b>Grounded</b>: a figure copied from a document, as true as the document. <b>Proven against its tests</b>: a formula that passed every test of its rule. <b>Proven within its encoding</b>: a claim decided exactly, as the model wrote it down. A claim's <b>bar</b> is the result it had to reach, written down before the sealed run. The <b>sealed run</b> is the measurement: problems the build was never tuned on, every file that could change a result frozen first. The <b>lattice</b> is the whole checked process (copy, write, decide, work out), set against <b>one unchecked reply</b>: the same model asked once, with nothing checking it. A <b>harness</b> is code that attacks a check with forged replies; a <b>second reader</b> is a separate piece of code, written apart from the check, that must rule the same way on every reply; a <b>planted leak</b> is a flaw put into a copy of a check on purpose, to show the harness finds it.</p>
   <ol>
     <li><b>Look.</b> Drag the crystal to turn it. Hard, bright facets are proven. Soft, warm facets are grounded. Orchid facets stand on a formula that passed its tests; leaf-green ones on a claim the solver decided. Point at any facet to read the step, how true it is, and what it stands on; for a cited figure, the words of the document it was quoted from.</li>
     <li><b>Grow one yourself.</b> Press <b>Grow it here</b>, or Enter. The model runs in this tab on your own graphics chip and works through twelve problems, one of each kind, while you watch. <span id="device" class="small">Checking this device…</span></li>
@@ -129,12 +286,8 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
     <li><b>Check the record.</b> <button id="rejudge" class="quiet" type="button">Grow the published run again, with no model</button> <span id="rejudgeOut" class="small" aria-live="polite"></span></li>
     <li><b>Attack all four checks yourself.</b> <button id="attack" class="quiet" type="button">Make a new attack</button> <span id="attackOut" class="small" aria-live="polite"></span></li>
     <li><b>Run the whole measurement.</b> <select id="runWhich" aria-label="Which set"><option value="sample">Sample: 12 problems</option><option value="dev">Dev: the 60 problems the build was tuned on</option><option value="sealed">Sealed: the 144 problems the claims are judged on</option></select> <button id="run" class="quiet" type="button">Run it</button> <button id="save" class="quiet" type="button" disabled>Save my run</button> <span id="runOut" class="small" aria-live="polite"></span></li>
-  </ol>
-</section>
-
-<section class="panel" id="how">
-  <h2>How it <em>works</em></h2>
-  <p>The reach of the whole engine is exactly the reach of its checks. So each kind of truth gets its own check, and every facet of the crystal carries the kind of check that made it and how much that check proves. There are four, and the model does the work for each; code only checks it.</p>
+  </ol></div></details>
+    <details class="honest reveal" id="how" style="max-width:none"><summary>How it works</summary><div class="in legacy"><p>The reach of the whole engine is exactly the reach of its checks. So each kind of truth gets its own check, and every facet of the crystal carries the kind of check that made it and how much that check proves. There are four, and the model does the work for each; code only checks it.</p>
   <svg class="law" viewBox="0 0 760 230" role="img" aria-labelledby="lawT"><title id="lawT">A cited figure is grounded. A step worked out from it is grounded too, and so is the answer. A step worked out from nothing but numbers is proven.</title>
     <g fill="none" stroke="rgba(255,191,120,.6)"><rect x="10" y="20" width="200" height="52"/><rect x="280" y="20" width="200" height="52"/><rect x="550" y="20" width="200" height="52"/><path d="M210 46H280M480 46H550"/></g>
     <g fill="none" stroke="rgba(94,242,228,.6)"><rect x="280" y="140" width="200" height="52"/><rect x="550" y="140" width="200" height="52"/><path d="M480 166H550"/></g>
@@ -154,30 +307,18 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
     <li><b>Work out.</b> With the figures cited and the calculation known, it is grown as The Crystal grows one: one small step at a time, each reply checked by exact arithmetic. A step the model gets wrong is split into smaller steps it is asked again; a step that is already as small as steps go, and still wrong, is dropped (it dissolves), and the problem gets no answer rather than a wrong one. <span data-bind="h.seed">It starts from 419 steps already checked, from sjgant80-hub/the-crystal data/runs/sealed.json at 71274e4.</span></li>
     <li><b>Label.</b> Every facet carries how true it is. The law is one line: a facet is only as strong as the weakest bond it stands on. A sum worked out exactly from a cited figure is grounded. A sum worked out from a tested formula is proven against its tests. No two strengths are ever counted or drawn as the same thing.</li>
   </ol>
-  <p><span data-bind="h.law">In the published sealed run: of the answers, 79 are grounded, 12 proven against their tests, 12 proven within their encoding and 12 proven; 0 were labelled stronger than what they stand on. The crystal holds 425 grounded bonds, 59 proven against tests, 12 proven within an encoding and 26 proven.</span></p>
-</section>
-
-<section class="panel" id="set">
-  <h2>The <em>checks</em></h2>
-  <p>Four kinds of check are in the design, and all four are built here. Each was added only together with the harness that attacks it, and each harness was turned on readers with a leak planted in them before anything was grown on its check.</p>
+  <p><span data-bind="h.law">In the published sealed run: of the answers, 79 are grounded, 12 proven against their tests, 12 proven within their encoding and 12 proven; 0 were labelled stronger than what they stand on. The crystal holds 425 grounded bonds, 59 proven against tests, 12 proven within an encoding and 26 proven.</span></p></div></details>
+    <details class="honest reveal" id="set" style="max-width:none"><summary>The checks</summary><div class="in legacy"><p>Four kinds of check are in the design, and all four are built here. Each was added only together with the harness that attacks it, and each harness was turned on readers with a leak planted in them before anything was grown on its check.</p>
   <div class="wrap" id="verifierTable"><table><thead><tr><th>the check</th><th>what it asks, and what it stands on</th><th>what a bond proves</th><th>what it put out</th></tr></thead><tbody><tr><td><b>Computational</b><br><span class="small">vendor/crystal/src/bond.mjs · <span class="pass">built</span></span></td><td>Does this step follow?<br><span class="small">Stands on: the steps the model is asked and gets exactly right. When it cannot: the step is split smaller, or dissolves. Attacked by vendor/crystal/src/fuzz.mjs. Its limit: one reply, 200 characters at most; attacked with 108 replies a step.</span></td><td><span class="pass">proven</span></td><td><span class="small">steps the model stated that bonded</span><br><b class="num">214 of 256 (83.6%)</b><br><span class="small">forged replies that bonded</span><br><b class="num">0 of 11547 (0.0%)</b><br><span class="small">honest replies refused</span><br><b class="num">0 of 3072 (0.0%)</b><br><span class="small">replies its two readers ruled differently on</span><br><b class="num">0 of 26907 (0.0%)</b><br><span class="small">planted leaks its harness found</span><br><b class="num">12 of 12 (100.0%)</b></td></tr><tr><td><b>Evidential</b><br><span class="small">src/cite.mjs · <span class="pass">built</span></span></td><td>Is this figure in the source, where the source says it is?<br><span class="small">Stands on: the source documents. When it cannot: I can&#39;t find that in your documents. Attacked by src/citefuzz.mjs. Its limit: one quote, 300 characters at most, asked once; attacked with up to 102 replies a figure.</span></td><td><span class="soft">grounded</span></td><td><span class="small">figures the model quoted that bonded</span><br><b class="num">255 of 280 (91.1%)</b><br><span class="small">figures not cited, by the reason</span><br><b class="num">a quote of another line 1, more than one figure there 12, not in the document 12</b><br><span class="small">forged quotes that bonded</span><br><b class="num">0 of 13479 (0.0%)</b><br><span class="small">honest quotes refused</span><br><b class="num">0 of 3180 (0.0%)</b><br><span class="small">replies that bonded where nothing can be cited</span><br><b class="num">0 of 1360 (0.0%)</b><br><span class="small">replies its two readers ruled differently on</span><br><b class="num">0 of 27559 (0.0%)</b><br><span class="small">planted leaks its harness found</span><br><b class="num">12 of 12 (100.0%)</b></td></tr><tr><td><b>Logical</b><br><span class="small">src/logic.mjs · <span class="pass">built</span></span></td><td>Does this claim follow from what is given?<br><span class="small">Stands on: the claim as it was written for the solver, and what is given. When it cannot: the claim cannot be decided as written. Attacked by src/logicfuzz.mjs. Its limit: one comparison, 140 characters at most, each quantity once; a small exact solver, not a general one; attacked with 24 claims a question.</span></td><td><span class="encoded">proven within its encoding</span></td><td><span class="small">claims the model wrote that were decided</span><br><b class="num">24 of 24 (100.0%)</b><br><span class="small">of those, with the question&#39;s own verdict</span><br><b class="num">24 of 24 (100.0%)</b><br><span class="small">claims not decided, by the reason</span><br><b class="num">none</b><br><span class="small">claims its solver and second procedure decided differently</span><br><b class="num">0 of 1550 (0.0%)</b><br><span class="small">planted leaks its harness found</span><br><b class="num">12 of 12 (100.0%)</b></td></tr><tr><td><b>Executable</b><br><span class="small">src/formula.mjs · <span class="pass">built</span></span></td><td>Does this formula pass the rule&#39;s tests?<br><span class="small">Stands on: the rule&#39;s tests. When it cannot: it fails a test. Attacked by src/formulafuzz.mjs. Its limit: one formula, 120 characters at most, four signs and brackets; at least 4 tests a rule; attacked with 78 replies a rule.</span></td><td><span class="tested">proven against its tests</span></td><td><span class="small">formulas the model wrote that passed their tests</span><br><b class="num">24 of 24 (100.0%)</b><br><span class="small">formulas refused, by the reason</span><br><b class="num">none</b><br><span class="small">different rules that bonded</span><br><b class="num">0 of 1424 (0.0%)</b><br><span class="small">honest formulas refused</span><br><b class="num">0 of 432 (0.0%)</b><br><span class="small">near-misses a rule&#39;s tests let through</span><br><b class="num">0</b><br><span class="small">replies its two runners ruled differently on</span><br><b class="num">0 of 2756 (0.0%)</b><br><span class="small">the limit: formulas built from the tests that bonded</span><br><b class="num">36 of 36 (100.0%)</b><br><span class="small">planted leaks its harness found</span><br><b class="num">12 of 12 (100.0%)</b></td></tr></tbody></table><p class="small">The model's counts are from the published sealed run. The attacks are worked out on this page each time it loads, on every step, figure, rule and claim that run asked for: 58772 replies, seed 20261212.</p></div>
-  <p class="small">Each check is attacked on this page every time it loads: forged replies made many ways, honest replies written every allowed way, and a second reader written apart from the check that must agree with it on every reply. The same harness is then turned on readers with a leak planted in each, to show it can find one. One of those is DocDec's own span check, exactly as it shipped: it lets a figure cut out of a longer one through, which is why it is not the check used here. The logical check is a small exact solver written for this build, not a general one such as Z3: it decides one kind of claim completely (a sum of products and quotients, each quantity once, each known exactly or between two figures) and refuses every other kind.</p>
-</section>
-
-<section class="panel" id="numbers">
-  <h2>The <em>numbers</em></h2>
-  <p class="small" data-bind="h.source">From the published sealed run: Llama 3.2 1B, 4-bit, in a browser tab (WebLLM 0.2.79), intel gen-12lp, 2026-11-24; 4234 s in 1 sitting; 0 network requests while it worked.</p>
+  <p class="small">Each check is attacked on this page every time it loads: forged replies made many ways, honest replies written every allowed way, and a second reader written apart from the check that must agree with it on every reply. The same harness is then turned on readers with a leak planted in each, to show it can find one. One of those is DocDec's own span check, exactly as it shipped: it lets a figure cut out of a longer one through, which is why it is not the check used here. The logical check is a small exact solver written for this build, not a general one such as Z3: it decides one kind of claim completely (a sum of products and quotients, each quantity once, each known exactly or between two figures) and refuses every other kind.</p></div></details>
+    <details class="honest reveal" id="numbers" style="max-width:none"><summary>The numbers</summary><div class="in legacy"><p class="small" data-bind="h.source">From the published sealed run: Llama 3.2 1B, 4-bit, in a browser tab (WebLLM 0.2.79), intel gen-12lp, 2026-11-24; 4234 s in 1 sitting; 0 network requests while it worked.</p>
   <div class="wrap" id="claimsTable"><table><thead><tr><th>claim</th><th>the bar: what it had to reach, written down before the run</th><th>on the sealed run</th><th></th></tr></thead><tbody><tr><td><b>S1</b> Every answer is labelled with what it stands on</td><td>every sealed answer is labelled with the weakest kind of bond it stands on: none is labelled stronger, so grounded is never called proven; and every answer to a problem with no document, no rule and no claim is labelled proven</td><td>115 problems reached an answer: 79 grounded, 12 proven against its tests, 12 proven within its encoding, 12 proven, 0 none of these. 0 were labelled stronger than what they stand on; 12 problems with no document, rule or claim were answered</td><td><span class="pass">PASS</span></td></tr><tr><td><b>S2</b> An answer is what its document gives</td><td>no sealed problem whose bonds are all cited figures and exact steps reaches an answer other than the one its own document gives: none</td><td>0 answers that stand only on cited figures and exact steps were not what the problem&#39;s own document gives</td><td><span class="pass">PASS</span></td></tr><tr><td><b>S3</b> Nothing is cited that is not there</td><td>no sealed problem whose document does not state a needed figure, or states it two ways, reaches an answer; and at least 9 in 10 of them stop at that figure with the right reason</td><td>0 of 24 problems that must not be answered reached an answer; 24 stopped at the right figure with the right reason (100.0%)</td><td><span class="pass">PASS</span></td></tr><tr><td><b>S4</b> The citation check holds</td><td>no forged quote bonds, of every forgery made for every figure the sealed run asked for and for the fixed set of hard cases; no honest quote is refused; nothing bonds where the document cannot be cited; the bond-check and the second reader never rule differently on a reply; and nothing throws</td><td>0 of 13479 forged quotes bonded (0 that would have cited a figure wrongly, 0 outside the allowed form); 0 of 3180 honest quotes were refused; 0 of 1360 replies bonded where nothing can be cited; the two readers ruled differently on 0 of 27559 replies; 0 threw. 265 places that can be cited and 34 that cannot, seed 20261212</td><td><span class="pass">PASS</span></td></tr><tr><td><b>S5</b> The harnesses can find a leak</td><td>the harness that attacks each of the three checks this build adds finds the leak in every reader, runner and solver that has one planted in it</td><td>the citation check: 12 of 12 planted leaks found; the formula check: 12 of 12 planted leaks found; the solver: 12 of 12 planted leaks found</td><td><span class="pass">PASS</span></td></tr><tr><td><b>S6</b> The small model can read</td><td>of the figures that are in their documents, the model&#39;s quote bonds at least 8 in 10</td><td>255 of 256 figures that were in their documents were quoted so that they bonded (99.6%)</td><td><span class="pass">PASS</span></td></tr><tr><td><b>S7</b> Checked beats unchecked</td><td>the lattice brings more of the sealed problems out as they should come out than the same model does in one unchecked reply, by an exact two-sided McNemar test, p &lt; 0.05</td><td>one unchecked reply 23.6%, the lattice 96.5% of 144 problems; 105 only the lattice, 0 only the one reply, p = 4.93e-32</td><td><span class="pass">PASS</span></td></tr><tr><td><b>S8</b> A wrong source gives a wrong answer, and it is labelled</td><td>every sealed problem whose document misstates a figure, and that reaches an answer, gives the document&#39;s answer and not the true one, and is labelled grounded</td><td>11 of 12 such problems reached an answer: 11 gave the document&#39;s answer, 11 differ from the true one, 11 are labelled grounded</td><td><span class="pass">PASS</span></td></tr><tr><td><b>S9</b> The formula check holds</td><td>no formula that is a different rule bonds, of every forgery made for every rule the sealed problems asked for and for the twelve rules every attack keeps; no honest formula is refused; no rule&#39;s tests let a near-miss through; the check and the second runner never rule differently on a reply; and nothing throws</td><td>0 of 1424 formulas that are a different rule bonded (0 different rules, 0 outside the allowed form); 0 of 432 honest formulas were refused; 0 near-misses passed a rule&#39;s tests; the two runners ruled differently on 0 of 2756 replies; 0 threw. 36 rules, seed 20261212. The limit, counted apart: 36 of 36 formulas built from the tests themselves bonded, as passing the tests allows</td><td><span class="pass">PASS</span></td></tr><tr><td><b>S10</b> The solver holds</td><td>on every claim the sealed run&#39;s model wrote, every sealed question&#39;s own claim, and every claim made to trip a solver for those questions and for the hard ones, the solver and a second procedure written apart from it give the same verdict or both refuse; and nothing throws</td><td>1550 of 1550 claims had one verdict from both, or were refused by both (290 yes, 279 no, 235 it depends, 746 refused); they differed on 0; 0 threw. 63 questions, seed 20261212</td><td><span class="pass">PASS</span></td></tr><tr><td><b>S11</b> The small model can write a rule</td><td>of the rules the sealed problems asked for, the model&#39;s formula passes the rule&#39;s tests at least 7 in 10</td><td>24 of 24 formulas the model wrote passed their rule&#39;s tests (100.0%)</td><td><span class="pass">PASS</span></td></tr><tr><td><b>S12</b> The small model can write a claim</td><td>of the claims the sealed problems asked for, the model&#39;s comparison is decided and its verdict is the question&#39;s own at least 7 in 10</td><td>24 of 24 claims the model wrote were decided with the question&#39;s own verdict (100.0%); 0 were decided with another verdict, and are labelled as such</td><td><span class="pass">PASS</span></td></tr></tbody></table></div>
   <details><summary>What the model read and wrote, and what it did when the figure was not there</summary><div id="reads"><p>Of 256 figures that were in their documents, the model's quote bonded 255 (99.6%). Of 24 figures that could not be cited (not stated, or stated two ways), the model offered a quote 24 times (it is asked to copy a line, and is never asked whether the figure is there: that is for the check to say); <b class="pass">0 of those bonded</b>.</p><table><thead><tr><th>why a figure did not bond</th><th>times</th></tr></thead><tbody><tr><td>more than one figure there</td><td class="num">12</td></tr><tr><td>not in the document</td><td class="num">12</td></tr><tr><td>a quote of another line</td><td class="num">1</td></tr></tbody></table><p class="small">Each of the 24 figures refused as "not in the document" or "more than one figure there" is the one its problem was built without, or with two ways: there, refusing is the right outcome.</p><p>Of 24 rules the model was asked to write as a formula, 24 passed their tests. Of 24 claims it was asked to write down, 24 could be decided, and 24 of those gave the question's own verdict; <b class="pass">0 were decided exactly, about a claim the model wrote down wrongly</b>, and carry the label that says so.</p><table><thead><tr><th>why a rule or a claim did not bond</th><th>times</th></tr></thead><tbody><tr><td>none: every rule and claim asked for bonded</td><td class="num">–</td></tr></tbody></table><table><thead><tr><th>kind of problem</th><th>problems</th><th>reached an answer</th><th>came out as it should</th></tr></thead><tbody><tr><td>computed</td><td class="num">12</td><td class="num">12</td><td class="num">12</td></tr><tr><td>cited</td><td class="num">12</td><td class="num">12</td><td class="num">12</td></tr><tr><td>mixed</td><td class="num">36</td><td class="num">33</td><td class="num">33</td></tr><tr><td>absent</td><td class="num">12</td><td class="num">0</td><td class="num">12</td></tr><tr><td>conflict</td><td class="num">12</td><td class="num">0</td><td class="num">12</td></tr><tr><td>misstated</td><td class="num">12</td><td class="num">11</td><td class="num">11</td></tr><tr><td>coded</td><td class="num">12</td><td class="num">12</td><td class="num">12</td></tr><tr><td>coded-cited</td><td class="num">12</td><td class="num">11</td><td class="num">11</td></tr><tr><td>decided</td><td class="num">12</td><td class="num">12</td><td class="num">12</td></tr><tr><td>decided-cited</td><td class="num">12</td><td class="num">12</td><td class="num">12</td></tr></tbody></table><p>The 5 that did not come out as they should, and where each stopped:</p><ul><li>coded-cited:20261212-11 (coded-cited): the model gave the step <code>102 ÷ 34 = 3.02641875</code>; there is no smaller step for dividing, so it dissolved. It was left with no answer, rather than given a wrong one.</li><li>mixed:20261212-12 (mixed): the figure for "price" did not bond: a quote of another line. It was left with no answer, rather than given a wrong one.</li><li>mixed:20261212-59 (mixed): the model gave the step <code>93 ÷ 31 = 3.0512570645161</code>; there is no smaller step for dividing, so it dissolved. It was left with no answer, rather than given a wrong one.</li><li>mixed:20261212-79 (mixed): the model gave the step <code>51 ÷ 17 = 3.0588235433832941</code>; there is no smaller step for dividing, so it dissolved. It was left with no answer, rather than given a wrong one.</li><li>misstated:20261212-107 (misstated): the model gave the step <code>4270 + 8 = 4288</code>; it was already the smallest step, so it dissolved. It was left with no answer, rather than given a wrong one.</li></ul><p class="small">For "absent" and "conflict" the right outcome is no answer, stopped at the right figure for the right reason. From the published sealed run.</p></div></details>
   <details><summary>The citation check, attacked</summary><div class="wrap" id="attackTable"><p>27559 replies were put to the citation check, on 265 figures that can be cited and 34 that cannot (every figure the published sealed run asked for, and 19 hard cases kept for every attack: a figure with a sign, a leading point, a word like million after it, a range, a label of each kind), from seed 20261212. <b class="pass">0 of 13479 forged quotes bonded.</b> <b class="pass">0 of 3180 honest quotes were refused.</b> <b class="pass">0 of 1360 replies bonded where nothing can be cited.</b> The check and the second reader ruled differently on <b class="pass">0</b> replies, and 0 threw. 255 of 9540 noise replies bonded, each because the noise had left an honest quote: both readers said so.</p><table><thead><tr><th>how the quote was forged</th><th>a bond would be</th><th>tried</th><th>bonded</th></tr></thead><tbody><tr><td>the figure cut short</td><td>a figure cited wrongly</td><td class="num">764</td><td class="num">0</td></tr><tr><td>the figure with its front cut off</td><td>a figure cited wrongly</td><td class="num">795</td><td class="num">0</td></tr><tr><td>a word cut in two</td><td>a figure cited wrongly</td><td class="num">805</td><td class="num">0</td></tr><tr><td>the figure changed</td><td>a figure cited wrongly</td><td class="num">771</td><td class="num">0</td></tr><tr><td>another line&#39;s figure in this line</td><td>a figure cited wrongly</td><td class="num">772</td><td class="num">0</td></tr><tr><td>a quote of another line</td><td>a figure cited wrongly</td><td class="num">797</td><td class="num">0</td></tr><tr><td>two lines stitched</td><td>a figure cited wrongly</td><td class="num">781</td><td class="num">0</td></tr><tr><td>the figure alone</td><td>a figure cited wrongly</td><td class="num">814</td><td class="num">0</td></tr><tr><td>the line with its figure left out</td><td>a figure cited wrongly</td><td class="num">783</td><td class="num">0</td></tr><tr><td>none, when it is there</td><td>a figure cited wrongly</td><td class="num">788</td><td class="num">0</td></tr><tr><td>the line in other letters</td><td>a figure cited wrongly</td><td class="num">831</td><td class="num">0</td></tr><tr><td>words round the quote</td><td>a figure cited wrongly</td><td class="num">800</td><td class="num">0</td></tr><tr><td>a second line with it</td><td>a figure cited wrongly</td><td class="num">828</td><td class="num">0</td></tr><tr><td>the figure twice</td><td>a figure cited wrongly</td><td class="num">800</td><td class="num">0</td></tr><tr><td>another clause&#39;s number on the line</td><td>a figure cited wrongly</td><td class="num">769</td><td class="num">0</td></tr><tr><td>the line&#39;s own number cut in two</td><td>a figure cited wrongly</td><td class="num">10</td><td class="num">0</td></tr><tr><td>quote marks that do not match</td><td>outside the allowed form</td><td class="num">796</td><td class="num">0</td></tr><tr><td>too long, or built to break a reader</td><td>outside the allowed form</td><td class="num">775</td><td class="num">0</td></tr></tbody></table><h3>Some of what it tried</h3><table><thead><tr><th>made as</th><th>the reply, to "the gate fee"</th><th>bonded</th></tr></thead><tbody><tr><td>the figure cut short</td><td><code>&quot;The gate fee is 2&quot;</code></td><td>no</td></tr><tr><td>the figure with its front cut off</td><td><code>&quot;0 pounds.&quot;</code></td><td>no</td></tr><tr><td>a word cut in two</td><td><code>&quot;e gate fee is 20 pounds.&quot;</code></td><td>no</td></tr><tr><td>the figure changed</td><td><code>&quot;The gate fee is 19 pounds.&quot;</code></td><td>no</td></tr><tr><td>another line&#39;s figure in this line</td><td><code>&quot;The gate fee is 1,250.50 pounds.&quot;</code></td><td>no</td></tr><tr><td>a quote of another line</td><td><code>&quot;The bulk price is 1.250,50 euros.&quot;</code></td><td>no</td></tr><tr><td>two lines stitched</td><td><code>&quot;The rebate20 pounds.&quot;</code></td><td>no</td></tr><tr><td>the figure alone</td><td><code>&quot;20 pounds&quot;</code></td><td>no</td></tr><tr><td>honest</td><td><code>&quot; ‘11. The gate fee is 20 pounds.’&quot;</code></td><td>yes</td></tr><tr><td>honest</td><td><code>&quot;&#39;gate fee is 20 pounds&#39;.\n&quot;</code></td><td>yes</td></tr><tr><td>honest</td><td><code>&quot; “gate fee is 20 pounds.” &quot;</code></td><td>yes</td></tr><tr><td>honest</td><td><code>&quot;‘gate fee is 20 pounds.’.&quot;</code></td><td>yes</td></tr><tr><td>honest</td><td><code>&quot; \&quot;gate fee is 20\&quot;&quot;</code></td><td>yes</td></tr><tr><td>honest</td><td><code>&quot; The gate fee is 20\n&quot;</code></td><td>yes</td></tr><tr><td>honest</td><td><code>&quot;\nThe gate fee is 20 pounds.. &quot;</code></td><td>yes</td></tr><tr><td>honest</td><td><code>&quot;“gate fee is 20 pounds.”&quot;</code></td><td>yes</td></tr><tr><td>noise</td><td><code>&quot;The gate feeis 20 pouds.&quot;</code></td><td>no</td></tr><tr><td>noise</td><td><code>&quot; The g1ate feeis 20 opunds.&quot;</code></td><td>no</td></tr><tr><td>noise</td><td><code>&quot;\&quot;3ate fee is 20\&quot;.\n&quot;</code></td><td>no</td></tr><tr><td>noise</td><td><code>&quot; &#39;gate fee is 20&#39;.. &quot;</code></td><td>no</td></tr><tr><td>noise</td><td><code>&quot; &#39;The  gate fee iis 20 pounds&#39;.\n&quot;</code></td><td>no</td></tr><tr><td>noise</td><td><code>&quot;gate fee is 20 poundds..&quot;</code></td><td>no</td></tr><tr><td>noise</td><td><code>&quot; ‘gate fee is 20 pounds.’&quot;</code></td><td>yes</td></tr><tr><td>noise</td><td><code>&quot; ‘gate eTeis 20 pounds.’.&quot;</code></td><td>no</td></tr></tbody></table><h3>Can the harness find a leak at all?</h3><p>The same harness was turned on 12 readers that each have one leak planted in them. <b class="pass">It found 12 of 12.</b> The first is DocDec's own span check, exactly as it shipped.</p><table><thead><tr><th>the planted reader</th><th>found</th><th>the first reply that gave it away</th></tr></thead><tbody><tr><td>finds the quote wherever its letters are (DocDec&#39;s span check, as vendored)</td><td class="pass">yes</td><td><code>&quot;The gate fee is 2&quot;</code> <span class="small">(the figure cut short)</span></td></tr><tr><td>does not mind capitals</td><td class="pass">yes</td><td><code>&quot;by rule v1.2 the levy is 5 pounds.&quot;</code> <span class="small">(the line in other letters)</span></td></tr><tr><td>takes a quote of any line</td><td class="pass">yes</td><td><code>&quot;The reserve is (1,250.50).&quot;</code> <span class="small">(a quote of another line)</span></td></tr><tr><td>does not look for a second figure</td><td class="pass">yes</td><td><code>&quot;\&quot;The tariff is 12 pounds; the tariff is 12 pounds.\&quot;&quot;</code> <span class="small">(more than one figure there)</span></td></tr><tr><td>reads a figure whatever touches it</td><td class="pass">yes</td><td><code>&quot;The credit note is -40 pounds&quot;</code> <span class="small">(no figure there)</span></td></tr><tr><td>takes the figure when the quote does not say what it is the figure of</td><td class="pass">yes</td><td><code>&quot;20 pounds&quot;</code> <span class="small">(the figure alone)</span></td></tr><tr><td>takes the line&#39;s figure when the quote holds none</td><td class="pass">yes</td><td><code>&quot;The gate fee is 2&quot;</code> <span class="small">(the figure cut short)</span></td></tr><tr><td>takes any clause number with the line</td><td class="pass">yes</td><td><code>&quot;1. The gate fee is 20 pounds.&quot;</code> <span class="small">(the line&#39;s own number cut in two)</span></td></tr><tr><td>reads the first line of the reply only</td><td class="pass">yes</td><td><code>&quot;The gate fee is 20 pounds.\nThe margin is 0.75 of cost.&quot;</code> <span class="small">(a second line with it)</span></td></tr><tr><td>lets words round the quote go</td><td class="pass">yes</td><td><code>&quot;The document says: The gate fee is 20 pounds.&quot;</code> <span class="small">(words round the quote)</span></td></tr><tr><td>refuses everything</td><td class="pass">yes</td><td><code>&quot; ‘11. The gate fee is 20 pounds.’&quot;</code> <span class="small">(honest)</span></td></tr><tr><td>throws on a reply it cannot read</td><td class="pass">yes</td><td><code>&quot;.stinu 700 si atouq ehT\n.tsoc fo 57.0 si nigram ehT\n.)05.052,1( si evreser ehT\n.%5.21 si etaber ehT\n.7£ si egrahcrus ehT\n.sdnuop 5 si yvel eht 2.1v elur yB\n.sdn&quot;</code> <span class="small">(no figure there)</span></td></tr></tbody></table></div></details>
   <details><summary>The formula check, attacked, and its limit shown</summary><div class="wrap" id="ruleAttack"><p>2756 formulas were put to the formula check, on 36 rules (every rule the published sealed run asked for, and the 12 rules kept for every attack), from seed 20261212. <b class="pass">0 of 1424 formulas that are a different rule bonded.</b> <b class="pass">0 of 432 honest formulas were refused.</b> <b class="pass">0 near-misses passed a rule's tests.</b> The check and the second runner ruled differently on <b class="pass">0</b> replies, and 0 threw.</p><p><b class="tested">The limit, shown: 36 of 36 formulas built from a rule's own tests bonded.</b> Each is the rule plus a product that is nought at every test, so it passes every test and is a different rule everywhere else. That is what "proven against its tests" means, and why it is not "proven".</p><table><thead><tr><th>how the formula was forged</th><th>a bond would be</th><th>tried</th><th>bonded</th></tr></thead><tbody><tr><td>a near-miss: one step changed</td><td>a different rule passed</td><td class="num">97</td><td class="num">0</td></tr><tr><td>a near-miss: two steps changed</td><td>a different rule passed</td><td class="num">112</td><td class="num">0</td></tr><tr><td>the brackets moved</td><td>a different rule passed</td><td class="num">59</td><td class="num">0</td></tr><tr><td>a number that is the first test&#39;s result</td><td>a different rule passed</td><td class="num">113</td><td class="num">0</td></tr><tr><td>a difference too small for a float to see</td><td>a different rule passed</td><td class="num">108</td><td class="num">0</td></tr><tr><td>no value at any test</td><td>a different rule passed</td><td class="num">108</td><td class="num">0</td></tr><tr><td>a letter the rule does not have</td><td>a different rule passed</td><td class="num">101</td><td class="num">0</td></tr><tr><td>words with it</td><td>outside the allowed form</td><td class="num">117</td><td class="num">0</td></tr><tr><td>its answer written after it</td><td>outside the allowed form</td><td class="num">118</td><td class="num">0</td></tr><tr><td>a second line</td><td>outside the allowed form</td><td class="num">105</td><td class="num">0</td></tr><tr><td>marks round it</td><td>outside the allowed form</td><td class="num">106</td><td class="num">0</td></tr><tr><td>a product written without its sign, or with a letter for it</td><td>outside the allowed form</td><td class="num">74</td><td class="num">0</td></tr><tr><td>capitals, or other digits</td><td>outside the allowed form</td><td class="num">100</td><td class="num">0</td></tr><tr><td>too long, or built to break a reader</td><td>outside the allowed form</td><td class="num">106</td><td class="num">0</td></tr></tbody></table><h3>Some of what it tried</h3><table><thead><tr><th>made as</th><th>the formula, for "p × c"</th><th>bonded</th></tr></thead><tbody><tr><td>a near-miss: one step changed</td><td><code>&quot;c × c&quot;</code></td><td>no</td></tr><tr><td>a near-miss: two steps changed</td><td><code>&quot;c&quot;</code></td><td>no</td></tr><tr><td>a number that is the first test&#39;s result</td><td><code>&quot;880&quot;</code></td><td>no</td></tr><tr><td>a difference too small for a float to see</td><td><code>&quot;p × c + 1 ÷ 1000000000000000000000&quot;</code></td><td>no</td></tr><tr><td>no value at any test</td><td><code>&quot;p × c + 1 ÷ ((p - 55) × (p - 33) × (p - 31))&quot;</code></td><td>no</td></tr><tr><td>a letter the rule does not have</td><td><code>&quot;p × c + g&quot;</code></td><td>no</td></tr><tr><td>words with it</td><td><code>&quot;So p × c&quot;</code></td><td>no</td></tr><tr><td>its answer written after it</td><td><code>&quot;p × c = 880&quot;</code></td><td>no</td></tr><tr><td>honest</td><td><code>&quot;p × c&quot;</code></td><td>yes</td></tr><tr><td>honest</td><td><code>&quot;p × c + 0.\n&quot;</code></td><td>yes</td></tr><tr><td>honest</td><td><code>&quot;p × c. &quot;</code></td><td>yes</td></tr><tr><td>honest</td><td><code>&quot;\np×c\n&quot;</code></td><td>yes</td></tr><tr><td>honest</td><td><code>&quot; p × c.\n&quot;</code></td><td>yes</td></tr><tr><td>honest</td><td><code>&quot; 0 + c × p. &quot;</code></td><td>yes</td></tr><tr><td>honest</td><td><code>&quot; 1 × p × c.\n&quot;</code></td><td>yes</td></tr><tr><td>honest</td><td><code>&quot;\np × c\n&quot;</code></td><td>yes</td></tr><tr><td>noise</td><td><code>&quot;0+    ×c. &quot;</code></td><td>no</td></tr><tr><td>noise</td><td><code>&quot;\npc\n&quot;</code></td><td>no</td></tr><tr><td>noise</td><td><code>&quot;\np  * c &quot;</code></td><td>yes</td></tr><tr><td>noise</td><td><code>&quot;8c×p&quot;</code></td><td>no</td></tr><tr><td>noise</td><td><code>&quot;1 × p × 5c.&quot;</code></td><td>no</td></tr><tr><td>noise</td><td><code>&quot; 0* p.&quot;</code></td><td>no</td></tr><tr><td>noise</td><td><code>&quot;p ××ccc&quot;</code></td><td>no</td></tr><tr><td>noise</td><td><code>&quot;\nc ×  .p &quot;</code></td><td>no</td></tr><tr><td>limit</td><td><code>&quot;p × c + (p - 55) × (p - 33) × (p - 31)&quot;</code></td><td>yes</td></tr></tbody></table><h3>Can the harness find a leak at all?</h3><p>The same harness was turned on 12 runners that each have one leak planted in them. <b class="pass">It found 12 of 12.</b></p><table><thead><tr><th>the planted runner</th><th>found</th><th>the first reply that gave it away</th></tr></thead><tbody><tr><td>runs only the first test</td><td class="pass">yes</td><td><code>&quot;880&quot;</code> <span class="small">(a number that is the first test&#39;s result)</span></td></tr><tr><td>compares as floating-point numbers</td><td class="pass">yes</td><td><code>&quot;p × c + 1 ÷ 100000000000000000&quot;</code> <span class="small">(a difference too small for a float to see)</span></td></tr><tr><td>tests only where every letter is the same</td><td class="pass">yes</td><td><code>&quot;c × c&quot;</code> <span class="small">(a near-miss: one step changed)</span></td></tr><tr><td>lets a letter it does not know stand for nought</td><td class="pass">yes</td><td><code>&quot;p × c + g&quot;</code> <span class="small">(a letter the rule does not have)</span></td></tr><tr><td>reads the formula before an = sign</td><td class="pass">yes</td><td><code>&quot;p × c = 880&quot;</code> <span class="small">(its answer written after it)</span></td></tr><tr><td>counts a test with no value as passed</td><td class="pass">yes</td><td><code>&quot;p × c + 1 ÷ ((p - 55) × (p - 33) × (p - 31))&quot;</code> <span class="small">(no value at any test)</span></td></tr><tr><td>reads x as times</td><td class="pass">yes</td><td><code>&quot;p x c&quot;</code> <span class="small">(a product written without its sign, or with a letter for it)</span></td></tr><tr><td>reads a formula out of a sentence</td><td class="pass">yes</td><td><code>&quot;Here it is:\np × c&quot;</code> <span class="small">(a second line)</span></td></tr><tr><td>does not see brackets</td><td class="pass">yes</td><td><code>&quot;((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((p × c))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))&quot;</code> <span class="small">(too long, or built to break a reader)</span></td></tr><tr><td>checks only that the letters are the rule&#39;s</td><td class="pass">yes</td><td><code>&quot;p × c + 1 ÷ 1000000000000000000000&quot;</code> <span class="small">(a difference too small for a float to see)</span></td></tr><tr><td>refuses everything</td><td class="pass">yes</td><td><code>&quot;p × c&quot;</code> <span class="small">(honest)</span></td></tr><tr><td>throws on a reply it cannot read</td><td class="pass">yes</td><td><code>&quot;p × c ＋ 0&quot;</code> <span class="small">(capitals, or other digits)</span></td></tr></tbody></table></div></details>
   <details><summary>The solver, attacked</summary><div class="wrap" id="claimAttack"><p>1550 claims were put to the solver, on 63 questions (every claim the published sealed run asked for, as the question wrote it and as the model did, and 15 hard questions kept for every attack: ranges across nought, a quantity that takes away, a division by a range below nought, decimals a float cannot hold), from seed 20261212. Each question gets about 25 claims: its own, and others made to trip a solver or to be refused, listed below. A second procedure, written apart from the solver, worked the formula out at every corner: every mix of each quantity's lowest and highest value. <b class="pass">They differed on 0 of 1550.</b> Both gave yes 290 times, no 279, it depends 235, and both refused 746; 0 threw.</p><table><thead><tr><th>how the claim was made</th><th>both must</th><th>tried</th><th>differed</th></tr></thead><tbody><tr><td>the question&#39;s own claim</td><td>give one verdict</td><td class="num">63</td><td class="num">0</td></tr><tr><td>the figure on the edge of the range</td><td>give one verdict</td><td class="num">119</td><td class="num">0</td></tr><tr><td>the figure just inside or outside the edge</td><td>give one verdict</td><td class="num">123</td><td class="num">0</td></tr><tr><td>the figure written first</td><td>give one verdict</td><td class="num">131</td><td class="num">0</td></tr><tr><td>the relation turned</td><td>give one verdict</td><td class="num">132</td><td class="num">0</td></tr><tr><td>a figure far outside the range</td><td>give one verdict</td><td class="num">115</td><td class="num">0</td></tr><tr><td>a claim made at random on the same quantities</td><td>give one verdict</td><td class="num">123</td><td class="num">0</td></tr><tr><td>a letter used twice</td><td>refuse it</td><td class="num">128</td><td class="num">0</td></tr><tr><td>no quantity at all</td><td>refuse it</td><td class="num">123</td><td class="num">0</td></tr><tr><td>a division by what could be nought</td><td>refuse it</td><td class="num">116</td><td class="num">0</td></tr><tr><td>two comparisons, or none</td><td>refuse it</td><td class="num">132</td><td class="num">0</td></tr><tr><td>a letter the question does not give</td><td>refuse it</td><td class="num">120</td><td class="num">0</td></tr><tr><td>words, or too long</td><td>refuse it</td><td class="num">125</td><td class="num">0</td></tr></tbody></table><h3>Some of what it tried</h3><table><thead><tr><th>made as</th><th>the claim</th><th>verdict</th></tr></thead><tbody><tr><td>the question&#39;s own claim</td><td><code>p × c + d ≥ 305</code></td><td>yes</td></tr><tr><td>the figure on the edge of the range</td><td><code>p × c + d &gt; 409</code></td><td>no</td></tr><tr><td>the figure just inside or outside the edge</td><td><code>p × c + d ≥ 409.001</code></td><td>no</td></tr><tr><td>the figure written first</td><td><code>305 ≤ p × c + d</code></td><td>yes</td></tr><tr><td>the relation turned</td><td><code>p × c + d &gt; 305</code></td><td>it depends</td></tr><tr><td>a figure far outside the range</td><td><code>p × c + d ≥ 0</code></td><td>yes</td></tr><tr><td>a claim made at random on the same quantities</td><td><code>((c × 8) + ((d + 7) + p)) &gt; 138</code></td><td>yes</td></tr><tr><td>a letter used twice</td><td><code>p - p ≥ 14</code></td><td>refused</td></tr><tr><td>no quantity at all</td><td><code>84 + 5 ≥ 23</code></td><td>refused</td></tr><tr><td>a division by what could be nought</td><td><code>1 ÷ (c - 10) ≥ 0</code></td><td>refused</td></tr><tr><td>two comparisons, or none</td><td><code>p × c + d ≠ 5</code></td><td>refused</td></tr><tr><td>a letter the question does not give</td><td><code>p × c + d + w ≥ 1</code></td><td>refused</td></tr><tr><td>words, or too long</td><td><code>p × c + d ≥ 1 pounds</code></td><td>refused</td></tr><tr><td>no quantity at all</td><td><code>35 + 2 ≥ 16</code></td><td>refused</td></tr><tr><td>the figure written first</td><td><code>305 ≤ p × c + d</code></td><td>yes</td></tr><tr><td>a division by what could be nought</td><td><code>1 ÷ (c - 10) ≥ 0</code></td><td>refused</td></tr></tbody></table><h3>Can the harness find a leak at all?</h3><p>The same harness was turned on 12 solvers that each have one leak planted in them. <b class="pass">It found 12 of 12.</b></p><table><thead><tr><th>the planted solver</th><th>found</th><th>the first reply that gave it away</th></tr></thead><tbody><tr><td>treats more than as at least</td><td class="pass">yes</td><td><code>&quot;p × c + d &gt; 409&quot;</code> <span class="small">(the figure on the edge of the range)</span></td></tr><tr><td>takes each quantity at its least for the least value</td><td class="pass">yes</td><td><code>&quot;p - e &lt; 100&quot;</code> <span class="small">(the figure on the edge of the range)</span></td></tr><tr><td>looks only at the middle</td><td class="pass">yes</td><td><code>&quot;p × c + d &gt; 305&quot;</code> <span class="small">(the relation turned)</span></td></tr><tr><td>decides a claim that uses a letter twice</td><td class="pass">yes</td><td><code>&quot;p - p ≥ 14&quot;</code> <span class="small">(a letter used twice)</span></td></tr><tr><td>divides by a range that holds nought</td><td class="pass">yes</td><td><code>&quot;1 ÷ (c - 10) ≥ 0&quot;</code> <span class="small">(a division by what could be nought)</span></td></tr><tr><td>works in floating point</td><td class="pass">yes</td><td><code>&quot;p + e &gt; 0.3&quot;</code> <span class="small">(the question&#39;s own claim)</span></td></tr><tr><td>reads a claim written figure first the wrong way round</td><td class="pass">yes</td><td><code>&quot;305 ≤ p × c + d&quot;</code> <span class="small">(the figure written first)</span></td></tr><tr><td>never says it depends</td><td class="pass">yes</td><td><code>&quot;p × c + d &gt; 305&quot;</code> <span class="small">(the relation turned)</span></td></tr><tr><td>takes the claim out of words</td><td class="pass">yes</td><td><code>&quot;p × c + d ≥ 1 pounds&quot;</code> <span class="small">(words, or too long)</span></td></tr><tr><td>lets a letter the question does not give stand for nought</td><td class="pass">yes</td><td><code>&quot;p × c + d + w ≥ 1&quot;</code> <span class="small">(a letter the question does not give)</span></td></tr><tr><td>refuses everything</td><td class="pass">yes</td><td><code>&quot;p × c + d ≥ 305&quot;</code> <span class="small">(the question&#39;s own claim)</span></td></tr><tr><td>throws on a claim it cannot read</td><td class="pass">yes</td><td><code>&quot;p × c + d ≠ 5&quot;</code> <span class="small">(two comparisons, or none)</span></td></tr></tbody></table></div></details>
-  <details><summary>What the checked answers cost, against one unchecked reply</summary><div id="cost"><p>584 model calls for 144 problems (4.1 each), 1938 s of model time: 280 to cite figures, 24 to write rules, 24 to write claims and 256 to work out steps. One unchecked reply to each of the same problems, read generously, got 34 of 144 right; on the 24 problems that have no answer it gave a number 22 times. The lattice brought 139 of 144 out as they should come out.</p><p class="small">The unchecked reply's instruction is the stronger of two tried on the 60 dev problems before the seal: told it may reply "cannot tell", the model got 16 of 60 right; not told, 15 of 60. With room for 192 tokens, 4 of its 60 replies ran to the limit.</p></div></details>
-</section>
-
-<section class="panel" id="limits">
-  <h2>What this does <em>not</em> prove</h2>
-  <ul>
+  <details><summary>What the checked answers cost, against one unchecked reply</summary><div id="cost"><p>584 model calls for 144 problems (4.1 each), 1938 s of model time: 280 to cite figures, 24 to write rules, 24 to write claims and 256 to work out steps. One unchecked reply to each of the same problems, read generously, got 34 of 144 right; on the 24 problems that have no answer it gave a number 22 times. The lattice brought 139 of 144 out as they should come out.</p><p class="small">The unchecked reply's instruction is the stronger of two tried on the 60 dev problems before the seal: told it may reply "cannot tell", the model got 16 of 60 right; not told, 15 of 60. With room for 192 tokens, 4 of its 60 replies ran to the limit.</p></div></details></div></details>
+    <details class="honest reveal" id="limits" style="max-width:none"><summary>What this does not prove</summary><div class="in legacy"><ul>
     <li><b>Grounded is not true.</b> A cited figure is in the document, where the document says it is. If the document is wrong, the answer is wrong, and it is still grounded. <span data-bind="l.misstated">In the published sealed run, 12 problems had a document that misstates a figure: 11 were answered, 11 with the document's figure, and 11 of those answers are not the true one. All 11 are labelled grounded.</span> The label is the protection: it is never called proven.</li>
     <li><b>"About what was asked" is a match of words.</b> The check looks for the key words of the question in the line that is quoted. A question put in other words than the document's is beyond it, and such a figure is refused, not guessed.</li>
     <li><b>A figure must be written plainly.</b> Digits, with commas in the thousands and a decimal part, and nothing touching them that could change what they say. A figure with a sign in front, a leading point, a range, a unit run on to it, or a word like "million" after it is not read: the line cannot be cited from, and the question gets no answer. That is strict on purpose. Reading 5 where the document says 5 million would be worse.</li>
@@ -191,12 +332,8 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
     <li><b>The seal was made twice.</b> After the first seal, the sealed run was begun, and the first check on GitHub found that the solver's attack made different claims under different JavaScript engines (a sort that drew at random). The attack was fixed, the build sealed again and the sealed run started again from nothing; nothing the model is shown or judged by changed, and the 34 replies made under the first seal are kept. <a href="SEAL.md">SEAL.md</a> tells it in full.</li>
     <li><b>The check holds the question.</b> It knows which figures a question needs and how they combine. The model does the reading and every step of the sum. For your own work, that bookkeeping is the part you would write.</li>
     <li><b>The model did not get smarter, and nothing here retrains it.</b> It is the same small model at the last facet as at the first.</li>
-  </ul>
-</section>
-
-<section class="panel" id="blueprint">
-  <h2>How it is <em>built</em></h2>
-  <p class="small">"Gated 41/41" means a mutation test changed that part's code 41 ways, one small change at a time (a &lt; for a &lt;=, a + for a -), and its tests caught every one. "Equivalent" is a change that makes no difference to what the code does, so no test can catch it; each has its reason written down in <code>src/witness.baseline.json</code>.</p>
+  </ul></div></details>
+    <details class="honest reveal" id="blueprint" style="max-width:none"><summary>How it is built</summary><div class="in legacy"><p class="small">"Gated 41/41" means a mutation test changed that part's code 41 ways, one small change at a time (a &lt; for a &lt;=, a + for a -), and its tests caught every one. "Equivalent" is a change that makes no difference to what the code does, so no test can catch it; each has its reason written down in <code>src/witness.baseline.json</code>.</p>
   <div class="wrap"><table><thead><tr><th>part</th><th>what it is</th><th>status</th></tr></thead><tbody>
     <tr><td>What it stands on</td><td>The Crystal's kernels, byte for byte as its seal froze them, and inside them The Climb's (<code>vendor/crystal/</code>).</td><td data-bind="bp.seed">The Crystal's repository at commit 6f19e28: 18 files, each with the hash its seal gives it</td></tr>
     <tr><td>The strength law</td><td>The four kinds of bond, what each proves, and the weakest-root rule (<code>src/strength.mjs</code>).</td><td data-bind="bp.strength"><span class="pass">built, gated 11/11</span></td></tr>
@@ -211,12 +348,8 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
     <tr><td>The numbers</td><td>Every count and every verdict, and the one unchecked reply they are set against (<code>src/counts.mjs</code>, <code>src/claims.mjs</code>, <code>src/onetry.mjs</code>).</td><td data-bind="bp.counts"><span class="pass">built, gated 157/158 (1 equivalent, with the reason written down)</span></td></tr>
     <tr><td>The glass</td><td>WebGL2, written for this page. It draws a record and decides nothing; each of the four strengths is its own material (<code>page/gem.js</code>).</td><td>built</td></tr>
     <tr><td>The model</td><td>Llama 3.2 1B Instruct at 4 bits, run by WebLLM 0.2.79 on WebGPU, always picking its likeliest word.</td><td>not part of this repository</td></tr>
-  </tbody></table></div>
-</section>
-
-<section class="panel" id="buyers">
-  <h2>For your <em>business</em></h2>
-  <p><b>What it is.</b> A way to get answers out of your own documents and rules from a small model you run yourself, where every figure is shown in the document it came from, every formula is run on its rule's tests, every claim is decided by a solver, every sum is exact, and every answer says how far it can be trusted. <span data-bind="b.what">In the published sealed run, 139 of 144 problems came out as they should; 0 answers that stand on cited figures and exact steps were other than what their document gives.</span></p>
+  </tbody></table></div></div></details>
+    <details class="honest reveal" id="buyers" style="max-width:none"><summary>For your business</summary><div class="in legacy"><p><b>What it is.</b> A way to get answers out of your own documents and rules from a small model you run yourself, where every figure is shown in the document it came from, every formula is run on its rule's tests, every claim is decided by a solver, every sum is exact, and every answer says how far it can be trusted. <span data-bind="b.what">In the published sealed run, 139 of 144 problems came out as they should; 0 answers that stand on cited figures and exact steps were other than what their document gives.</span></p>
   <details><summary>Where it fits, and where it does not</summary>
     <p>It fits questions whose answer is figures from a document, a rule applied to them, and arithmetic: what an order comes to under a contract, what is owed after a deposit, what a term costs in total, and whether a range of orders is certain to clear a limit. It does not fit judgement, summaries, or anything a program cannot check. Where it cannot check, it gives no answer.</p></details>
   <details><summary>For each role</summary><ul>
@@ -241,26 +374,346 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
     <li><b>"A small model cannot read."</b> It is measured. <span data-bind="b.reads">In the published sealed run its quote bonded for 255 of 256 figures that were there.</span></li>
   </ul></details>
   <p><b>The case for the board.</b> The expensive failure of AI on documents is the confident answer that was never in the document. This cannot give one: a figure is in the document at a place you can open, or there is no answer. <span data-bind="b.board">In the published sealed run: 139 of 144 came out as they should, 0 answers that stand on cited figures were not what the document gives, and 0 answers were labelled stronger than what they stand on.</span></p>
-  <div id="walk"><h3>A simulated buyer walk</h3><p class="small">A simulated buyer walk: a local 7B model played four buyers and read this page&#39;s text cold, part by part, one buyer at a time (36 readings, about 2.5 hours). It is a model&#39;s first-pass audit, not a customer&#39;s opinion. Kar checked every gap it raised against the page, and pressed every button on the page by hand (the quote check with each of its suggested changes, growing the published run again, a new attack, and growing twelve problems live). The real gaps are below, each with what was changed. Not changed: lines that only quoted the page back (the footer, the case for the board), and one that was right as it stood (a forgery tried only 10 times applies only to lines that carry a clause number). A first try that asked for all four buyers in one reply was not kept: the model answered &quot;none&quot; to nearly every part, which is no evidence the page is clear.</p><details><summary>The CFO of a 400-person firm: could follow the result, but tripped on words used before they were defined and on two numbers with no unit</summary><ul><li>&quot;bonded&quot;, &quot;harness&quot;, &quot;planted leak&quot; and &quot;lattice&quot; are used before the page says what they are → a list of the words this page uses now opens Start here: facet, bond, proven, grounded, proven against its tests, proven within its encoding, bar, sealed run, lattice, one unchecked reply, harness, second reader, planted leak</li><li>&quot;4.1 small calls per problem&quot;: what is a call? → the line now says each is a short request to the small model on this device: copy one line, write one rule or claim, or work out one step</li><li>&quot;asked the stronger of two ways&quot;: which two, and how much stronger? → it now names the two instructions and gives each one&#39;s score: 16 of 60 against 15 of 60 dev problems</li><li>&quot;gated 11/11&quot; is never explained → the blueprint now opens with what a mutation gate is, and what an equivalent change is</li><li>&quot;not pinned by hash&quot;: what does that mean for me? → it now says the page does not check the downloaded model files against a fixed fingerprint, so a changed file upstream would not be caught here</li></ul></details><details><summary>The CTO who also owns security: wanted the mechanics spelled out where the page gave only a count</summary><ul><li>&quot;1550 claims were put to the solver, on 63 questions&quot;: how do 63 questions make 1550 claims? → the solver&#39;s attack now says each question gets about 25 claims: its own, and others made to trip a solver or to be refused</li><li>&quot;worked out every corner of every range&quot; → now: worked the formula out at every mix of each quantity&#39;s lowest and highest value</li><li>&quot;a wrong step split smaller&quot;, &quot;dissolves&quot; → How it works now says what happens: a wrong step is split into smaller steps asked again; one already as small as steps go, and still wrong, is dropped, and the problem gets no answer rather than a wrong one</li><li>&quot;exact arithmetic&quot; is not defined → proven now reads: worked out by code in exact fractions, with no rounding</li><li>a commit id beside a count of steps reads as another number → the line now says &quot;at commit&quot;</li></ul></details><details><summary>The COO who runs the teams that would use it: read two tables as contradicting themselves, and wanted every &quot;it&quot; named</summary><ul><li>&quot;every rule and claim asked for bonded | 0&quot; in a table of reasons for failing → an empty table of reasons now says &quot;none&quot;, with a dash, not a nought</li><li>&quot;What it cost&quot;: what is &quot;it&quot;? → now &quot;What the checked answers cost, against one unchecked reply&quot;</li><li>the 24 figures refused as &quot;not in the document&quot; or &quot;more than one figure there&quot; look like failures → a line under the table now says, checked figure by figure from the record, that each is the figure its problem was built without, where refusing is right</li><li>&quot;No answer was given&quot; for the five that missed is vague → each now says where it stopped, and that it was left with no answer rather than given a wrong one</li><li>growing live, the closing line counted only grounded and proven answers (found by pressing the button) → it now counts all four strengths</li></ul></details><details><summary>The owner-manager of a 12-person business, no technical staff: was lost at the first line, then could use the citation check once its messages said why in plain words</summary><ul><li>&quot;Grown from The Crystal, as sealed&quot; means nothing to a stranger → the line now reads &quot;The third build, on The Crystal&#39;s sealed checks&quot;, and the words are defined below it</li><li>&quot;Attack both checks yourself&quot;: there are four → fixed there and in two other places that still said both</li><li>the citation check&#39;s message repeated its reason word for word (&quot;more than one figure there ... more than one figure there&quot;) → it now says why in plain words, for example that the document gives more than one figure for this, so it cannot give one</li><li>the run selector and the depth slider were too small to tap on a phone (18 px and 16 px tall) → both are now at least 32 px tall; nothing on the page scrolls sideways at 375 px</li></ul></details></div>
-</section>
-
-<section class="panel" id="paper">
-  <h2>White <em>paper</em>: one label per kind of truth</h2>
-  <p><b>The problem.</b> A model that answers questions about a document can quote a figure that is not there, work on a figure it misread, write a rule down wrongly, or answer a yes-or-no question it never worked out. On the page all four look the same: a confident answer. Checking one kind of work, the arithmetic say, leaves the others unchecked, and an answer that rests on an unchecked part is still reported as if all of it were checked.</p>
+  <div id="walk"><h3>A simulated buyer walk</h3><p class="small">A simulated buyer walk: a local 7B model played four buyers and read this page&#39;s text cold, part by part, one buyer at a time (36 readings, about 2.5 hours). It is a model&#39;s first-pass audit, not a customer&#39;s opinion. Kar checked every gap it raised against the page, and pressed every button on the page by hand (the quote check with each of its suggested changes, growing the published run again, a new attack, and growing twelve problems live). The real gaps are below, each with what was changed. Not changed: lines that only quoted the page back (the footer, the case for the board), and one that was right as it stood (a forgery tried only 10 times applies only to lines that carry a clause number). A first try that asked for all four buyers in one reply was not kept: the model answered &quot;none&quot; to nearly every part, which is no evidence the page is clear.</p><details><summary>The CFO of a 400-person firm: could follow the result, but tripped on words used before they were defined and on two numbers with no unit</summary><ul><li>&quot;bonded&quot;, &quot;harness&quot;, &quot;planted leak&quot; and &quot;lattice&quot; are used before the page says what they are → a list of the words this page uses now opens Start here: facet, bond, proven, grounded, proven against its tests, proven within its encoding, bar, sealed run, lattice, one unchecked reply, harness, second reader, planted leak</li><li>&quot;4.1 small calls per problem&quot;: what is a call? → the line now says each is a short request to the small model on this device: copy one line, write one rule or claim, or work out one step</li><li>&quot;asked the stronger of two ways&quot;: which two, and how much stronger? → it now names the two instructions and gives each one&#39;s score: 16 of 60 against 15 of 60 dev problems</li><li>&quot;gated 11/11&quot; is never explained → the blueprint now opens with what a mutation gate is, and what an equivalent change is</li><li>&quot;not pinned by hash&quot;: what does that mean for me? → it now says the page does not check the downloaded model files against a fixed fingerprint, so a changed file upstream would not be caught here</li></ul></details><details><summary>The CTO who also owns security: wanted the mechanics spelled out where the page gave only a count</summary><ul><li>&quot;1550 claims were put to the solver, on 63 questions&quot;: how do 63 questions make 1550 claims? → the solver&#39;s attack now says each question gets about 25 claims: its own, and others made to trip a solver or to be refused</li><li>&quot;worked out every corner of every range&quot; → now: worked the formula out at every mix of each quantity&#39;s lowest and highest value</li><li>&quot;a wrong step split smaller&quot;, &quot;dissolves&quot; → How it works now says what happens: a wrong step is split into smaller steps asked again; one already as small as steps go, and still wrong, is dropped, and the problem gets no answer rather than a wrong one</li><li>&quot;exact arithmetic&quot; is not defined → proven now reads: worked out by code in exact fractions, with no rounding</li><li>a commit id beside a count of steps reads as another number → the line now says &quot;at commit&quot;</li></ul></details><details><summary>The COO who runs the teams that would use it: read two tables as contradicting themselves, and wanted every &quot;it&quot; named</summary><ul><li>&quot;every rule and claim asked for bonded | 0&quot; in a table of reasons for failing → an empty table of reasons now says &quot;none&quot;, with a dash, not a nought</li><li>&quot;What it cost&quot;: what is &quot;it&quot;? → now &quot;What the checked answers cost, against one unchecked reply&quot;</li><li>the 24 figures refused as &quot;not in the document&quot; or &quot;more than one figure there&quot; look like failures → a line under the table now says, checked figure by figure from the record, that each is the figure its problem was built without, where refusing is right</li><li>&quot;No answer was given&quot; for the five that missed is vague → each now says where it stopped, and that it was left with no answer rather than given a wrong one</li><li>growing live, the closing line counted only grounded and proven answers (found by pressing the button) → it now counts all four strengths</li></ul></details><details><summary>The owner-manager of a 12-person business, no technical staff: was lost at the first line, then could use the citation check once its messages said why in plain words</summary><ul><li>&quot;Grown from The Crystal, as sealed&quot; means nothing to a stranger → the line now reads &quot;The third build, on The Crystal&#39;s sealed checks&quot;, and the words are defined below it</li><li>&quot;Attack both checks yourself&quot;: there are four → fixed there and in two other places that still said both</li><li>the citation check&#39;s message repeated its reason word for word (&quot;more than one figure there ... more than one figure there&quot;) → it now says why in plain words, for example that the document gives more than one figure for this, so it cannot give one</li><li>the run selector and the depth slider were too small to tap on a phone (18 px and 16 px tall) → both are now at least 32 px tall; nothing on the page scrolls sideways at 375 px</li></ul></details></div></div></details>
+    <details class="honest reveal" id="paper" style="max-width:none"><summary>White paper: one label per kind of truth</summary><div class="in legacy"><p><b>The problem.</b> A model that answers questions about a document can quote a figure that is not there, work on a figure it misread, write a rule down wrongly, or answer a yes-or-no question it never worked out. On the page all four look the same: a confident answer. Checking one kind of work, the arithmetic say, leaves the others unchecked, and an answer that rests on an unchecked part is still reported as if all of it were checked.</p>
   <p><b>The idea.</b> Give each kind of work its own check, and give what each check proves its own name. Exact arithmetic is proven. A figure found in the document, word for word, is grounded: as true as the document. A formula that passed its rule's tests is proven against its tests. A claim a solver decided is proven within its encoding: exact about the claim as it was written. Then label every answer by the weakest check beneath it, so no answer is called truer than what it stands on. Where no check can say yes, give no answer, and say which piece failed and why.</p>
   <p><b>How a check is trusted.</b> A check is only as good as the attack it survives. Each one here comes with a harness that forges replies many ways, a second reader written apart that must rule the same way on every reply, and twelve copies of the check with one leak planted in each, which the harness must find. Every check and every harness is mutation-gated: its tests must catch every small change to its code.</p>
   <p><b>What this page tests.</b> Whether a small model in a browser tab, held to these four checks, brings more problems out as they should come out than the same model answering once with nothing checking it; whether any checked answer is wrong; and whether any is labelled stronger than it stands on. The problems were sealed before the run and twelve claims with their bars were written down first; the numbers above show each one's result.</p>
   <p><b>What it does not show.</b> That a grounded answer is true: it is as true as its document. That a formula that passes its tests is right: one built to pass exactly those tests passes too, and the page shows it. That a decided claim is the claim that was meant: the solver is exact about what the model wrote. That the model got better: nothing here trains it.</p>
   <p><b>The one rule.</b> No answer is called truer than its weakest check, and every number on this page comes from a recorded run that the page can grow again, without the model, to the same result.</p>
-  <p class="small">The records: <a href="data/runs/sealed.json">the sealed run</a>, <a href="data/runs/dev.json">the dev run</a>, <a href="data/gates.json">the mutation gates</a>, <a href="CLAIMS.md">the claims</a>, <a href="SEAL.md">the seal</a>.</p>
+  <p class="small">The records: <a href="data/runs/sealed.json">the sealed run</a>, <a href="data/runs/dev.json">the dev run</a>, <a href="data/gates.json">the mutation gates</a>, <a href="CLAIMS.md">the claims</a>, <a href="SEAL.md">the seal</a>.</p></div></details>
+  </div>
 </section>
-</main>
+
 <footer>
-  The Verifier Set · built by Kar · MIT licence (holder Simon Gant) · supplied by <a href="https://www.ai-nativesolutions.com">AI Native Solutions</a><br>
-  Powered by the Konomi architecture, created by Thomas Frumkin.<br>
-  AI you own. Proof you can re-run. · <a href="https://github.com/sjgant80-hub/the-verifier-set">source</a> · <a href="CLAIMS.md">claims</a> · <a href="https://sjgant80-hub.github.io/the-crystal/">The Crystal, which it grew from</a> · <a href="https://sjgant80-hub.github.io/the-climb/">The Climb</a>
+  <div class="wrap frow">
+    <div><div class="brand">The Verifier Set</div><div class="fnote">The Verifier Set · built by Kar · MIT licence (holder Simon Gant) · supplied by <a href="https://www.ai-nativesolutions.com">AI Native Solutions</a><br>
+  AI you own. Proof you can re-run. · <a href="https://github.com/sjgant80-hub/the-verifier-set">source</a> · <a href="CLAIMS.md">claims</a> · <a href="https://sjgant80-hub.github.io/the-crystal/">The Crystal, which it grew from</a> · <a href="https://sjgant80-hub.github.io/the-climb/">The Climb</a><br>Powered by the Konomi architecture, created by Thomas Frumkin.</div></div>
+    <div class="taglist"><span>›</span> AI you own. Proof you can re-run.<br><span>›</span> A small model that says "I can't tell."<br><span>›</span> Nothing leaves your browser.</div>
+  </div>
 </footer>
 <script type="module">
+// vendor/house/crystal.js, inlined byte for byte (imports read the scopes above; export removed)
+const CRYSTAL = (() => {
+// crystal.js — the house hero: a living crystal, drawn by one fragment shader. No library is fetched.
+//
+// It is a real solid, not a picture of one: a 32-faced gem (an icosahedron cut by a dodecahedron) that every pixel's
+// ray is intersected with exactly. Light is bent into the body, carried through it, turned back where it cannot leave
+// and bent out again, once for each of three colours, so the facets split light the way glass does. The body absorbs
+// as it carries; its edges burn; a slow lattice of light moves inside it.
+//
+// And it is bound to data. Each of the 32 faces holds a state the page gives it: dark, proven (cyan), sealing (gold,
+// breathing) or failed (red, kept). A page lights a face only for a receipt it has re-derived, so the crystal is the
+// record, not decoration. A face can be pointed at and pressed: the page is told which one.
+//
+//   mount(canvas, options) → { setFaces, setEnergy, setCentre, onHover, onPick, redraw, destroy, FACES }   or null
+// It decides nothing. With no WebGL the canvas is left as it is (the page's own background shows) and null is returned.
+
+const FACES = 32;
+const STATE = { dark: 0, proven: 1, sealing: 2, failed: 3 };
+const PHI = (1 + Math.sqrt(5)) / 2;
+const unit = (v) => { const l = Math.hypot(v[0], v[1], v[2]); return [v[0] / l, v[1] / l, v[2] / l]; };
+// ten icosahedron normals, then six dodecahedron normals; each stands for a pair of opposite faces (i and i + 16)
+const NORMALS = [[1, 1, 1], [-1, 1, 1], [1, -1, 1], [1, 1, -1], [0, 1, PHI + 1], [0, -1, PHI + 1], [PHI + 1, 0, 1], [-PHI - 1, 0, 1], [1, PHI + 1, 0], [-1, PHI + 1, 0], [0, PHI, 1], [0, -PHI, 1], [1, 0, PHI], [-1, 0, PHI], [PHI, 1, 0], [-PHI, 1, 0]].map(unit);
+const R_ICOSA = 1.2, R_CUT = 1.37, CAMERA = 5.2, FOV = 0.8284;
+
+const VERT = 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
+const FRAG = `
+precision highp float;
+uniform vec2 uRes; uniform float uTime; uniform mat3 uRot; uniform mat3 uInv; uniform vec3 uCen;
+uniform vec3 uN[16]; uniform float uR[16]; uniform float uState[32]; uniform float uEnergy; uniform float uHot;
+const vec3 CYAN = vec3(0.286, 0.910, 0.784); const vec3 GOLD = vec3(1.0, 0.812, 0.416); const vec3 RED = vec3(1.0, 0.42, 0.42);
+float hash(vec2 p){ p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
+float hash3(vec3 p){ p = fract(p * 0.3183099 + 0.1); p *= 17.0; return fract(p.x * p.y * p.z * (p.x + p.y + p.z)); }
+float noise(vec3 x){ vec3 i = floor(x), f = fract(x); f = f * f * (3.0 - 2.0 * f);
+  return mix(mix(mix(hash3(i), hash3(i + vec3(1,0,0)), f.x), mix(hash3(i + vec3(0,1,0)), hash3(i + vec3(1,1,0)), f.x), f.y),
+             mix(mix(hash3(i + vec3(0,0,1)), hash3(i + vec3(1,0,1)), f.x), mix(hash3(i + vec3(0,1,1)), hash3(i + vec3(1,1,1)), f.x), f.y), f.z); }
+vec3 tint(float s){ return s < 0.5 ? vec3(0.0) : s < 1.5 ? CYAN : s < 2.5 ? GOLD : RED; }
+// the solid: sixteen pairs of planes. Where a ray enters and leaves, through which faces, and how near an edge.
+bool solid(vec3 ro, vec3 rd, out float tN, out float tF, out vec3 nN, out vec3 nF, out float sN, out float sF, out float eN, out float eF, out float iN){
+  tN = -1e9; tF = 1e9; float tN2 = -1e9; float tF2 = 1e9; nN = vec3(0.0); nF = vec3(0.0); sN = 0.0; sF = 0.0; iN = -1.0;
+  for (int i = 0; i < 16; i++){
+    vec3 n = uN[i]; float dn = dot(rd, n); dn = abs(dn) < 1e-5 ? 1e-5 : dn; float po = dot(ro, n);
+    float tp = (uR[i] - po) / dn; float tm = (-uR[i] - po) / dn;
+    float ta; float tb; vec3 na; vec3 nb; float sa; float sb; float ia;
+    if (dn < 0.0) { ta = tp; na = n; sa = uState[i]; ia = float(i); tb = tm; nb = -n; sb = uState[i + 16]; }
+    else { ta = tm; na = -n; sa = uState[i + 16]; ia = float(i) + 16.0; tb = tp; nb = n; sb = uState[i]; }
+    if (ta > tN) { tN2 = tN; tN = ta; nN = na; sN = sa; iN = ia; } else if (ta > tN2) { tN2 = ta; }
+    if (tb < tF) { tF2 = tF; tF = tb; nF = nb; sF = sb; } else if (tb < tF2) { tF2 = tb; }
+  }
+  eN = tN - tN2; eF = tF2 - tF;
+  return tN < tF && tF > 0.0;
+}
+// what the crystal reflects and bends: a dark sea, three lamps, a horizon, slow bars of light
+vec3 world(vec3 d){
+  vec3 c = mix(vec3(0.0006, 0.003, 0.006), vec3(0.006, 0.028, 0.042), pow(clamp(d.y * 0.5 + 0.5, 0.0, 1.0), 1.5));
+  c += CYAN * 2.2 * pow(max(dot(d, normalize(vec3(0.6, 0.7, 0.4))), 0.0), 26.0);
+  c += vec3(0.6, 0.8, 1.0) * 1.3 * pow(max(dot(d, normalize(vec3(-0.7, 0.3, 0.5))), 0.0), 60.0);
+  c += GOLD * 0.55 * pow(max(dot(d, normalize(vec3(0.1, -0.8, 0.5))), 0.0), 28.0);
+  c += vec3(0.15, 0.5, 0.45) * exp(-abs(d.y) * 14.0) * 0.12;
+  float bars = smoothstep(0.9, 1.0, sin(d.x * 9.0 + d.z * 5.0 + uTime * 0.07) * 0.5 + 0.5);
+  return c + vec3(0.5, 0.9, 0.85) * bars * 0.22 * smoothstep(-0.2, 0.6, d.y);
+}
+// one colour of light through the body: bent in, carried, turned back once if it cannot leave, bent out
+vec3 through(vec3 p, vec3 rd, vec3 n, float ior, out float path, out float sX, out float eX){
+  vec3 d = refract(rd, n, 1.0 / ior); vec3 o = p - n * 0.003; vec3 leave = d; path = 0.0; sX = 0.0; eX = 1.0;
+  for (int b = 0; b < 2; b++){
+    float tN; float tF; vec3 nN; vec3 nF; float sN; float sF; float eN; float eF; float iN;
+    solid(o, d, tN, tF, nN, nF, sN, sF, eN, eF, iN);
+    path += max(tF, 0.0);
+    if (b == 0) { sX = sF; eX = eF; }
+    vec3 r = refract(d, -nF, ior);
+    if (dot(r, r) > 0.0) { leave = r; break; }
+    vec3 q = o + d * tF; d = reflect(d, -nF); o = q - nF * 0.003; leave = d;
+  }
+  return leave;
+}
+void main(){
+  vec2 uv = (gl_FragCoord.xy - 0.5 * uRes) / uRes.y;
+  vec3 ro = vec3(0.0, 0.0, ${CAMERA.toFixed(1)}); vec3 rd = normalize(vec3(uv * ${FOV.toFixed(4)}, -1.0));
+  // the room: depth, a breath of light round the crystal, three drifts of dust
+  vec3 col = mix(vec3(0.0002, 0.0008, 0.0016), vec3(0.0016, 0.0042, 0.0085), exp(-length(uv - vec2(0.36, 0.3)) * 1.9));
+  float near = length(cross(rd, uCen - ro));
+  col += CYAN * 0.010 * uEnergy * exp(-near * near * 0.42);
+  for (int k = 0; k < 3; k++){
+    float sc = 14.0 + float(k) * 11.0; vec2 g = uv * sc + vec2(uTime * 0.010 * float(k + 1), uTime * 0.006);
+    vec2 id = floor(g); vec2 f = fract(g) - 0.5; float h = hash(id + float(k) * 17.0);
+    vec2 o = vec2(hash(id + 3.1), hash(id + 7.7)) - 0.5; float tw = 0.5 + 0.5 * sin(uTime * (0.6 + h * 2.0) + h * 40.0);
+    col += vec3(0.56, 0.91, 0.85) * smoothstep(0.045, 0.0, length(f - o * 0.7)) * step(0.9, h) * tw * (0.22 - 0.05 * float(k));
+  }
+  vec3 lo = uInv * (ro - uCen); vec3 ld = uInv * rd;
+  float tN; float tF; vec3 nN; vec3 nF; float sN; float sF; float eN; float eF; float iN;
+  if (solid(lo, ld, tN, tF, nN, nF, sN, sF, eN, eF, iN) && tN > 0.0){
+    vec3 p = lo + ld * tN; float facing = max(dot(-ld, nN), 0.0); float fres = pow(1.0 - facing, 3.0);
+    float pa; float sa; float ea; float pathG; float sX; float eX;
+    vec3 dr = through(p, ld, nN, 1.41, pa, sa, ea);
+    vec3 dg = through(p, ld, nN, 1.45, pathG, sX, eX);
+    vec3 db = through(p, ld, nN, 1.50, pa, sa, ea);
+    vec3 bent = vec3(world(uRot * dr).r, world(uRot * dg).g, world(uRot * db).b);
+    vec3 body = exp(-pathG * vec3(1.5, 0.38, 0.52) * 0.8);
+    vec3 c = mix(bent * body, world(uRot * reflect(ld, nN)), 0.06 + 0.9 * fres);
+    vec3 cN = tint(sN); vec3 cX = tint(sX);
+    float breath = (sN > 1.5 && sN < 2.5) ? 0.6 + 0.4 * sin(uTime * 1.8 + iN) : 1.0;
+    c += cN * (0.012 + 0.10 * fres) * breath * uEnergy;                 // a lit face glows from within
+    c += cX * 0.03 * body.g * uEnergy;                                  // the far side, seen through the body
+    float edge = exp(-eN * 90.0) + 0.35 * exp(-eX * 60.0) * body.g;      // edges burn
+    c += mix(vec3(0.16, 0.55, 0.48), cN, step(0.5, sN)) * edge * (0.35 + 0.45 * uEnergy);
+    vec3 mid = p + refract(ld, nN, 1.0 / 1.45) * pathG * 0.5;           // the lattice of light inside
+    c += CYAN * pow(noise(mid * 3.2 + vec3(0.0, uTime * 0.12, uTime * 0.05)), 3.0) * 0.05 * uEnergy;
+    c += vec3(0.5, 0.9, 0.85) * (1.0 - step(0.5, abs(iN - uHot))) * 0.07;         // the face under the pointer
+    col = c;
+  }
+  col *= 1.0 - 0.5 * pow(length(uv * vec2(0.75, 1.0)), 2.2);
+  col = 1.0 - exp(-col * 2.4);
+  col = pow(col, vec3(0.4545)); col = mix(col, col * col * (3.0 - 2.0 * col), 0.65) + (hash(gl_FragCoord.xy + uTime) - 0.5) * 0.014;
+  gl_FragColor = vec4(col, 1.0);
+}`;
+
+const mul = (m, v) => [m[0] * v[0] + m[3] * v[1] + m[6] * v[2], m[1] * v[0] + m[4] * v[1] + m[7] * v[2], m[2] * v[0] + m[5] * v[1] + m[8] * v[2]];
+// rot(yaw, pitch) → the turn of the crystal as a column-major 3×3, and its inverse (its transpose)
+function rot(yaw, pitch) {
+  const cy = Math.cos(yaw), sy = Math.sin(yaw), cx = Math.cos(pitch), sx = Math.sin(pitch);
+  const m = [cy, sx * sy, -cx * sy, 0, cx, sx, sy, -sx * cy, cx * cy];
+  return { m, inv: [m[0], m[3], m[6], m[1], m[4], m[7], m[2], m[5], m[8]] };
+}
+// faceAt(u, v, aspect, turn, centre, cut) → the face (0…31) a ray through that point of the screen enters by, or -1.
+// u, v run 0…1 from the top left. The same sum the shader does, so the page and the picture agree on which face it is.
+function faceAt(u, v, aspect, turn, centre, cut) {
+  const x = (u - 0.5) * aspect * FOV, y = (0.5 - v) * FOV, l = Math.hypot(x, y, 1);
+  const rd = mul(turn.inv, [x / l, y / l, -1 / l]), ro = mul(turn.inv, [-centre[0], -centre[1], CAMERA - centre[2]]);
+  let tN = -1e9, tF = 1e9, face = -1;
+  for (let i = 0; i < 16; i++) {
+    const n = NORMALS[i], r = i < 10 ? R_ICOSA : cut;
+    let dn = rd[0] * n[0] + rd[1] * n[1] + rd[2] * n[2]; if (Math.abs(dn) < 1e-5) dn = 1e-5;
+    const po = ro[0] * n[0] + ro[1] * n[1] + ro[2] * n[2], tp = (r - po) / dn, tm = (-r - po) / dn;
+    const ta = dn < 0 ? tp : tm, tb = dn < 0 ? tm : tp;
+    if (ta > tN) { tN = ta; face = dn < 0 ? i : i + 16; }
+    if (tb < tF) tF = tb;
+  }
+  return tN < tF && tN > 0 ? face : -1;
+}
+
+function mount(canvas, options) {
+  const opt = options || {};
+  let gl = null;
+  try { gl = canvas && canvas.getContext ? canvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'high-performance' }) : null; } catch { gl = null; }
+  if (!gl) return null;
+  const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null; };
+  const vs = sh(gl.VERTEX_SHADER, VERT), fs = sh(gl.FRAGMENT_SHADER, FRAG);
+  if (!vs || !fs) return null;
+  const prog = gl.createProgram(); gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return null;
+  gl.useProgram(prog);
+  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer()); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  const a = gl.getAttribLocation(prog, 'a'); gl.enableVertexAttribArray(a); gl.vertexAttribPointer(a, 2, gl.FLOAT, false, 0, 0);
+  const U = (n) => gl.getUniformLocation(prog, n);
+  const u = { res: U('uRes'), time: U('uTime'), rot: U('uRot'), inv: U('uInv'), cen: U('uCen'), n: U('uN[0]'), r: U('uR[0]'), state: U('uState[0]'), energy: U('uEnergy'), hot: U('uHot') };
+  gl.uniform3fv(u.n, new Float32Array(NORMALS.flat()));
+  const still = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const S = { faces: new Float32Array(FACES), energy: opt.energy ?? 0.8, target: opt.energy ?? 0.8, centre: [0, 0, 0], yaw: 0.5, pitch: 0.18, vy: 0, vp: 0, drag: null, hot: -1, scale: 1, ms: 16, t: 0, last: 0, seen: true, raf: 0, dead: false, hover: null, pick: null, turn: rot(0.5, 0.18), cut: R_CUT };
+  const size = () => {
+    const w = canvas.clientWidth || 1, h = canvas.clientHeight || 1, d = Math.min(1.5, globalThis.devicePixelRatio || 1) * S.scale;
+    const W = Math.max(2, Math.round(w * d)), H = Math.max(2, Math.round(h * d));
+    if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
+    S.centre = typeof opt.centre === 'function' ? opt.centre(w, h) : [w > 820 ? 1.25 : 0, w > 820 ? 0 : 0.55, 0];
+  };
+  const draw = () => {
+    size();
+    S.turn = rot(S.yaw, S.pitch);
+    S.cut = R_CUT + 0.07 * Math.sin(S.t * 0.35);                        // the cut faces open and close: it breathes
+    const r = new Float32Array(16); for (let i = 0; i < 16; i++) r[i] = i < 10 ? R_ICOSA : S.cut;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.uniform2f(u.res, canvas.width, canvas.height); gl.uniform1f(u.time, S.t); gl.uniformMatrix3fv(u.rot, false, new Float32Array(S.turn.m)); gl.uniformMatrix3fv(u.inv, false, new Float32Array(S.turn.inv));
+    gl.uniform3f(u.cen, S.centre[0], S.centre[1], S.centre[2]); gl.uniform1fv(u.r, r); gl.uniform1fv(u.state, S.faces); gl.uniform1f(u.energy, S.energy); gl.uniform1f(u.hot, S.hot);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  };
+  const frame = (now) => {
+    if (S.dead) return;
+    S.raf = requestAnimationFrame(frame);
+    if (!S.seen || (typeof document !== 'undefined' && document.hidden)) { S.last = now; return; }
+    const dt = Math.min(0.05, (now - (S.last || now)) / 1000); S.last = now;
+    S.ms += ((dt * 1000) - S.ms) * 0.08;
+    if (S.ms > 30 && S.scale > 0.45) S.scale *= 0.92; else if (S.ms < 14 && S.scale < 1) S.scale = Math.min(1, S.scale * 1.03);
+    if (!still) { S.t += dt; if (!S.drag) { S.yaw += dt * 0.16 + S.vy; S.pitch += (0.18 + 0.12 * Math.sin(S.t * 0.22) - S.pitch) * 0.02 + S.vp; S.vy *= 0.94; S.vp *= 0.94; } }
+    S.energy += (S.target - S.energy) * 0.04;
+    draw();
+  };
+  const where = (e) => { const b = canvas.getBoundingClientRect(); return [(e.clientX - b.left) / b.width, (e.clientY - b.top) / b.height, b.width / b.height]; };
+  const face = (e) => { const [x, y, asp] = where(e); return faceAt(x, y, asp, S.turn, S.centre, S.cut); };
+  const down = (e) => { S.drag = { x: e.clientX, y: e.clientY, moved: 0 }; };
+  const move = (e) => {
+    if (S.drag) { const dx = e.clientX - S.drag.x, dy = e.clientY - S.drag.y; S.drag.x = e.clientX; S.drag.y = e.clientY; S.drag.moved += Math.abs(dx) + Math.abs(dy); S.yaw += dx * 0.006; S.pitch = Math.max(-1.2, Math.min(1.2, S.pitch + dy * 0.006)); S.vy = dx * 0.0006; S.vp = 0; if (still) draw(); return; }
+    const f = face(e); if (f !== S.hot) { S.hot = f; canvas.style.cursor = f >= 0 ? 'pointer' : 'grab'; if (S.hover) S.hover(f, e); if (still) draw(); }
+  };
+  const up = (e) => { const d = S.drag; S.drag = null; if (d && d.moved < 6 && S.pick) { const f = face(e); if (f >= 0) S.pick(f, e); } };
+  const leave = () => { S.drag = null; if (S.hot !== -1) { S.hot = -1; if (S.hover) S.hover(-1, null); if (still) draw(); } };
+  canvas.addEventListener('pointerdown', down); canvas.addEventListener('pointermove', move); canvas.addEventListener('pointerup', up); canvas.addEventListener('pointerleave', leave);
+  canvas.style.cursor = 'grab'; canvas.style.touchAction = 'pan-y';
+  let io = null;
+  if (typeof IntersectionObserver === 'function') { io = new IntersectionObserver((es) => { for (const e of es) S.seen = e.isIntersecting; }); io.observe(canvas); }
+  const onSize = () => { if (still) draw(); };
+  if (typeof addEventListener === 'function') addEventListener('resize', onSize);
+  draw();
+  S.raf = requestAnimationFrame(frame);
+  return {
+    FACES,
+    setFaces(states) { for (let i = 0; i < FACES; i++) S.faces[i] = Number(states && states[i]) || 0; if (still) draw(); },
+    setEnergy(x) { S.target = Math.max(0, Math.min(1.4, Number(x) || 0)); },
+    setCentre(fn) { opt.centre = fn; if (still) draw(); },
+    onHover(fn) { S.hover = fn; }, onPick(fn) { S.pick = fn; },
+    redraw: draw,
+    destroy() { S.dead = true; cancelAnimationFrame(S.raf); if (io) io.disconnect(); canvas.removeEventListener('pointerdown', down); canvas.removeEventListener('pointermove', move); canvas.removeEventListener('pointerup', up); canvas.removeEventListener('pointerleave', leave); if (typeof removeEventListener === 'function') removeEventListener('resize', onSize); },
+  };
+}
+return { FACES, STATE, NORMALS, rot, faceAt, mount };
+})();
+
+// vendor/house/house.js, inlined byte for byte (imports read the scopes above; export removed)
+const HOUSE = (() => {
+// house.js — the kit's motion: what makes a house page feel alive without saying anything untrue.
+//   reveal(root)          sections rise into place as they are reached
+//   light(root)           a soft light follows the pointer across cards
+//   count(el, text)       a receipt's number runs up to its value when first seen; the value written is exactly `text`
+//   bindScroll(crystal)   the crystal's light answers the scroll: brightest at the top, quieter as the page is read
+// Each is safe to call with nothing to act on, and does nothing where motion is not wanted.
+const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function reveal(root) {
+  const els = root && root.querySelectorAll ? [...root.querySelectorAll('.reveal')] : [];
+  if (typeof IntersectionObserver !== 'function' || still()) return;                 // nothing is hidden, so nothing needs showing
+  if (root.documentElement && root.documentElement.classList) root.documentElement.classList.add('js');   // only now may .reveal start hidden
+  const io = new IntersectionObserver((es) => { for (const e of es) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }, { threshold: 0.14 });
+  for (const el of els) io.observe(el);
+}
+
+function light(root) {
+  if (!root || !root.addEventListener || still()) return;
+  root.addEventListener('pointermove', (e) => {
+    const card = e.target && e.target.closest ? e.target.closest('.act') : null;
+    if (!card) return;
+    const b = card.getBoundingClientRect();
+    card.style.setProperty('--mx', `${e.clientX - b.left}px`); card.style.setProperty('--my', `${e.clientY - b.top}px`);
+  });
+}
+
+// count(el, text): text is the final, true text of the number (for example "31.6%"). Only its digits move, and only
+// on the way in: when it stops, the element holds exactly `text`.
+function count(el, text) {
+  const final = String(text), m = final.match(/^(\D*)(\d+(?:\.\d+)?)(.*)$/);
+  if (!el || !m || still() || typeof requestAnimationFrame !== 'function' || typeof IntersectionObserver !== 'function') { if (el) el.textContent = final; return; }
+  const to = Number(m[2]), places = (m[2].split('.')[1] || '').length;
+  el.textContent = final;
+  const io = new IntersectionObserver((es) => {
+    if (!es.some((e) => e.isIntersecting)) return;
+    io.disconnect();
+    const t0 = performance.now(), run = (now) => { const k = Math.min(1, (now - t0) / 900), ease = 1 - (1 - k) ** 3; el.textContent = k < 1 ? `${m[1]}${(to * ease).toFixed(places)}${m[3]}` : final; if (k < 1) requestAnimationFrame(run); };
+    requestAnimationFrame(run);
+  }, { threshold: 0.4 });
+  io.observe(el);
+}
+
+function bindScroll(crystal, base) {
+  if (!crystal || typeof addEventListener !== 'function') return;
+  const top = base ?? 1, set = () => crystal.setEnergy(top * Math.max(0.35, 1 - (globalThis.scrollY || 0) / ((globalThis.innerHeight || 800) * 1.2)));
+  addEventListener('scroll', set, { passive: true }); set();
+}
+return { reveal, light, count, bindScroll };
+})();
+
+// vendor/house/receipts.mjs, inlined byte for byte (imports read the scopes above; export removed)
+const RECEIPTS = (() => {
+// receipts.mjs — read a flagship's own published page for the numbers it has sealed, so that the front door never
+// types a number: it reads each one from the page that proves it, and can read it again, live, in a visitor's tab.
+//
+// A flagship's page is baked by its own gated kernels from its own sealed records. What is read here is what that
+// page says, word for word; this file adds nothing and rounds nothing.
+//
+//   text(html)              the page as a visitor reads it: the body, tags gone, spaces single
+//   claims(html)            every pre-registered claim on the page: [{ id, name, result, pass }] (pass: true, false,
+//                           or null while it is still sealing). Both layouts are read: the table and the house stack.
+//   headline(repo, html)    that build's headline receipt, or null when its page does not state one:
+//                           { was, now, of, label }  (was → now, out of how many, in plain words)
+//   extra(repo, html)       further receipts a page states: [{ key, value, of, label }]
+// Pure and total.
+const str = (x) => (typeof x === 'string' ? x : '');
+const un = (s) => s.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+const flat = (s) => un(s.replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
+
+// shown(html) → the body as markup, without its scripts and styles: only what a visitor is shown is ever read
+const shown = (html) => { const h = str(html), a = h.search(/<body[\s>]/i); return a === -1 ? '' : h.slice(a).replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' '); };
+
+function text(html) { return flat(shown(html)); }
+
+function claims(html) {
+  const h = shown(html), out = [], seen = new Set();
+  const add = (id, name, result, pass) => { if (!seen.has(id)) { seen.add(id); out.push({ id, name: flat(name), result: flat(result), pass }); } };
+  // the table: <tr><td><b>C1</b> name</td><td>the bar</td><td>what happened</td><td><span class="pass">PASS</span>…
+  for (const m of h.matchAll(/<tr><td><b>([A-Z]\d{1,2})<\/b>([^<]*)<\/td>([\s\S]*?)<\/tr>/g)) {
+    const cells = [...m[3].matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/g)].map((c) => c[1]);
+    add(m[1], m[2], cells[1] ?? '', /class="pass">PASS</.test(m[3]) ? true : /class="fail">FAIL</.test(m[3]) ? false : null);
+  }
+  // the house stack: <div class="srow"><div class="d">K1</div><div class="nm"><b>name</b><span>what happened</span><span class="tag cy">pass</span>
+  for (const m of h.matchAll(/<div class="srow[^"]*"><div class="d">([A-Z]\d{1,2})<\/div><div class="nm"><b>([^<]*)<\/b><span>([\s\S]*?)<\/span><span class="tag (cy|rd|gd)">/g)) add(m[1], m[2], m[3], m[4] === 'cy' ? true : m[4] === 'rd' ? false : null);
+  return out;
+}
+
+const READ = {
+  'the-climb': (t) => { const m = t.match(/right at the first try (\d+(?:\.\d+)?%) \((\d+) of (\d+)\) right after the climb (\d+(?:\.\d+)?%) \((\d+) of \3\)/); return m && { was: m[1], now: m[4], of: Number(m[3]), label: 'sealed problems right: at one try, then after the climb' }; },
+  'the-crystal': (t) => { const m = t.match(/one try (\d+(?:\.\d+)?%), the crystal (\d+(?:\.\d+)?%) of (\d+) problems/); return m && { was: m[1], now: m[2], of: Number(m[3]), label: 'sealed problems right: at one try, then as a crystal' }; },
+  'the-verifier-set': (t) => { const m = t.match(/got (\d+) of (\d+) right; on the \d+ problems that have no answer it gave a number \d+ times\. The lattice brought (\d+) of \2 out/); return m && { was: m[1], now: m[3], of: Number(m[2]), label: 'sealed problems that came out as they should: unchecked, then checked' }; },
+  'the-distillation': (t) => { const m = t.match(/(\d+(?:\.\d+)?%) → (\d+(?:\.\d+)?%) Right, cold, on (\d+) held-out problems/); return m && { was: m[1], now: m[2], of: Number(m[3]), label: 'held-out problems right, cold: before, then after training on its own verified work' }; },
+};
+const MORE = {
+  'the-crystal': (t) => { const m = t.match(/forged replies that bonded (\d+) of (\d+)/); return m ? [{ key: 'forged', value: m[1], of: Number(m[2]), label: 'forged replies that got past the check' }] : []; },
+  'the-verifier-set': (t) => { const m = t.match(/on the (\d+) with no answer it gave a number (\d+) times\. With the checks, \d+ of \d+ came out as they should, and none of those \1 was answered/); return m ? [{ key: 'unanswerable', value: m[2], after: '0', of: Number(m[1]), label: 'confident numbers given to questions that have no answer: unchecked, then checked' }] : []; },
+};
+const own = (map, repo) => (typeof repo === 'string' && Object.prototype.hasOwnProperty.call(map, repo) ? map[repo] : null);
+
+function headline(repo, html) { const f = own(READ, repo); return f ? f(text(html)) || null : null; }
+function extra(repo, html) { const f = own(MORE, repo); return f ? f(text(html)) : []; }
+return { text, claims, headline, extra };
+})();
+
 // vendor/crystal/vendor/climb/src/sha256.mjs, inlined byte for byte (imports read the scopes above; export removed)
 const SHA = (() => {
 // sha256.mjs — SHA-256 of a string's UTF-8 bytes, as lowercase hex. Pure and synchronous, so the lane check that
@@ -4772,6 +5225,34 @@ const ready = (async function start() {
   renderAttack();
 })();
 window.__verifier = { ready, S, runSet, load, render, renderAttack, show, play, rejudge, attackUI, tryIt, tasksOf };
+
+// house-app.js — the house layer. It adds nothing to what this build proves: it waits for the page script above to
+// finish, reads what that script worked out from the sealed run (with the house's receipts reader, vendored), and
+// shows it as receipts, a claim stack and a crystal whose lit faces are this build's claims.
+window.__houseLayer = (async () => {
+  await window.__verifier.ready;
+  const KEYS = {"ids":["status","verifierTable","claimsTable","reads","attackTable","ruleAttack","claimAttack","cost","walk"],"binds":["n.cited","n.proven","n.grounded","n.tested","n.encoded","n.refused","n.home","h.none","h.seed","h.law","h.source","l.misstated","bp.seed","bp.strength","bp.cite","bp.ways","bp.citefuzz","bp.formula","bp.ruleways","bp.formulafuzz","bp.logic","bp.claimways","bp.logicfuzz","bp.weave","bp.facets","bp.counts","b.what","b.cost","b.versus","b.refused","b.rules","b.reads","b.board"]};
+  const el = (id) => document.getElementById(id), safe = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const drawn = [...KEYS.ids.map((id) => el(id)), ...KEYS.binds.flatMap((k) => [...document.querySelectorAll(`[data-bind="${k}"]`)])].map((e) => (e && typeof e.innerHTML === 'string' ? e.innerHTML : '')).join(' ');
+  const html = `<body>${drawn}</body>`, claims = RECEIPTS.claims(html), head = RECEIPTS.headline('the-verifier-set', html), more = RECEIPTS.extra('the-verifier-set', html);
+  const src = '<a class="src" href="data/runs/sealed.json">receipt: the sealed run ↗</a>', passed = claims.filter((c) => c.pass === true).length, failed = claims.filter((c) => c.pass === false);
+  const stats = [];
+  if (head) stats.push(`<div class="stat reveal"><div class="n"><span class="was">${safe(head.was)}</span><span class="arrow">→</span><span class="now">${safe(head.now)}</span></div><div class="lab"><b>Of ${head.of} sealed problems.</b> ${safe(head.label[0].toUpperCase() + head.label.slice(1))}.</div>${src}</div>`);
+  for (const x of more) stats.push(`<div class="stat reveal"><div class="n">${x.after !== undefined ? `<span class="was">${safe(x.value)}</span><span class="arrow">→</span><span class="now">${safe(x.after)}</span>` : `<span class="now">${safe(x.value)}</span><span class="was" style="font-size:.42em"> /${x.of.toLocaleString('en')}</span>`}</div><div class="lab"><b>${safe(x.label[0].toUpperCase() + x.label.slice(1))}.</b> Of ${x.of.toLocaleString('en')}.</div>${src}</div>`);
+  if (claims.length) stats.push(`<div class="stat reveal"><div class="n"><span class="now">${passed}</span><span class="was" style="font-size:.42em"> /${claims.length}</span>${failed.length ? ` <span class="bad" style="font-size:.5em">−${failed.length}</span>` : ''}</div><div class="lab"><b>Pre-registered claims passed.</b> ${failed.length ? `${failed.map((c) => c.id).join(', ')} failed and ${failed.length === 1 ? 'is' : 'are'} kept on the page, in red.` : 'A claim that fails stays on the page, in red.'}</div>${src}</div>`);
+  el('hsReceipts').innerHTML = stats.join('') || '<div class="stat"><div class="n"><span class="wait">—</span></div><div class="lab">The sealed run. <span class="tag gd">sealing now</span></div></div>';
+  el('hsClaims').innerHTML = claims.map((c) => `<div class="srow ${c.pass === false ? 'red' : c.pass === null ? 'gold' : ''}"><div class="d">${c.id}</div><div class="nm"><b>${safe(c.name)}</b><span>${safe(c.result)}</span>${c.pass === true ? '<span class="tag cy">pass</span>' : c.pass === false ? '<span class="tag rd">fail · kept</span>' : '<span class="tag gd">sealing now</span>'}</div></div>`).join('') || '<div class="srow gold"><div class="d">—</div><div class="nm"><span>the sealed run is not published yet</span><span class="tag gd">sealing now</span></div></div>';
+  const rest = `${passed} of ${claims.length} claims passed${failed.length ? ` · ${failed.length} failed and kept` : ''} · point at a face`;
+  el('hsFacet').innerHTML = rest;
+  const crystal = CRYSTAL.mount(el('crystal'), { energy: 0.9 });
+  if (crystal) {
+    crystal.setFaces(Array.from({ length: 32 }, (_, i) => (claims[i] ? (claims[i].pass === true ? 1 : claims[i].pass === false ? 3 : 2) : 0)));
+    crystal.onHover((i) => { const c = claims[i]; el('hsFacet').innerHTML = c ? `<b>${c.id} ${safe(c.name)}</b> · ${c.pass === true ? 'pass' : c.pass === false ? 'FAIL, kept' : 'sealing now'} · ${safe(c.result)}` : rest; });
+    crystal.onPick(() => { const s = el('claims'); if (s && s.scrollIntoView) s.scrollIntoView({ behavior: 'smooth' }); });
+    HOUSE.bindScroll(crystal, 0.9);
+  }
+  HOUSE.reveal(document); HOUSE.light(document);
+})();
 </script>
 </body>
 </html>

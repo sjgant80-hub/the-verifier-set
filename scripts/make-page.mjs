@@ -11,6 +11,8 @@ import { fileURLToPath } from 'node:url';
 
 // [namespace, file] in dependency order; each module may import only from the ones above it
 export const KERNELS = [
+  // the house kit (the crystal, the motion) and the house's receipts reader, as vendored
+  ['CRYSTAL', 'vendor/house/crystal.js'], ['HOUSE', 'vendor/house/house.js'], ['RECEIPTS', 'vendor/house/receipts.mjs'],
   // The Climb's sealed kernels, then The Crystal's (both as vendored), DocDec's gate, this repository's own, the glass
   ['SHA', 'vendor/crystal/vendor/climb/src/sha256.mjs'], ['STATS', 'vendor/crystal/vendor/climb/vendor/stats.mjs'], ['MEMORY', 'vendor/crystal/vendor/climb/vendor/memory.mjs'], ['EXACT', 'vendor/crystal/vendor/climb/src/exact.mjs'], ['CHECK', 'vendor/crystal/vendor/climb/src/checker.mjs'],
   ['PLAN', 'vendor/crystal/vendor/climb/src/plan.mjs'], ['LEFT', 'vendor/crystal/vendor/climb/src/left.mjs'], ['KEEP', 'vendor/crystal/vendor/climb/src/keep.mjs'],
@@ -20,7 +22,7 @@ export const KERNELS = [
   ['FACETS', 'src/facets.mjs'], ['SET', 'src/set.mjs'], ['GEM', 'page/gem.js'],
 ];
 // what bake() writes into the page: these ids, and every data-bind. Device, load and run status are the visitor's own.
-export const BAKED = ['status', 'verifierTable', 'claimsTable', 'reads', 'attackTable', 'ruleAttack', 'claimAttack', 'cost', 'walk'];
+export const BAKED = ['hsFacet', 'hsReceipts', 'hsClaims', 'status', 'verifierTable', 'claimsTable', 'reads', 'attackTable', 'ruleAttack', 'claimAttack', 'cost', 'walk'];
 const LF = (s) => s.split('\r\n').join('\n');
 const nsOf = (spec, from) => {
   const name = spec.split('/').pop();
@@ -49,7 +51,7 @@ export function build(root = '.') {
     const { code, names } = body(read(file), file);
     return `// ${file}, inlined byte for byte (imports read the scopes above; export removed)\nconst ${ns} = (() => {\n${code}\nreturn { ${names.join(', ')} };\n})();`;
   }).join('\n\n');
-  return read('page/template.html').replace('/*KERNELS*/', () => kernels).replace('/*APP*/', () => read('page/app.js').trim());
+  return read('page/template.html').replace('/*HOUSE_CSS*/', () => read('vendor/house/house.css').trim()).replace('/*KERNELS*/', () => kernels).replace('/*APP*/', () => `${read('page/app.js').trim()}\n\n${read('page/house-app.js').trim()}`);
 }
 
 const escText = (s) => String(s ?? '').replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
@@ -82,6 +84,7 @@ export async function bake(html, root = '.') {
     const code = html.slice(html.indexOf('<script type="module">') + 22, html.lastIndexOf('</script>'));
     await import('data:text/javascript;base64,' + Buffer.from(`${code}\n// bake ${++runs}`).toString('base64'));
     await g.__verifier.ready;
+    if (g.__houseLayer) await g.__houseLayer;                       // the house layer draws after the page script, and is baked with it
   } finally {
     g.document = keep.document; g.window = keep.window; g.fetch = keep.fetch;
     try { if (keep.ls) Object.defineProperty(g, 'localStorage', keep.ls); else delete g.localStorage; } catch { /* leave it */ }

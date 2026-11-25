@@ -9,88 +9,91 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2302070c'/%3E%3Cpath d='M16 4 27 16 16 28 5 16z' fill='none' stroke='%235ef2e4' stroke-width='2'/%3E%3C/svg%3E">
 <style>
-@font-face{font-family:'Fraunces';src:url('vendor/fonts/fraunces/files/fraunces-latin-full-italic.woff2') format('woff2');font-weight:100 900;font-style:italic;font-display:swap}
-@font-face{font-family:'Fraunces';src:url('vendor/fonts/fraunces/files/fraunces-latin-full-normal.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
-@font-face{font-family:'Hanken Grotesk';src:url('vendor/fonts/hanken-grotesk/files/hanken-grotesk-latin-wght-normal.woff2') format('woff2');font-weight:100 900;font-display:swap}
-@font-face{font-family:'JetBrains Mono';src:url('vendor/fonts/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2') format('woff2');font-weight:100 800;font-display:swap}
-:root{--abyss:#02070c;--water:#04101a;--lume:#5ef2e4;--blue:#49b4ff;--violet:#a797ff;--orchid:#d48cff;--leaf:#9be37a;--amber:#ffbf78;--red:#ff6470;--ink:#e4f6f8;--ink-2:#a3c3cb;--ink-3:#7f9fa7;--panel:rgba(4,16,25,.86);--edge:rgba(94,242,228,.2);--display:'Fraunces','Iowan Old Style','Palatino Linotype',Georgia,serif;--body:'Hanken Grotesk','Segoe UI',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,'Cascadia Mono',Consolas,monospace;--gut:clamp(16px,5vw,72px);color-scheme:dark}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--abyss);color:var(--ink);font:400 16px/1.6 var(--body);overflow-x:hidden}
-a{color:var(--lume);text-underline-offset:3px}
-:focus-visible{outline:2px solid var(--lume);outline-offset:3px}
-code{font:500 .86em var(--mono);color:var(--lume);overflow-wrap:anywhere}
-#gem{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0;touch-action:none;cursor:grab}
-.top{position:fixed;z-index:20;inset:0 0 auto 0;display:flex;align-items:center;gap:20px;padding:14px var(--gut);background:linear-gradient(180deg,rgba(2,7,12,.82),rgba(2,7,12,0));pointer-events:none}
-.top>*{pointer-events:auto}
-.mark{font:500 12px/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--ink);text-decoration:none;white-space:nowrap}
-.top nav{margin-left:auto;display:flex;gap:18px;flex-wrap:wrap;justify-content:flex-end}
-.top nav a{font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;padding:8px 0}
-.top nav a:hover{color:var(--lume)}
-main{position:relative;z-index:5;pointer-events:none}
-main>*{pointer-events:auto}
-.hero{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:96px var(--gut) 28px;pointer-events:none}
-.hero>*{pointer-events:auto;max-width:560px}
-.kicker{font:500 11px/1.4 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);margin:0 0 10px}
-h1{font:400 clamp(44px,9vw,92px)/.98 var(--display);margin:0 0 14px;letter-spacing:-.01em;text-shadow:0 0 30px var(--abyss)}
-h1 em{font-style:italic;color:var(--lume)}
-.lead{margin:0 0 18px;color:var(--ink);text-shadow:0 0 14px var(--abyss),0 0 4px var(--abyss)}
-.row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
-button{font:600 14px/1 var(--body);color:#012;background:var(--lume);border:0;padding:13px 20px;cursor:pointer;border-radius:2px}
-button:hover{filter:brightness(1.1)}
-button:disabled{opacity:.5;cursor:default}
-button.quiet{background:transparent;color:var(--ink);border:1px solid var(--edge)}
-.hint,.small{font:500 11.5px/1.5 var(--mono);color:var(--ink-2)}
+/*HOUSE_CSS*/
+/* this build's own styles, for its own content, which now sits behind a click or inside the glass */
+#gem{position:relative;display:block;width:100%;height:min(68vh,560px);touch-action:none;cursor:grab;border-radius:14px;background:#02070c;margin:0 0 16px}
+.legacy{font-size:15px;line-height:1.6}
+.legacy{--abyss:#02070c;--water:#04101a;--lume:#5ef2e4;--blue:#49b4ff;--violet:#a797ff;--orchid:#d48cff;--leaf:#9be37a;--amber:#ffbf78;--red:#ff6470;--ink:#e4f6f8;--ink-2:#a3c3cb;--ink-3:#7f9fa7;--panel:rgba(4,16,25,.86);--edge:rgba(94,242,228,.2);--display:'Fraunces','Iowan Old Style','Palatino Linotype',Georgia,serif;--body:'Hanken Grotesk','Segoe UI',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,'Cascadia Mono',Consolas,monospace;--gut:clamp(16px,5vw,72px);}
+.legacy a{color:var(--lume);text-underline-offset:3px}
+.legacy :focus-visible{outline:2px solid var(--lume);outline-offset:3px}
+.legacy code{font:500 .86em var(--mono);color:var(--lume);overflow-wrap:anywhere}
+.legacy .kicker{font:500 11px/1.4 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);margin:0 0 10px}
+.legacy .lead{margin:0 0 18px;color:var(--ink);text-shadow:0 0 14px var(--abyss),0 0 4px var(--abyss)}
+.legacy .row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.legacy button{font:600 14px/1 var(--body);color:#012;background:var(--lume);border:0;padding:13px 20px;cursor:pointer;border-radius:2px}
+.legacy button:hover{filter:brightness(1.1)}
+.legacy button:disabled{opacity:.5;cursor:default}
+.legacy button.quiet{background:transparent;color:var(--ink);border:1px solid var(--edge)}
+.legacy .hint,.legacy .small{font:500 11.5px/1.5 var(--mono);color:var(--ink-2)}
 #status{font:500 12px/1.5 var(--mono);color:var(--ink-2);margin:12px 0 0;min-height:18px;text-shadow:0 0 10px var(--abyss)}
-.ledger{display:flex;flex-wrap:wrap;gap:8px 22px;margin:16px 0 8px;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;color:var(--ink-2);max-width:none}
-.ledger b{display:block;font:500 clamp(17px,2.6vw,24px)/1.1 var(--mono);color:var(--ink);letter-spacing:0}
-.ledger .bad b{color:var(--red)}
-.scrub{display:flex;align-items:center;gap:12px;font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);max-width:520px}
-.scrub input{flex:1;accent-color:var(--lume);min-height:32px}
-select{font:500 13px/1.2 var(--body);min-height:36px;padding:6px 8px;color:var(--ink);background:rgba(2,7,12,.9);border:1px solid var(--edge);border-radius:2px}
-.tags{font:italic 400 15px/1.5 var(--display);color:var(--ink-2);margin:14px 0 0}
+.legacy .ledger{display:flex;flex-wrap:wrap;gap:8px 22px;margin:16px 0 8px;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;color:var(--ink-2);max-width:none}
+.legacy .ledger b{display:block;font:500 clamp(17px,2.6vw,24px)/1.1 var(--mono);color:var(--ink);letter-spacing:0}
+.legacy .ledger .bad b{color:var(--red)}
+.legacy .scrub{display:flex;align-items:center;gap:12px;font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);max-width:520px}
+.legacy .scrub input{flex:1;accent-color:var(--lume);min-height:32px}
+.legacy select{font:500 13px/1.2 var(--body);min-height:36px;padding:6px 8px;color:var(--ink);background:rgba(2,7,12,.9);border:1px solid var(--edge);border-radius:2px}
+.legacy .tags{font:italic 400 15px/1.5 var(--display);color:var(--ink-2);margin:14px 0 0}
 #tip{position:fixed;z-index:30;left:0;top:0;transform:translate(-999px,-999px);font:500 12px/1.4 var(--mono);color:var(--ink);background:rgba(2,7,12,.92);border:1px solid var(--edge);padding:7px 10px;max-width:min(340px,80vw);pointer-events:none}
-section.panel{background:var(--panel);border-top:1px solid var(--edge);padding:44px var(--gut)}
-section.panel>*{max-width:760px}
-h2{font:400 clamp(26px,4.4vw,38px)/1.1 var(--display);margin:0 0 14px}
-h2 em{font-style:italic;color:var(--lume)}
-h3{font:600 15px/1.3 var(--body);margin:22px 0 6px}
-ol,ul{padding-left:20px}
-li{margin:0 0 8px}
-details{border-top:1px solid var(--edge);padding:10px 0}
-details>summary{cursor:pointer;font-weight:600}
-table{border-collapse:collapse;width:100%;font-size:14px;margin:10px 0}
-th,td{text-align:left;padding:7px 8px 7px 0;border-bottom:1px solid var(--edge);vertical-align:top}
-th{font:500 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
-td.num{font-family:var(--mono);white-space:nowrap}
-.pass{color:var(--lume)}.fail{color:var(--red);font-weight:600}.pend{color:var(--amber)}
-.wrap{overflow-x:auto}
-svg.law{width:100%;height:auto;max-width:760px}
-svg.law text{font:500 12px var(--mono);fill:var(--ink)}
-svg.law .m{fill:var(--ink-2)}
-footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var(--gut) 40px;font:500 12px/1.7 var(--mono);color:var(--ink-2)}
-@media (max-width:640px){.top nav a:not(.keep){display:none}.hero{padding-bottom:20px}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-.try{display:grid;gap:6px;margin:10px 0 4px;max-width:640px}
-.try label{font:500 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin-top:6px}
-.try textarea,.try input{font:500 13px/1.5 var(--mono);color:var(--ink);background:rgba(2,7,12,.7);border:1px solid var(--edge);padding:9px 10px;width:100%;border-radius:2px}
-.try button{justify-self:start;margin-top:6px}
-.soft{color:var(--amber)}.tested{color:var(--orchid)}.encoded{color:var(--leaf)}
-.key{display:flex;flex-wrap:wrap;gap:6px 18px;margin:8px 0 0;font:500 11.5px/1.4 var(--mono);color:var(--ink-2)}.key i{display:inline-block;width:10px;height:10px;margin-right:6px;transform:rotate(45deg)}
+.legacy h2{font:400 clamp(26px,4.4vw,38px)/1.1 var(--display);margin:0 0 14px}
+.legacy h2 em{font-style:italic;color:var(--lume)}
+.legacy h3{font:600 15px/1.3 var(--body);margin:22px 0 6px}
+.legacy ol,.legacy ul{padding-left:20px}
+.legacy li{margin:0 0 8px}
+.legacy details{border-top:1px solid var(--edge);padding:10px 0}
+.legacy details>summary{cursor:pointer;font-weight:600}
+.legacy table{border-collapse:collapse;width:100%;font-size:14px;margin:10px 0}
+.legacy th,.legacy td{text-align:left;padding:7px 8px 7px 0;border-bottom:1px solid var(--edge);vertical-align:top}
+.legacy th{font:500 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.legacy td.num{font-family:var(--mono);white-space:nowrap}
+.legacy .pass{color:var(--lume)}.fail{color:var(--red);font-weight:600}.pend{color:var(--amber)}
+.legacy .wrap{overflow-x:auto}
+.legacy svg.law{width:100%;height:auto;max-width:760px}
+.legacy svg.law text{font:500 12px var(--mono);fill:var(--ink)}
+.legacy svg.law .m{fill:var(--ink-2)}
+.legacy .try{display:grid;gap:6px;margin:10px 0 4px;max-width:640px}
+.legacy .try label{font:500 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin-top:6px}
+.legacy .try textarea,.legacy .try input{font:500 13px/1.5 var(--mono);color:var(--ink);background:rgba(2,7,12,.7);border:1px solid var(--edge);padding:9px 10px;width:100%;border-radius:2px}
+.legacy .try button{justify-self:start;margin-top:6px}
+.legacy .soft{color:var(--amber)}.tested{color:var(--orchid)}.encoded{color:var(--leaf)}
+.legacy .key{display:flex;flex-wrap:wrap;gap:6px 18px;margin:8px 0 0;font:500 11.5px/1.4 var(--mono);color:var(--ink-2)}.key i{display:inline-block;width:10px;height:10px;margin-right:6px;transform:rotate(45deg)}
 </style>
 </head>
 <body>
-<canvas id="gem" role="img" aria-label="A crystal of octahedra. A hard, bright facet is a step proven by exact arithmetic. A soft, warm facet is grounded: it is, or stands on, a figure quoted from a document. An orchid facet is proven against its tests: it is, or stands on, a formula the model wrote that passed them. A leaf-green facet is proven within its encoding: a claim the solver decided as the model wrote it down. Dark facets were never reached."></canvas>
-<header class="top">
-  <a class="mark" href="#top">The Verifier Set</a>
-  <nav aria-label="On this page"><a href="#start">Start</a><a href="#how">How it works</a><a href="#set">The checks</a><a class="keep" href="#numbers">The numbers</a><a class="keep" href="#limits">What this does not prove</a><a href="#buyers">For buyers</a><a href="#paper">White paper</a></nav>
+<header class="hero" id="top">
+  <canvas id="crystal" role="img" aria-label="A crystal of 32 faces. Each lit face is one of this build's pre-registered claims: cyan when it passed, red when it failed and is kept."></canvas>
+  <div class="hero-shade"></div>
+  <div class="wrap">
+    <p class="eyebrow">AI Native Solutions · The Verifier Set</p>
+    <h1>It refuses to <em>lie.</em></h1>
+    <p class="sub">Every answer is checked against the arithmetic or the cited source. If it cannot be checked, it is not released.</p>
+    <div class="cta"><a class="btn primary" href="#result">See the result →</a><a class="btn ghost" href="#glass">Run it yourself</a></div>
+  </div>
+  <p class="facet" id="hsFacet" aria-live="polite">Reading the sealed record.</p>
 </header>
-<main>
-<section class="hero" id="top">
-  <p class="kicker">The third build, on The Crystal's sealed checks</p>
-  <h1>Know what it <em>stands on.</em></h1>
-  <p class="lead">A small AI model reads documents, writes rules as formulas and claims as comparisons, and works out answers. Four checks, one for each kind of work: a figure it cites must be in the document, a formula must pass its rule's tests, a claim is decided by a solver, a step is checked by exact arithmetic. Every facet is drawn in the material of what it stands on, and no answer is called truer than its weakest check.</p>
-  <div class="row"><button id="grow" type="button">Grow it here</button><button id="play" class="quiet" type="button">Play the record</button><span class="hint">or press Enter · the model is about 880 MB, once</span></div>
+
+<section class="pad" id="result">
+  <div class="wrap">
+    <p class="kline reveal">The result</p>
+    <h2 class="claim reveal">The same 1B model. Once with the checks, once without. <b>The checks do the work.</b></h2>
+    <div class="stats" id="hsReceipts">Reading the sealed record.</div>
+  </div>
+</section>
+
+<section class="pad alt" id="claims">
+  <div class="wrap">
+    <p class="kline reveal">The claims, written down first</p>
+    <h2 class="claim reveal">The pass marks were fixed <b>before the sealed run.</b></h2>
+    <div class="stack reveal" id="hsClaims">Reading the sealed record.</div>
+  </div>
+</section>
+
+<section class="pad proof" id="glass">
+  <div class="wrap">
+    <h2 class="hl reveal"><span class="a">Don't trust us.</span><br><span class="b">Re-run it.</span></h2>
+    <p class="sub2 reveal">Grow it on your own graphics chip, or play the sealed record. Nothing leaves your browser.</p>
+    <div class="glass legacy reveal" style="text-align:left">
+      <canvas id="gem" role="img" aria-label="A crystal of octahedra. A hard, bright facet is a step proven by exact arithmetic. A soft, warm facet is grounded: it is, or stands on, a figure quoted from a document. An orchid facet is proven against its tests: it is, or stands on, a formula the model wrote that passed them. A leaf-green facet is proven within its encoding: a claim the solver decided as the model wrote it down. Dark facets were never reached."></canvas>
+      <div class="row"><button id="grow" type="button">Grow it here</button><button id="play" class="quiet" type="button">Play the record</button><span class="hint">or press Enter · the model is about 880 MB, once</span></div>
   <p id="status" aria-live="polite">not measured yet</p>
   <div class="ledger" aria-label="What is on the glass">
     <span><b data-bind="n.cited">not measured yet</b>figures cited</span>
@@ -103,13 +106,18 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
   </div>
   <p class="key" aria-label="What each material means"><span><i style="background:var(--lume)"></i>proven: exact arithmetic</span><span><i style="background:var(--amber)"></i>grounded: a figure from a document</span><span><i style="background:var(--orchid)"></i>proven against its tests</span><span><i style="background:var(--leaf)"></i>proven within its encoding</span></p>
   <label class="scrub"><span>Depth</span><input type="range" id="scrub" min="0" max="1000" value="1000" aria-label="Travel through the growth, from the seed to the last facet"></label>
-  <p class="tags">Don't trust us. Re-run it. · A small model that says "I can't tell." · Nothing leaves your browser.</p>
+    </div>
+    <div id="tip" role="status" aria-live="polite"></div>
+    <details class="honest reveal"><summary>What this does — and doesn't — claim</summary><div class="in"><p><b>Grounded is not true.</b> A cited figure is as true as its document. It is labelled grounded, never proven.</p><p><b>Narrow on purpose.</b> Figures, rules, simple claims and sums. Where no check can say yes, there is no answer.</p><p><b>One sealed run.</b> One model, problems made by code. It says nothing about messy documents.</p><p>The full list is below, under "What this does not prove".</p></div></details>
+  </div>
 </section>
-<div id="tip" role="status" aria-live="polite"></div>
 
-<section class="panel" id="start">
-  <h2>Start <em>here</em></h2>
-  <p><b>The words this page uses.</b> A <b>facet</b> is one piece of an answer on the glass: a figure, a rule, a claim, or one step of a sum. A facet <b>bonds</b> when its check passes; one that cannot is refused, and the reason is kept. <b>Proven</b>: worked out by code in exact fractions, with no rounding: nothing to take on trust. <b>Grounded</b>: a figure copied from a document, as true as the document. <b>Proven against its tests</b>: a formula that passed every test of its rule. <b>Proven within its encoding</b>: a claim decided exactly, as the model wrote it down. A claim's <b>bar</b> is the result it had to reach, written down before the sealed run. The <b>sealed run</b> is the measurement: problems the build was never tuned on, every file that could change a result frozen first. The <b>lattice</b> is the whole checked process (copy, write, decide, work out), set against <b>one unchecked reply</b>: the same model asked once, with nothing checking it. A <b>harness</b> is code that attacks a check with forged replies; a <b>second reader</b> is a separate piece of code, written apart from the check, that must rule the same way on every reply; a <b>planted leak</b> is a flaw put into a copy of a check on purpose, to show the harness finds it.</p>
+<section class="pad alt" id="full">
+  <div class="wrap">
+    <p class="kline reveal">Everything, in full</p>
+    <h2 class="claim reveal">Every detail is still here. <b>One click away.</b></h2>
+    <details class="honest reveal" style="max-width:none"><summary>What it is, in one paragraph</summary><div class="in legacy"><p class="lead">A small AI model reads documents, writes rules as formulas and claims as comparisons, and works out answers. Four checks, one for each kind of work: a figure it cites must be in the document, a formula must pass its rule's tests, a claim is decided by a solver, a step is checked by exact arithmetic. Every facet is drawn in the material of what it stands on, and no answer is called truer than its weakest check.</p></div></details>
+    <details class="honest reveal" id="start" style="max-width:none"><summary>Start here</summary><div class="in legacy"><p><b>The words this page uses.</b> A <b>facet</b> is one piece of an answer on the glass: a figure, a rule, a claim, or one step of a sum. A facet <b>bonds</b> when its check passes; one that cannot is refused, and the reason is kept. <b>Proven</b>: worked out by code in exact fractions, with no rounding: nothing to take on trust. <b>Grounded</b>: a figure copied from a document, as true as the document. <b>Proven against its tests</b>: a formula that passed every test of its rule. <b>Proven within its encoding</b>: a claim decided exactly, as the model wrote it down. A claim's <b>bar</b> is the result it had to reach, written down before the sealed run. The <b>sealed run</b> is the measurement: problems the build was never tuned on, every file that could change a result frozen first. The <b>lattice</b> is the whole checked process (copy, write, decide, work out), set against <b>one unchecked reply</b>: the same model asked once, with nothing checking it. A <b>harness</b> is code that attacks a check with forged replies; a <b>second reader</b> is a separate piece of code, written apart from the check, that must rule the same way on every reply; a <b>planted leak</b> is a flaw put into a copy of a check on purpose, to show the harness finds it.</p>
   <ol>
     <li><b>Look.</b> Drag the crystal to turn it. Hard, bright facets are proven. Soft, warm facets are grounded. Orchid facets stand on a formula that passed its tests; leaf-green ones on a claim the solver decided. Point at any facet to read the step, how true it is, and what it stands on; for a cited figure, the words of the document it was quoted from.</li>
     <li><b>Grow one yourself.</b> Press <b>Grow it here</b>, or Enter. The model runs in this tab on your own graphics chip and works through twelve problems, one of each kind, while you watch. <span id="device" class="small">Checking this device…</span></li>
@@ -129,12 +137,8 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
     <li><b>Check the record.</b> <button id="rejudge" class="quiet" type="button">Grow the published run again, with no model</button> <span id="rejudgeOut" class="small" aria-live="polite"></span></li>
     <li><b>Attack all four checks yourself.</b> <button id="attack" class="quiet" type="button">Make a new attack</button> <span id="attackOut" class="small" aria-live="polite"></span></li>
     <li><b>Run the whole measurement.</b> <select id="runWhich" aria-label="Which set"><option value="sample">Sample: 12 problems</option><option value="dev">Dev: the 60 problems the build was tuned on</option><option value="sealed">Sealed: the 144 problems the claims are judged on</option></select> <button id="run" class="quiet" type="button">Run it</button> <button id="save" class="quiet" type="button" disabled>Save my run</button> <span id="runOut" class="small" aria-live="polite"></span></li>
-  </ol>
-</section>
-
-<section class="panel" id="how">
-  <h2>How it <em>works</em></h2>
-  <p>The reach of the whole engine is exactly the reach of its checks. So each kind of truth gets its own check, and every facet of the crystal carries the kind of check that made it and how much that check proves. There are four, and the model does the work for each; code only checks it.</p>
+  </ol></div></details>
+    <details class="honest reveal" id="how" style="max-width:none"><summary>How it works</summary><div class="in legacy"><p>The reach of the whole engine is exactly the reach of its checks. So each kind of truth gets its own check, and every facet of the crystal carries the kind of check that made it and how much that check proves. There are four, and the model does the work for each; code only checks it.</p>
   <svg class="law" viewBox="0 0 760 230" role="img" aria-labelledby="lawT"><title id="lawT">A cited figure is grounded. A step worked out from it is grounded too, and so is the answer. A step worked out from nothing but numbers is proven.</title>
     <g fill="none" stroke="rgba(255,191,120,.6)"><rect x="10" y="20" width="200" height="52"/><rect x="280" y="20" width="200" height="52"/><rect x="550" y="20" width="200" height="52"/><path d="M210 46H280M480 46H550"/></g>
     <g fill="none" stroke="rgba(94,242,228,.6)"><rect x="280" y="140" width="200" height="52"/><rect x="550" y="140" width="200" height="52"/><path d="M480 166H550"/></g>
@@ -154,30 +158,18 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
     <li><b>Work out.</b> With the figures cited and the calculation known, it is grown as The Crystal grows one: one small step at a time, each reply checked by exact arithmetic. A step the model gets wrong is split into smaller steps it is asked again; a step that is already as small as steps go, and still wrong, is dropped (it dissolves), and the problem gets no answer rather than a wrong one. <span data-bind="h.seed">not measured yet</span></li>
     <li><b>Label.</b> Every facet carries how true it is. The law is one line: a facet is only as strong as the weakest bond it stands on. A sum worked out exactly from a cited figure is grounded. A sum worked out from a tested formula is proven against its tests. No two strengths are ever counted or drawn as the same thing.</li>
   </ol>
-  <p><span data-bind="h.law">not measured yet</span></p>
-</section>
-
-<section class="panel" id="set">
-  <h2>The <em>checks</em></h2>
-  <p>Four kinds of check are in the design, and all four are built here. Each was added only together with the harness that attacks it, and each harness was turned on readers with a leak planted in them before anything was grown on its check.</p>
+  <p><span data-bind="h.law">not measured yet</span></p></div></details>
+    <details class="honest reveal" id="set" style="max-width:none"><summary>The checks</summary><div class="in legacy"><p>Four kinds of check are in the design, and all four are built here. Each was added only together with the harness that attacks it, and each harness was turned on readers with a leak planted in them before anything was grown on its check.</p>
   <div class="wrap" id="verifierTable">not measured yet</div>
-  <p class="small">Each check is attacked on this page every time it loads: forged replies made many ways, honest replies written every allowed way, and a second reader written apart from the check that must agree with it on every reply. The same harness is then turned on readers with a leak planted in each, to show it can find one. One of those is DocDec's own span check, exactly as it shipped: it lets a figure cut out of a longer one through, which is why it is not the check used here. The logical check is a small exact solver written for this build, not a general one such as Z3: it decides one kind of claim completely (a sum of products and quotients, each quantity once, each known exactly or between two figures) and refuses every other kind.</p>
-</section>
-
-<section class="panel" id="numbers">
-  <h2>The <em>numbers</em></h2>
-  <p class="small" data-bind="h.source">not measured yet</p>
+  <p class="small">Each check is attacked on this page every time it loads: forged replies made many ways, honest replies written every allowed way, and a second reader written apart from the check that must agree with it on every reply. The same harness is then turned on readers with a leak planted in each, to show it can find one. One of those is DocDec's own span check, exactly as it shipped: it lets a figure cut out of a longer one through, which is why it is not the check used here. The logical check is a small exact solver written for this build, not a general one such as Z3: it decides one kind of claim completely (a sum of products and quotients, each quantity once, each known exactly or between two figures) and refuses every other kind.</p></div></details>
+    <details class="honest reveal" id="numbers" style="max-width:none"><summary>The numbers</summary><div class="in legacy"><p class="small" data-bind="h.source">not measured yet</p>
   <div class="wrap" id="claimsTable">not measured yet</div>
   <details><summary>What the model read and wrote, and what it did when the figure was not there</summary><div id="reads">not measured yet</div></details>
   <details><summary>The citation check, attacked</summary><div class="wrap" id="attackTable">not measured yet</div></details>
   <details><summary>The formula check, attacked, and its limit shown</summary><div class="wrap" id="ruleAttack">not measured yet</div></details>
   <details><summary>The solver, attacked</summary><div class="wrap" id="claimAttack">not measured yet</div></details>
-  <details><summary>What the checked answers cost, against one unchecked reply</summary><div id="cost">not measured yet</div></details>
-</section>
-
-<section class="panel" id="limits">
-  <h2>What this does <em>not</em> prove</h2>
-  <ul>
+  <details><summary>What the checked answers cost, against one unchecked reply</summary><div id="cost">not measured yet</div></details></div></details>
+    <details class="honest reveal" id="limits" style="max-width:none"><summary>What this does not prove</summary><div class="in legacy"><ul>
     <li><b>Grounded is not true.</b> A cited figure is in the document, where the document says it is. If the document is wrong, the answer is wrong, and it is still grounded. <span data-bind="l.misstated">not measured yet</span> The label is the protection: it is never called proven.</li>
     <li><b>"About what was asked" is a match of words.</b> The check looks for the key words of the question in the line that is quoted. A question put in other words than the document's is beyond it, and such a figure is refused, not guessed.</li>
     <li><b>A figure must be written plainly.</b> Digits, with commas in the thousands and a decimal part, and nothing touching them that could change what they say. A figure with a sign in front, a leading point, a range, a unit run on to it, or a word like "million" after it is not read: the line cannot be cited from, and the question gets no answer. That is strict on purpose. Reading 5 where the document says 5 million would be worse.</li>
@@ -191,12 +183,8 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
     <li><b>The seal was made twice.</b> After the first seal, the sealed run was begun, and the first check on GitHub found that the solver's attack made different claims under different JavaScript engines (a sort that drew at random). The attack was fixed, the build sealed again and the sealed run started again from nothing; nothing the model is shown or judged by changed, and the 34 replies made under the first seal are kept. <a href="SEAL.md">SEAL.md</a> tells it in full.</li>
     <li><b>The check holds the question.</b> It knows which figures a question needs and how they combine. The model does the reading and every step of the sum. For your own work, that bookkeeping is the part you would write.</li>
     <li><b>The model did not get smarter, and nothing here retrains it.</b> It is the same small model at the last facet as at the first.</li>
-  </ul>
-</section>
-
-<section class="panel" id="blueprint">
-  <h2>How it is <em>built</em></h2>
-  <p class="small">"Gated 41/41" means a mutation test changed that part's code 41 ways, one small change at a time (a &lt; for a &lt;=, a + for a -), and its tests caught every one. "Equivalent" is a change that makes no difference to what the code does, so no test can catch it; each has its reason written down in <code>src/witness.baseline.json</code>.</p>
+  </ul></div></details>
+    <details class="honest reveal" id="blueprint" style="max-width:none"><summary>How it is built</summary><div class="in legacy"><p class="small">"Gated 41/41" means a mutation test changed that part's code 41 ways, one small change at a time (a &lt; for a &lt;=, a + for a -), and its tests caught every one. "Equivalent" is a change that makes no difference to what the code does, so no test can catch it; each has its reason written down in <code>src/witness.baseline.json</code>.</p>
   <div class="wrap"><table><thead><tr><th>part</th><th>what it is</th><th>status</th></tr></thead><tbody>
     <tr><td>What it stands on</td><td>The Crystal's kernels, byte for byte as its seal froze them, and inside them The Climb's (<code>vendor/crystal/</code>).</td><td data-bind="bp.seed">not measured yet</td></tr>
     <tr><td>The strength law</td><td>The four kinds of bond, what each proves, and the weakest-root rule (<code>src/strength.mjs</code>).</td><td data-bind="bp.strength">not measured yet</td></tr>
@@ -211,12 +199,8 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
     <tr><td>The numbers</td><td>Every count and every verdict, and the one unchecked reply they are set against (<code>src/counts.mjs</code>, <code>src/claims.mjs</code>, <code>src/onetry.mjs</code>).</td><td data-bind="bp.counts">not measured yet</td></tr>
     <tr><td>The glass</td><td>WebGL2, written for this page. It draws a record and decides nothing; each of the four strengths is its own material (<code>page/gem.js</code>).</td><td>built</td></tr>
     <tr><td>The model</td><td>Llama 3.2 1B Instruct at 4 bits, run by WebLLM 0.2.79 on WebGPU, always picking its likeliest word.</td><td>not part of this repository</td></tr>
-  </tbody></table></div>
-</section>
-
-<section class="panel" id="buyers">
-  <h2>For your <em>business</em></h2>
-  <p><b>What it is.</b> A way to get answers out of your own documents and rules from a small model you run yourself, where every figure is shown in the document it came from, every formula is run on its rule's tests, every claim is decided by a solver, every sum is exact, and every answer says how far it can be trusted. <span data-bind="b.what">not measured yet</span></p>
+  </tbody></table></div></div></details>
+    <details class="honest reveal" id="buyers" style="max-width:none"><summary>For your business</summary><div class="in legacy"><p><b>What it is.</b> A way to get answers out of your own documents and rules from a small model you run yourself, where every figure is shown in the document it came from, every formula is run on its rule's tests, every claim is decided by a solver, every sum is exact, and every answer says how far it can be trusted. <span data-bind="b.what">not measured yet</span></p>
   <details><summary>Where it fits, and where it does not</summary>
     <p>It fits questions whose answer is figures from a document, a rule applied to them, and arithmetic: what an order comes to under a contract, what is owed after a deposit, what a term costs in total, and whether a range of orders is certain to clear a limit. It does not fit judgement, summaries, or anything a program cannot check. Where it cannot check, it gives no answer.</p></details>
   <details><summary>For each role</summary><ul>
@@ -241,24 +225,23 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
     <li><b>"A small model cannot read."</b> It is measured. <span data-bind="b.reads">not measured yet</span></li>
   </ul></details>
   <p><b>The case for the board.</b> The expensive failure of AI on documents is the confident answer that was never in the document. This cannot give one: a figure is in the document at a place you can open, or there is no answer. <span data-bind="b.board">not measured yet</span></p>
-  <div id="walk">not measured yet</div>
-</section>
-
-<section class="panel" id="paper">
-  <h2>White <em>paper</em>: one label per kind of truth</h2>
-  <p><b>The problem.</b> A model that answers questions about a document can quote a figure that is not there, work on a figure it misread, write a rule down wrongly, or answer a yes-or-no question it never worked out. On the page all four look the same: a confident answer. Checking one kind of work, the arithmetic say, leaves the others unchecked, and an answer that rests on an unchecked part is still reported as if all of it were checked.</p>
+  <div id="walk">not measured yet</div></div></details>
+    <details class="honest reveal" id="paper" style="max-width:none"><summary>White paper: one label per kind of truth</summary><div class="in legacy"><p><b>The problem.</b> A model that answers questions about a document can quote a figure that is not there, work on a figure it misread, write a rule down wrongly, or answer a yes-or-no question it never worked out. On the page all four look the same: a confident answer. Checking one kind of work, the arithmetic say, leaves the others unchecked, and an answer that rests on an unchecked part is still reported as if all of it were checked.</p>
   <p><b>The idea.</b> Give each kind of work its own check, and give what each check proves its own name. Exact arithmetic is proven. A figure found in the document, word for word, is grounded: as true as the document. A formula that passed its rule's tests is proven against its tests. A claim a solver decided is proven within its encoding: exact about the claim as it was written. Then label every answer by the weakest check beneath it, so no answer is called truer than what it stands on. Where no check can say yes, give no answer, and say which piece failed and why.</p>
   <p><b>How a check is trusted.</b> A check is only as good as the attack it survives. Each one here comes with a harness that forges replies many ways, a second reader written apart that must rule the same way on every reply, and twelve copies of the check with one leak planted in each, which the harness must find. Every check and every harness is mutation-gated: its tests must catch every small change to its code.</p>
   <p><b>What this page tests.</b> Whether a small model in a browser tab, held to these four checks, brings more problems out as they should come out than the same model answering once with nothing checking it; whether any checked answer is wrong; and whether any is labelled stronger than it stands on. The problems were sealed before the run and twelve claims with their bars were written down first; the numbers above show each one's result.</p>
   <p><b>What it does not show.</b> That a grounded answer is true: it is as true as its document. That a formula that passes its tests is right: one built to pass exactly those tests passes too, and the page shows it. That a decided claim is the claim that was meant: the solver is exact about what the model wrote. That the model got better: nothing here trains it.</p>
   <p><b>The one rule.</b> No answer is called truer than its weakest check, and every number on this page comes from a recorded run that the page can grow again, without the model, to the same result.</p>
-  <p class="small">The records: <a href="data/runs/sealed.json">the sealed run</a>, <a href="data/runs/dev.json">the dev run</a>, <a href="data/gates.json">the mutation gates</a>, <a href="CLAIMS.md">the claims</a>, <a href="SEAL.md">the seal</a>.</p>
+  <p class="small">The records: <a href="data/runs/sealed.json">the sealed run</a>, <a href="data/runs/dev.json">the dev run</a>, <a href="data/gates.json">the mutation gates</a>, <a href="CLAIMS.md">the claims</a>, <a href="SEAL.md">the seal</a>.</p></div></details>
+  </div>
 </section>
-</main>
+
 <footer>
-  The Verifier Set · built by Kar · MIT licence (holder Simon Gant) · supplied by <a href="https://www.ai-nativesolutions.com">AI Native Solutions</a><br>
-  Powered by the Konomi architecture, created by Thomas Frumkin.<br>
-  AI you own. Proof you can re-run. · <a href="https://github.com/sjgant80-hub/the-verifier-set">source</a> · <a href="CLAIMS.md">claims</a> · <a href="https://sjgant80-hub.github.io/the-crystal/">The Crystal, which it grew from</a> · <a href="https://sjgant80-hub.github.io/the-climb/">The Climb</a>
+  <div class="wrap frow">
+    <div><div class="brand">The Verifier Set</div><div class="fnote">The Verifier Set · built by Kar · MIT licence (holder Simon Gant) · supplied by <a href="https://www.ai-nativesolutions.com">AI Native Solutions</a><br>
+  AI you own. Proof you can re-run. · <a href="https://github.com/sjgant80-hub/the-verifier-set">source</a> · <a href="CLAIMS.md">claims</a> · <a href="https://sjgant80-hub.github.io/the-crystal/">The Crystal, which it grew from</a> · <a href="https://sjgant80-hub.github.io/the-climb/">The Climb</a><br>Powered by the Konomi architecture, created by Thomas Frumkin.</div></div>
+    <div class="taglist"><span>›</span> AI you own. Proof you can re-run.<br><span>›</span> A small model that says "I can't tell."<br><span>›</span> Nothing leaves your browser.</div>
+  </div>
 </footer>
 <script type="module">
 /*KERNELS*/

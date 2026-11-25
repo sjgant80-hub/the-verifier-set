@@ -87,8 +87,10 @@ test('every id and binding the page script uses is on the page, and every bindin
 test('the page says what it is and how to use it, in the house identity, with no private symbols and no price list', () => {
   const tpl = read('page/template.html');
   for (const h of ['id="top"', 'id="start"', 'id="how"', 'id="set"', 'id="numbers"', 'id="limits"', 'id="blueprint"', 'id="buyers"', 'id="gem"']) assert.ok(tpl.includes(h), h);
-  for (const mark of ['#02070c', "'Fraunces'", "'Hanken Grotesk'", "'JetBrains Mono'", 'Know what it <em>stands on.</em>', "Don't trust us. Re-run it.", 'Nothing leaves your browser.', 'What this does <em>not</em> prove', 'grounded, not proven', 'Powered by the Konomi architecture, created by Thomas Frumkin.']) assert.ok(tpl.includes(mark), mark);
-  assert.ok(!/fonts\.googleapis|fonts\.gstatic|googletagmanager|analytics/.test(tpl)); for (const f of [...tpl.matchAll(/url\('([^']+\.woff2)'\)/g)].map((m) => m[1])) assert.ok(readFileSync(new URL(f, root)).length > 10000, f);
+  for (const mark of ['#02070c', "'Fraunces'", "'Hanken Grotesk'", "'JetBrains Mono'", 'It refuses to <em>lie.</em>', "Don't trust us.", 'Re-run it.', 'Nothing leaves your browser.', 'What this does not prove', 'grounded, not proven', 'Powered by the Konomi architecture, created by Thomas Frumkin.', '<canvas id="crystal"', 'id="hsReceipts"', 'id="hsClaims"', '<details class="honest ']) assert.ok(tpl.includes(mark), mark);
+  // the fonts are the house kit's, served from this page: no font host is called
+  const kit = read('vendor/house/house.css');
+  assert.ok(!/fonts\.googleapis|fonts\.gstatic|googletagmanager|analytics/.test(tpl + kit)); const fonts = [...kit.matchAll(/url\('([^']+\.woff2)'\)/g)].map((m) => m[1]); assert.equal(fonts.length, 4); for (const f of fonts) assert.ok(readFileSync(new URL(f, root)).length > 10000, f);
   const shape = ['to', 'rus'].join('');
   for (const f of ['page/template.html', 'page/app.js', 'page/gem.js', 'README.md', 'CLAIMS.md', 'SEAL.md', 'NOTICE', 'seed.json', ...readdirSync(new URL('src/', root)).map((x) => `src/${x}`), ...readdirSync(new URL('scripts/', root)).map((x) => `scripts/${x}`)]) {
     const text = read(f);
@@ -132,4 +134,14 @@ test('no private repository name is in anything this repository ships (checked b
     const parts = tok.split('-');
     for (let i = 0; i < parts.length; i++) for (let k = i + 1; k <= parts.length; k++) { const run = parts.slice(i, k).join('-'); if (run.length >= 5) assert.ok(!banned.has(sha(run)), `${f} carries a private repository name (a ${run.length}-letter run in "${tok.slice(0, 4)}…")`); }
   }
+});
+
+test('the page meets the house standard: the ship gate, and the kit it vendors is the house kit', async () => {
+  const STANDARD = (await import('../vendor/house/standard.mjs')).default;
+  const r = STANDARD.check(html);
+  assert.equal(r.pass, true, r.rules.filter((x) => !x.pass).map((x) => `${x.id} ${x.name}: ${x.why}`).join(' | '));
+  assert.ok(r.measured.viewWords <= 1250 && r.measured.longest <= 45, 'no wall of text greets a visitor');
+  // every word the page had before the rebuild is still on it: the old sections sit behind a click, none was dropped
+  for (const id of ['start', 'how', 'set', 'numbers', 'limits', 'blueprint', 'buyers', 'paper']) assert.ok(new RegExp(`<details class="honest reveal" id="${id}"`).test(html), `the ${id} section is on the page, folded`);
+  for (const f of ['house.css', 'crystal.js', 'house.js', 'receipts.mjs', 'standard.mjs']) assert.ok(read(`vendor/house/${f}`).length > 500, f);
 });

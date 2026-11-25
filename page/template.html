@@ -83,7 +83,7 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
 <canvas id="gem" role="img" aria-label="A crystal of octahedra. A hard, bright facet is a step proven by exact arithmetic. A soft, warm facet is grounded: it is, or stands on, a figure quoted from a document. An orchid facet is proven against its tests: it is, or stands on, a formula the model wrote that passed them. A leaf-green facet is proven within its encoding: a claim the solver decided as the model wrote it down. Dark facets were never reached."></canvas>
 <header class="top">
   <a class="mark" href="#top">The Verifier Set</a>
-  <nav aria-label="On this page"><a href="#start">Start</a><a href="#how">How it works</a><a href="#set">The checks</a><a class="keep" href="#numbers">The numbers</a><a class="keep" href="#limits">What this does not prove</a><a href="#buyers">For buyers</a></nav>
+  <nav aria-label="On this page"><a href="#start">Start</a><a href="#how">How it works</a><a href="#set">The checks</a><a class="keep" href="#numbers">The numbers</a><a class="keep" href="#limits">What this does not prove</a><a href="#buyers">For buyers</a><a href="#paper">White paper</a></nav>
 </header>
 <main>
 <section class="hero" id="top">
@@ -242,6 +242,17 @@ footer{background:var(--abyss);border-top:1px solid var(--edge);padding:28px var
   </ul></details>
   <p><b>The case for the board.</b> The expensive failure of AI on documents is the confident answer that was never in the document. This cannot give one: a figure is in the document at a place you can open, or there is no answer. <span data-bind="b.board">not measured yet</span></p>
   <div id="walk">not measured yet</div>
+</section>
+
+<section class="panel" id="paper">
+  <h2>White <em>paper</em>: one label per kind of truth</h2>
+  <p><b>The problem.</b> A model that answers questions about a document can quote a figure that is not there, work on a figure it misread, write a rule down wrongly, or answer a yes-or-no question it never worked out. On the page all four look the same: a confident answer. Checking one kind of work, the arithmetic say, leaves the others unchecked, and an answer that rests on an unchecked part is still reported as if all of it were checked.</p>
+  <p><b>The idea.</b> Give each kind of work its own check, and give what each check proves its own name. Exact arithmetic is proven. A figure found in the document, word for word, is grounded: as true as the document. A formula that passed its rule's tests is proven against its tests. A claim a solver decided is proven within its encoding: exact about the claim as it was written. Then label every answer by the weakest check beneath it, so no answer is called truer than what it stands on. Where no check can say yes, give no answer, and say which piece failed and why.</p>
+  <p><b>How a check is trusted.</b> A check is only as good as the attack it survives. Each one here comes with a harness that forges replies many ways, a second reader written apart that must rule the same way on every reply, and twelve copies of the check with one leak planted in each, which the harness must find. Every check and every harness is mutation-gated: its tests must catch every small change to its code.</p>
+  <p><b>What this page tests.</b> Whether a small model in a browser tab, held to these four checks, brings more problems out as they should come out than the same model answering once with nothing checking it; whether any checked answer is wrong; and whether any is labelled stronger than it stands on. The problems were sealed before the run and twelve claims with their bars were written down first; the numbers above show each one's result.</p>
+  <p><b>What it does not show.</b> That a grounded answer is true: it is as true as its document. That a formula that passes its tests is right: one built to pass exactly those tests passes too, and the page shows it. That a decided claim is the claim that was meant: the solver is exact about what the model wrote. That the model got better: nothing here trains it.</p>
+  <p><b>The one rule.</b> No answer is called truer than its weakest check, and every number on this page comes from a recorded run that the page can grow again, without the model, to the same result.</p>
+  <p class="small">The records: <a href="data/runs/sealed.json">the sealed run</a>, <a href="data/runs/dev.json">the dev run</a>, <a href="data/gates.json">the mutation gates</a>, <a href="CLAIMS.md">the claims</a>, <a href="SEAL.md">the seal</a>.</p>
 </section>
 </main>
 <footer>

@@ -1,7 +1,0 @@
-{
-  "build": "the-verifier-set",
-  "passed": 12,
-  "total": 12,
-  "source": "derived from this repo's own sealed, committed index.html — the page's own baked facet \"12 of 12 claims passed\"",
-  "note": "Published so kar-buildcurve can read the claims signal (weight 0.25). The number is the repo’s own, not re-asserted here."
-}
